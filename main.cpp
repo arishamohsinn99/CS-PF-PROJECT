@@ -9,4 +9,5 @@ int main()
      cout<<"bye bye";
      cout<<"enter number";
      cin>>n;
+     cout<<"hello";
 }
