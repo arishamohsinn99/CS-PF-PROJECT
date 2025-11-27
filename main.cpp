@@ -3,6 +3,7 @@ using namespace std;
 int main()
 {
     string username, password;
+    int choice_1;
      cout<<"***************************************************************************************************************************\n\n"<<endl;
      cout<<"                                      ##       ##      ##       ##         ##"<<endl;
      cout<<"                                      ## #   # ##     #  #      ##         ## "<<endl;
@@ -17,8 +18,16 @@ int main()
      cout<<"##      ##    #    #    ##     ##    #    #    #####     ######    ##      ##    ######    ##      ##      ##"<<endl;
      cout<<"\n";
      cout<<"***************************************************************************************************************************\n\n"<<endl;
-           
-
+     cout<<"====================================================================================="<<endl;      
+     cout<<"                              1. ADMIN PANEL"<<endl;
+     cout<<"                              2. SHOPKEEPER"<<endl;
+     cout<<"                              3. STAFF MEMBER"<<endl;
+     cout<<"                              0.EXIT"<<endl;
+     cout<<"                              ENTER YOUR CHOICE=";
+     cin>>choice_1;
+     cout<<"====================================================================================="<<endl; 
+   if(choice_1==1 || choice_1==2 || choice_1==3)
+   { 
      cout<<"                                _________________________________________"<<endl;
      cout<<"                               |                                         |"<<endl;
      cout<<"                               |  ====================================   |"<<endl;
@@ -27,10 +36,10 @@ int main()
      cout<<"                               |   ===================================   |"<<endl;
      cout<<"                               |  |                                   |  |"<<endl;
      cout<<"                               |  |                                   |  |"<<endl;
-     cout<<"                                         USERNAME:";
+     cout<<"                                          USERNAME:";
      getline(cin,username);
 
-     cout<<"                                         PASSWORD:";
+     cout<<"                                          PASSWORD:";
      getline(cin,password);
      
      cout<<"                               |  |                                   |  |"<<endl;
@@ -42,7 +51,11 @@ int main()
      cout<<"                               |                                         |"<<endl;
      cout<<"                               |                                         |"<<endl;
      cout<<"                               |_________________________________________|"<<endl;
-     
+   }
+   else if(choice_1==0)
+   {
+     cout<<"EXIT";
+   }
 
 
 
