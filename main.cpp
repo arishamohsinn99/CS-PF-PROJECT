@@ -3,7 +3,7 @@ using namespace std;
 int main()
 {
     string username, password;
-    int choice_1;
+    int choice_1 , choice_shop, choice_admin;
      cout<<"***************************************************************************************************************************\n\n"<<endl;
      cout<<"                                      ##       ##      ##       ##         ##"<<endl;
      cout<<"                                      ## #   # ##     #  #      ##         ## "<<endl;
@@ -23,44 +23,45 @@ int main()
      cout<<"                                             2. SHOPKEEPER"<<endl;
      cout<<"                                             3. STAFF MEMBER"<<endl;
      cout<<"                                             0.EXIT"<<endl;
-     cout<<"                                             ENTER YOUR CHOICE=";
+     cout<<"                                             Select who is logging in=";
      cin>>choice_1;
      cin.ignore();
      cout<<"           ====================================================================================="<<endl; 
    if(choice_1==1 || choice_1==2 || choice_1==3)
    { 
-     cout<<"                                   _________________________________________"<<endl;
-     cout<<"                                  |                                         |"<<endl;
-     cout<<"                                  |  ====================================   |"<<endl;
-     cout<<"                                  |  |                                   |  |"<<endl;
-     cout<<"                                  |  |             * LOGIN *             |  |"<<endl;
-     cout<<"                                  |   ===================================   |"<<endl;
-     cout<<"                                  |  |                                   |  |"<<endl;
-     cout<<"                                  |  |                                   |  |"<<endl;
-     cout<<"                                               USERNAME:";
+     cout<<"                                       _________________________________________"<<endl;
+     cout<<"                                      |                                         |"<<endl;
+     cout<<"                                      |  ====================================   |"<<endl;
+     cout<<"                                      |  |                                   |  |"<<endl;
+     cout<<"                                      |  |             * LOGIN *             |  |"<<endl;
+     cout<<"                                      |   ===================================   |"<<endl;
+     cout<<"                                      |  |                                   |  |"<<endl;
+     cout<<"                                      |  |                                   |  |"<<endl;
+     cout<<"                                                   USERNAME:";
                                                       getline(cin,username);
 
-     cout<<"\n                                                PASSWORD:";
+     cout<<"\n                                                    PASSWORD:";
                                                    getline(cin,password);
      
-     cout<<"                                  |  |                                   |  |"<<endl;
-     cout<<"                                  |  |                                   |  |"<<endl;
-     cout<<"                                  |  |                                   |  |"<<endl;
-     cout<<"                                  |  |                                   |  |"<<endl;
-     cout<<"                                  |  |                                   |  |"<<endl;
-     cout<<"                                  |  =====================================  |"<<endl;
-     cout<<"                                  |                                         |"<<endl;
-     cout<<"                                  |                                         |"<<endl;
-     cout<<"                                  |_________________________________________|"<<endl;
+     cout<<"                                      |  |                                   |  |"<<endl;
+     cout<<"                                      |  |                                   |  |"<<endl;
+     cout<<"                                      |  |                                   |  |"<<endl;
+     cout<<"                                      |  |                                   |  |"<<endl;
+     cout<<"                                      |  |                                   |  |"<<endl;
+     cout<<"                                      |  =====================================  |"<<endl;
+     cout<<"                                      |                                         |"<<endl;
+     cout<<"                                      |                                         |"<<endl;
+     cout<<"                                      |_________________________________________|"<<endl;
      if(username=="admin" && password=="admin")
      {    cout<<"\n\n\n";
-          cout<<"                                  ##    #####    ##     ##   #######   ##   ##"<<endl;
-          cout<<"                                 #  #   ##   #   ## # # ##      #      ## # ##"<<endl;
-          cout<<"                                 ####   ##    #  ##  #  ##      #      ##  ###"<<endl;
-          cout<<"                                 #  #   ##   #   ##     ##      #      ##   ##"<<endl;
-          cout<<"                                 #  #   #####    ##     ##   #######   ##   ##"<<endl;
+          cout<<"                                                     WELCOME TO \n"<<endl;
+          cout<<"                                        ##    #####    ##     ##   #######   ##   ##"<<endl;
+          cout<<"                                       #  #   ##   #   ## # # ##      #      ## # ##"<<endl;
+          cout<<"                                       ####   ##    #  ##  #  ##      #      ##  ###"<<endl;
+          cout<<"                                       #  #   ##   #   ##     ##      #      ##   ##"<<endl;
+          cout<<"                                       #  #   #####    ##     ##   #######   ##   ##\n"<<endl;
+          cout<<"                                                          PANEL"<<endl;
           cout<<"\n";
-          int choice_admin;
           cout<<"                                             1. Shop Management"<<endl;
           cout<<"                                             2. Tenant Management"<<endl;
           cout<<"                                             3. Employee Management"<<endl;
@@ -72,6 +73,15 @@ int main()
           cout<<"                                             ENTER YOUR CHOICE=";
           cin>>choice_admin;
           cin.ignore();
+          if(choice_admin == 1)
+          {
+                      cout<<"*******************************************************************************"<<endl;
+                      cout<<"                            SHOP MANAGEMENT"<<endl;
+                      cout<<"*******************************************************************************"<<endl;
+                           cout<<"1. Add Shops"<<endl;
+                           cout<<"2. Update Shops"<<endl;
+                           cout<<"3. Remove Shops"<<endl;
+          }
      }
    }
    else if(choice_1==0)
