@@ -73,24 +73,24 @@ void AdminPanel()
              
           cout<<"\n\n\n";
           cout<<"*************************************************************************************************************************************"<<endl;
-          cout<<"                                                        WELCOME TO \n"<<endl;
-          cout<<"                                        ##    #####    ##     ##   ########   ##   ##"<<endl;
-          cout<<"                                       #  #   ##   #   ## # # ##      ##      ## # ##"<<endl;
-          cout<<"                                       ####   ##    #  ##  #  ##      ##      ##  ###"<<endl;
-          cout<<"                                       #  #   ##   #   ##     ##      ##      ##   ##"<<endl;
-          cout<<"                                       #  #   #####    ##     ##   ########   ##   ##\n"<<endl;
-          cout<<"                                                          PANEL"<<endl;
+          cout<<"                                                              WELCOME TO \n"<<endl;
+          cout<<"                                             ##    #####    ##     ##   ########   ##   ##"<<endl;
+          cout<<"                                            #  #   ##   #   ## # # ##      ##      ## # ##"<<endl;
+          cout<<"                                            ####   ##    #  ##  #  ##      ##      ##  ###"<<endl;
+          cout<<"                                            #  #   ##   #   ##     ##      ##      ##   ##"<<endl;
+          cout<<"                                            #  #   #####    ##     ##   ########   ##   ##\n"<<endl;
+          cout<<"                                                               PANEL"<<endl;
           cout<<"*************************************************************************************************************************************"<<endl;
           cout<<"\n";
-          cout<<"                                             1. Shop Management"<<endl;
-          cout<<"                                             2. Tenant Management"<<endl;
-          cout<<"                                             3. Staff Management"<<endl;
-          cout<<"                                             4. Floor and Space Management"<<endl;
-          cout<<"                                             5. Visitor Management"<<endl;
-          cout<<"                                             6. Event and Promotion Management "<<endl;
-          cout<<"                                             7. Reports and Analytic"<<endl;
-          cout<<"                                             0. logout"<<endl;
-          cout<<"                                               ENTER YOUR CHOICE=";
+          cout<<"                                                     1. Shop Management"<<endl;
+          cout<<"                                                     2. Tenant Management"<<endl;
+          cout<<"                                                     3. Staff Management"<<endl;
+          cout<<"                                                     4. Floor and Space Management"<<endl;
+          cout<<"                                                     5. Visitor Management"<<endl;
+          cout<<"                                                     6. Event and Promotion Management "<<endl;
+          cout<<"                                                     7. Reports and Analytic"<<endl;
+          cout<<"                                                     0. logout"<<endl;
+          cout<<"                                                         ENTER YOUR CHOICE=";
           cin>>choice_admin;
           cin.ignore();
           if(choice_admin == 1)
@@ -202,10 +202,7 @@ void ShopkeeperPanel()
 {
      int choice_shopkeeper=1;
       do{
-          system("cls");
-          title();
-          panel();
-          loginScreen();
+
      cout<<"\n\n"<<endl;
        cout<<"*************************************************************************************************************************************"<<endl;
        cout<<"                                                               WELCOME TO\n"<<endl;
@@ -228,7 +225,6 @@ void ShopkeeperPanel()
           cout<<"                                                           ENTER YOUR CHOICE=";
           cin>>choice_shopkeeper;
 
-          system("cls");
           
           if(choice_shopkeeper==1)
           {
@@ -276,7 +272,10 @@ void ShopkeeperPanel()
 }
 void StaffPanel()
 {
-             int staffChoice;
+       
+             int staffChoice=1;
+        while(staffChoice!=0)
+             {  
           cout<<"*************************************************************************************************************************************"<<endl;
           cout<<"                                                               WELCOME TO\n"<<endl;
           cout<<"                                             ####     ######      ####      #######    ######"<<endl;
@@ -287,6 +286,7 @@ void StaffPanel()
           cout<<"                                                                  PANEL"<<endl;
           cout<<"*************************************************************************************************************************************"<<endl;
           cout<<"\n"<<endl;
+
           cout<<"                                                         1. View Assigned Duties"<<endl;
           cout<<"                                                         2. Mark Attendance"<<endl;
           cout<<"                                                         3. Update Work Status"<<endl;
@@ -295,6 +295,45 @@ void StaffPanel()
           cout<<"                                                         0. Logout"<<endl;
           cout<<"                                                          ENTER YOUR CHOICE=";
           cin>>staffChoice;
+          cin.ignore();
+          if(staffChoice==1)
+                {
+                    cout<<"****************************************************************"<<endl;
+                    cout<<"           VIEW ASSIGNED DUTIES"<<endl;
+                    cout<<"****************************************************************"<<endl;
+                }
+                else if(staffChoice==2)
+                {
+                    cout<<"****************************************************************"<<endl;
+                    cout<<"              MARK ATTENDANCE"<<endl;
+                    cout<<"****************************************************************"<<endl;
+                }
+                 else if(staffChoice==3)
+                {
+                    cout<<"****************************************************************"<<endl;
+                    cout<<"                UPDATE WORK STATUS "<<endl;
+                    cout<<"****************************************************************"<<endl;
+                }
+                 else if(staffChoice==4)
+                {
+                    cout<<"****************************************************************"<<endl;
+                    cout<<"              REPORT AN ISSUE"<<endl;
+                    cout<<"****************************************************************"<<endl;
+                }
+                 else if(staffChoice==5)
+                {
+                    cout<<"****************************************************************"<<endl;
+                    cout<<"              VIEW SALARY DETAILS"<<endl;
+                    cout<<"****************************************************************"<<endl;
+                }
+                if(staffChoice != 0)
+                 {
+                    cout << "Press Enter to continue";
+                    cin.ignore();
+                    cin.get();
+                 }
+               
+}
 }
 
 
@@ -311,26 +350,24 @@ int main()
    if(choice_1==1 || choice_1==2 || choice_1==3)
    { 
             loginScreen(username,password);
+
      if(username=="admin" && password=="admin")
-     {   
+       {   
          AdminPanel(); 
      
-    }
+       }
     else if(username=="shopkeeper" && password=="shopkeeper")
-    {
+       { 
         ShopkeeperPanel();
         
-    }
+        }
     else if(username=="staff" && password=="staff" )
-    {
+       {
        StaffPanel();
-    }
+       }
+ }
    else if(choice_1==0)
-   {
-     cout<<"EXIT";
-   }
-
-
-
-}
+ {
+     cout<<"EXIT"<<endl;
+ }
 }
