@@ -1,68 +1,75 @@
 #include<iostream>
 using namespace std;
-int main()
+void title()
 {
-    string username, password;
-    int choice_1 , choice_shop, choice_admin,choice_shopkeeper, shopChoice , tenantChoice, staffChoice ,floorChoice, visitorChoice
-    ,eventChoice , reportChoice;
-     cout<<"***************************************************************************************************************************\n\n"<<endl;
-     cout<<"                                      ###      ###      ####       ##         ##"<<endl;
-     cout<<"                                      ## ##   # ##     ##  ##      ##         ## "<<endl;
-     cout<<"                                      ##   ##   ##    ########     ##         ##"<<endl;
-     cout<<"                                      ##        ##    ##     ##    ##         ##"<<endl;
-     cout<<"                                      ##        ##    ##     ##    ########   ########"<<endl;
+     cout<<"**********************************************************************************************************************************\n\n"<<endl;
+     cout<<"                                           ###      ###      ####       ##         ##"<<endl;
+     cout<<"                                           ## ##   # ##     ##  ##      ##         ## "<<endl;
+     cout<<"                                           ##   ##   ##    ########     ##         ##"<<endl;
+     cout<<"                                           ##        ##    ##     ##    ##         ##"<<endl;
+     cout<<"                                           ##        ##    ##     ##    ########   ########"<<endl;
      cout<<"\n";
-     cout<<"###     ###      ##      ##     ##      ##      ####      #######    ##      ##    #######    ##      ##   ########"<<endl;
-     cout<<"## ## ## ##     #  #     ## #   ##     #  #    #          ##         ## #  # ##    ##         ## #    ##      ##   "<<endl;
-     cout<<"##   ##  ##    ######    ##   # ##    ######   #   ###    #######    ##  #   ##    #######    ##  #   ##      ##"<<endl;
-     cout<<"##       ##    #    #    ##     ##    #    #   #     #    ##         ##      ##    ##         ##    # ##      ##"<<endl;  
-     cout<<"##       ##    #    #    ##     ##    #    #    #####     #######    ##      ##    #######    ##      ##      ##"<<endl;
+     cout<<"         ###     ###      ##      ##     ##      ##      ####      #######    ##      ##    #######    ##      ##   ########"<<endl;
+     cout<<"         ## ## ## ##     #  #     ## #   ##     #  #    #          ##         ## #  # ##    ##         ## #    ##      ##   "<<endl;
+     cout<<"         ##   ##  ##    ######    ##   # ##    ######   #   ###    #######    ##  #   ##    #######    ##  #   ##      ##"<<endl;
+     cout<<"         ##       ##    #    #    ##     ##    #    #   #     #    ##         ##      ##    ##         ##    # ##      ##"<<endl;  
+     cout<<"         ##       ##    #    #    ##     ##    #    #    #####     #######    ##      ##    #######    ##      ##      ##"<<endl;
      cout<<"\n";
-     cout<<"                ######    ##      ##    #######    ########   ########    ###      ###"<<endl;
-     cout<<"                #           ##  ##      #             ##      ##          ## ##   # ## "<<endl;
-     cout<<"                 #  #         ##         #  #         ##      ########    ##    #   ##"<<endl;
-     cout<<"                     #        ##              #       ##      ##          ##        ## "<<endl;
-     cout<<"                ######        ##       #######        ##      ########    ##        ##"<<endl;
+     cout<<"                               ######    ##      ##    #######    ########   ########    ###      ###"<<endl;
+     cout<<"                               #           ##  ##      #             ##      ##          ## ##   # ## "<<endl;
+     cout<<"                                ####         ##         ####         ##      ########    ##    #   ##"<<endl;
+     cout<<"                                    #        ##              #       ##      ##          ##        ## "<<endl;
+     cout<<"                               ######        ##       #######        ##      ########    ##        ##"<<endl;
      cout<<"\n";
-     cout<<"***************************************************************************************************************************\n\n"<<endl;
-     cout<<"            ====================================================================================="<<endl;      
-     cout<<"                                             1. ADMIN PANEL"<<endl;
-     cout<<"                                             2. SHOPKEEPER"<<endl;
-     cout<<"                                             3. STAFF MEMBER"<<endl;
-     cout<<"                                             0.EXIT"<<endl;
-     cout<<"                                             Select who is logging in=";
-     cin>>choice_1;
-     cin.ignore();
-     cout<<"           ====================================================================================="<<endl; 
-   if(choice_1==1 || choice_1==2 || choice_1==3)
-   { 
-     cout<<"                                       _________________________________________"<<endl;
-     cout<<"                                      |                                         |"<<endl;
-     cout<<"                                      |  ====================================   |"<<endl;
-     cout<<"                                      |  |                                   |  |"<<endl;
-     cout<<"                                      |  |             * LOGIN *             |  |"<<endl;
-     cout<<"                                      |   ===================================   |"<<endl;
-     cout<<"                                      |  |                                   |  |"<<endl;
-     cout<<"                                      |  |                                   |  |"<<endl;
-     cout<<"                                                   USERNAME:";
+     cout<<"*********************************************************************************************************************************\n\n"<<endl;
+
+}
+
+void panel()
+{
+     
+     cout<<"                    ====================================================================================="<<endl;      
+     cout<<"                                                     1. ADMIN PANEL"<<endl;
+     cout<<"                                                     2. SHOPKEEPER"<<endl;
+     cout<<"                                                     3. STAFF MEMBER"<<endl;
+     cout<<"                                                     0. EXIT"<<endl;
+     cout<<"                   ====================================================================================="<<endl;
+     cout<<"                                               Select who is logging in=";
+     
+}
+void loginScreen(string &username, string &password)
+{
+     cout<<"                                              _________________________________________"<<endl;
+     cout<<"                                             |                                         |"<<endl;
+     cout<<"                                             |  ====================================   |"<<endl;
+     cout<<"                                             |  |                                   |  |"<<endl;
+     cout<<"                                             |  |             * LOGIN *             |  |"<<endl;
+     cout<<"                                             |   ===================================   |"<<endl;
+     cout<<"                                             |  |                                   |  |"<<endl;
+     cout<<"                                             |  |                                   |  |"<<endl;
+     cout<<"                                                          USERNAME:";
                                                       getline(cin,username);
 
-     cout<<"\n                                                    PASSWORD:";
+     cout<<"\n                                                           PASSWORD:";
                                                    getline(cin,password);
      
-     cout<<"                                      |  |                                   |  |"<<endl;
-     cout<<"                                      |  |                                   |  |"<<endl;
-     cout<<"                                      |  |                                   |  |"<<endl;
-     cout<<"                                      |  |                                   |  |"<<endl;
-     cout<<"                                      |  |                                   |  |"<<endl;
-     cout<<"                                      |  =====================================  |"<<endl;
-     cout<<"                                      |                                         |"<<endl;
-     cout<<"                                      |                                         |"<<endl;
-     cout<<"                                      |_________________________________________|"<<endl;
-     if(username=="admin" && password=="admin")
-     {   choice_admin=1;
-          while(choice_admin!=0)
-          { 
+     cout<<"                                             |  |                                   |  |"<<endl;
+     cout<<"                                             |  |                                   |  |"<<endl;
+     cout<<"                                             |  |                                   |  |"<<endl;
+     cout<<"                                             |  |                                   |  |"<<endl;
+     cout<<"                                             |  |                                   |  |"<<endl;
+     cout<<"                                             |  =====================================  |"<<endl;
+     cout<<"                                             |                                         |"<<endl;
+     cout<<"                                             |                                         |"<<endl;
+     cout<<"                                             |_________________________________________|"<<endl;
+     cout<<"\n\n";
+}
+void AdminPanel()
+{
+     int choice_1,choice_shop, choice_admin,choice_shopkeeper, shopChoice , tenantChoice, staffChoice ,floorChoice, visitorChoice
+    ,eventChoice , reportChoice;
+     do{
+          
              
           cout<<"\n\n\n";
           cout<<"*************************************************************************************************************************************"<<endl;
@@ -188,12 +195,18 @@ int main()
                }while(reportChoice!=7);
                            
           }
-          }
-     
-    }
-    else if(username=="shopkeeper" && password=="shopkeeper")
-    {
-       cout<<"\n\n"<<endl;
+          
+ }while(choice_admin!=0);
+}
+void ShopkeeperPanel()
+{
+     int choice_shopkeeper=1;
+      do{
+          system("cls");
+          title();
+          panel();
+          loginScreen();
+     cout<<"\n\n"<<endl;
        cout<<"*************************************************************************************************************************************"<<endl;
        cout<<"                                                               WELCOME TO\n"<<endl;
        cout<<"                  #####   ##     ##    #######    #######    ##    ##    #######    #######   #######    ########    #######"<<endl;
@@ -211,12 +224,59 @@ int main()
           cout<<"                                                        4. View Sales Summary"<<endl;
           cout<<"                                                        5. Customer Billing"<<endl;
           cout<<"                                                        6. Request Maintenance"<<endl;
-          cout<<"                                                        0. Logout"<<endl;
+          cout<<"                                                        0. Back"<<endl;
           cout<<"                                                           ENTER YOUR CHOICE=";
           cin>>choice_shopkeeper;
-    }
-    else if(username=="staff" && password=="staff" )
+
+          system("cls");
+          
+          if(choice_shopkeeper==1)
+          {
+               cout<<"******************************************************************************"<<endl;
+               cout<<"                         VIEW SHOP DETAILS"<<endl;
+               cout<<"*******************************************************************************"<<endl;
+          }
+          else if(choice_shopkeeper==2)
+          {
+               cout<<"******************************************************************************"<<endl;
+               cout<<"                         UPDATE SHOP INFORMATION"<<endl;
+               cout<<"*******************************************************************************"<<endl;
+          }
+          else if(choice_shopkeeper==3)
+          {
+               cout<<"******************************************************************************"<<endl;
+               cout<<"                         MANAGE PRODUCTS"<<endl;
+               cout<<"*******************************************************************************"<<endl;
+          }
+          else if(choice_shopkeeper==4)
+          {
+               cout<<"******************************************************************************"<<endl;
+               cout<<"                         VIEW SALES SUMMARY"<<endl;
+               cout<<"*******************************************************************************"<<endl;
+          }
+          else if(choice_shopkeeper==5)
+          {
+               cout<<"******************************************************************************"<<endl;
+               cout<<"                         CUSTOMER BILING"<<endl;
+               cout<<"*******************************************************************************"<<endl;
+          }
+          else if(choice_shopkeeper==6)
+          {
+               cout<<"******************************************************************************"<<endl;
+               cout<<"                         REQUEST MAINTENANCE"<<endl;
+               cout<<"*******************************************************************************"<<endl;
+          }
+          if(choice_shopkeeper != 0)
     {
+             cout << "\nPress Enter to return to the menu...";
+             cin.ignore(); 
+             cin.get(); 
+    }
+     }while(choice_shopkeeper!=0);
+}
+void StaffPanel()
+{
+             int staffChoice;
           cout<<"*************************************************************************************************************************************"<<endl;
           cout<<"                                                               WELCOME TO\n"<<endl;
           cout<<"                                             ####     ######      ####      #######    ######"<<endl;
@@ -234,8 +294,37 @@ int main()
           cout<<"                                                         5. View Salary Details"<<endl;
           cout<<"                                                         0. Logout"<<endl;
           cout<<"                                                          ENTER YOUR CHOICE=";
+          cin>>staffChoice;
+}
+
+
+  
+int main()
+{
+    string username, password;
+    int choice_1;
+
+             title();  
+             panel();
+             cin>>choice_1;
+             cin.ignore();
+   if(choice_1==1 || choice_1==2 || choice_1==3)
+   { 
+            loginScreen(username,password);
+     if(username=="admin" && password=="admin")
+     {   
+         AdminPanel(); 
+     
     }
-   }
+    else if(username=="shopkeeper" && password=="shopkeeper")
+    {
+        ShopkeeperPanel();
+        
+    }
+    else if(username=="staff" && password=="staff" )
+    {
+       StaffPanel();
+    }
    else if(choice_1==0)
    {
      cout<<"EXIT";
@@ -243,4 +332,5 @@ int main()
 
 
 
+}
 }
