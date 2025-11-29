@@ -30,8 +30,8 @@ void panel()
      
      cout<<"                        ====================================================================================="<<endl;      
      cout<<"                                                        1. ADMIN PANEL"<<endl;
-     cout<<"                                                        2. SHOPKEEPER"<<endl;
-     cout<<"                                                        3. STAFF MEMBER"<<endl;
+     cout<<"                                                        2. SHOPKEEPER PANEL"<<endl;
+     cout<<"                                                        3. STAFF PANEL"<<endl;
      cout<<"                                                        0. EXIT"<<endl;
      cout<<"                        ====================================================================================="<<endl;
      cout<<"                                                    Select Who Is Logging In=";
