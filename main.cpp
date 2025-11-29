@@ -185,7 +185,7 @@ int main()
           cout<<"                                             4. Report an Issue"<<endl;
           cout<<"                                             5. View Salary Details"<<endl;
           cout<<"                                             0. Logout"<<endl;
-          cout<<"                                               ENTER YOUR CHOICE=";
+          cout<<"                                               ENTER YOUR CHOIC=";
     }
    }
    else if(choice_1==0)
