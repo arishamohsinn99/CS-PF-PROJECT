@@ -105,6 +105,27 @@ void AdminPanel()
                            cout<<"4. Back"<<endl;
                            cout<<"Enter Choice= ";
                            cin>>shopChoice;
+                           if(shopChoice==1)
+                           {
+                              cout<<"\n*********************************************************"<<endl;
+                              cout<<"                        ADD SHOPS"<<endl;
+                              cout<<"**********************************************************"<<endl;
+
+                           }
+                           else if(shopChoice==2)
+                           {
+                              cout<<"\n*********************************************************"<<endl;
+                              cout<<"                        UPDATE SHOPS"<<endl;
+                              cout<<"**********************************************************"<<endl;
+
+                           }
+                           else if(shopChoice==3)
+                           {
+                              cout<<"\n*********************************************************"<<endl;
+                              cout<<"                        REMOVE SHOPS"<<endl;
+                              cout<<"**********************************************************"<<endl;
+
+                           }
                }while(shopChoice!=4);
           }
           else  if(choice_admin == 2)
@@ -120,6 +141,34 @@ void AdminPanel()
                            cout<<"5. Back"<<endl;
                            cout<<"Enter Choice= ";
                            cin>>tenantChoice;
+                           if(tenantChoice==1)
+                           {
+                              cout<<"\n*********************************************************"<<endl;
+                              cout<<"                        ADD SHOPKEEPER"<<endl;
+                              cout<<"**********************************************************"<<endl;
+
+                           }
+                           else if(tenantChoice==2)
+                           {
+                              cout<<"\n*********************************************************"<<endl;
+                              cout<<"                        VIEW SHOPKEEPER"<<endl;
+                              cout<<"**********************************************************"<<endl;
+
+                           }
+                           else if(tenantChoice==3)
+                           {
+                              cout<<"\n*********************************************************"<<endl;
+                              cout<<"                        UPDATE SHOPKEEPER"<<endl;
+                              cout<<"**********************************************************"<<endl;
+
+                           }
+                           else if(tenantChoice==4)
+                           {
+                              cout<<"\n*********************************************************"<<endl;
+                              cout<<"                        REMOVE SHOPKEEPER"<<endl;
+                              cout<<"**********************************************************"<<endl;
+
+                           }
                }while(tenantChoice!=5);
           }
            else  if(choice_admin == 3)
@@ -136,10 +185,46 @@ void AdminPanel()
                            cout<<"6.Back"<<endl;
                            cout<<"Enter Choice= ";
                            cin>>staffChoice;
+                           if(staffChoice==1)
+                           {
+                              cout<<"\n*********************************************************"<<endl;
+                              cout<<"                        ADD STAFF"<<endl;
+                              cout<<"**********************************************************"<<endl;
+
+                           }
+                           else if(staffChoice==2)
+                           {
+                              cout<<"\n*********************************************************"<<endl;
+                              cout<<"                        VIEW ALL STAFF"<<endl;
+                              cout<<"**********************************************************"<<endl;
+
+                           }
+                           if(staffChoice==3)
+                           {
+                              cout<<"\n*********************************************************"<<endl;
+                              cout<<"                        UPDATE STAFF"<<endl;
+                              cout<<"**********************************************************"<<endl;
+
+                           }
+                           if(staffChoice==4)
+                           {
+                              cout<<"\n*********************************************************"<<endl;
+                              cout<<"                         REMOVE STAFF"<<endl;
+                              cout<<"**********************************************************"<<endl;
+
+                           }
+                           if(staffChoice==5)
+                           {
+                              cout<<"\n*********************************************************"<<endl;
+                              cout<<"                        ASSIGNING DUTY TO STAFF"<<endl;
+                              cout<<"**********************************************************"<<endl;
+
+                           }
                }while(staffChoice!=6);
           }
            else  if(choice_admin == 4)
           {
+               do{
                       cout<<"*******************************************************************************"<<endl;
                       cout<<"                      FLOOR AND SPACE MANAGEMENT"<<endl;
                       cout<<"*******************************************************************************"<<endl;
@@ -148,11 +233,49 @@ void AdminPanel()
                            cout<<"3. Allocte Space to New Shop"<<endl;
                            cout<<"4. Update Status of the Floor"<<endl;
                            cout<<"5. Mark Space as Vacant"<<endl;
+                           cout<<"6. Back"<<endl;
                            cout<<"Enter Choice= ";
                            cin>>floorChoice;
+                           if(floorChoice==1)
+                           {
+                              cout<<"\n*********************************************************"<<endl;
+                              cout<<"                        ADD FLOOR"<<endl;
+                              cout<<"**********************************************************"<<endl;
+
+                           }
+                           else if(floorChoice==2)
+                           {
+                              cout<<"\n*********************************************************"<<endl;
+                              cout<<"                         VIEW AVAILABLE SPACES"<<endl;
+                              cout<<"**********************************************************"<<endl;
+
+                           }
+                           else if(floorChoice==3)
+                           {
+                              cout<<"\n*********************************************************"<<endl;
+                              cout<<"                         ALLOCATE SPACE TO NEW FLOOR"<<endl;
+                              cout<<"**********************************************************"<<endl;
+
+                           }
+                           else if(floorChoice==4)
+                           {
+                              cout<<"\n*********************************************************"<<endl;
+                              cout<<"                         UPDATE STATUS OF THE FLOOR"<<endl;
+                              cout<<"**********************************************************"<<endl;
+
+                           }
+                           else if(floorChoice==5)
+                           {
+                              cout<<"\n*********************************************************"<<endl;
+                              cout<<"                         MARK AS VACANT SPACE"<<endl;
+                              cout<<"**********************************************************"<<endl;
+
+                           }
+                         }while(floorChoice!=6);
           }
            else  if(choice_admin == 5)
           {
+                  do{
                       cout<<"*******************************************************************************"<<endl;
                       cout<<"                       VISITOR MANAGEMENT"<<endl;
                       cout<<"*******************************************************************************"<<endl;
@@ -160,7 +283,11 @@ void AdminPanel()
                            cout<<"2. Record Exit"<<endl;
                            cout<<"3. View Total Visitors Today"<<endl;
                            cout<<"4. View Visitor Log"<<endl;
+                           cout<<"5. Back"<<endl;
+                           cout<<"Enter= ";
+                           cin>>visitorChoice;
                            
+                  }while(visitorChoice!=5);
           }
            else  if(choice_admin == 6)
           {
@@ -175,6 +302,34 @@ void AdminPanel()
                            cout<<"5. Back"<<endl;
                            cout<<"Enter Choice= ";
                            cin>>eventChoice;
+                           if(eventChoice==1)
+                           {
+                              cout<<"\n*********************************************************"<<endl;
+                              cout<<"                        ADD NEW EVENT"<<endl;
+                              cout<<"**********************************************************"<<endl;
+
+                           }
+                           else if(eventChoice==2)
+                           {
+                              cout<<"\n*********************************************************"<<endl;
+                              cout<<"                        UPDATE EVENT"<<endl;
+                              cout<<"**********************************************************"<<endl;
+
+                           }
+                           else if(eventChoice==3)
+                           {
+                              cout<<"\n*********************************************************"<<endl;
+                              cout<<"                        CANCEL EVENT"<<endl;
+                              cout<<"**********************************************************"<<endl;
+
+                           }
+                           else if(eventChoice==4)
+                           {
+                              cout<<"\n*********************************************************"<<endl;
+                              cout<<"                        VIEW ALL EVENT"<<endl;
+                              cout<<"**********************************************************"<<endl;
+
+                           }
                  }while(eventChoice!=5);
           }
            else  if(choice_admin == 7)
@@ -188,10 +343,52 @@ void AdminPanel()
                            cout<<"3. Staff Report"<<endl;
                            cout<<"4. Visitor Report"<<endl;
                            cout<<"5. Events Report"<<endl;
-                           cout<<"6. Generate Mall Summar"<<endl;
+                           cout<<"6. Generate Mall Summary"<<endl;
                            cout<<"7. Back"<<endl;
                            cout<<"Enter Choice= ";
                            cin>>reportChoice;
+                           if(reportChoice==1)
+                           {
+                              cout<<"\n*********************************************************"<<endl;
+                              cout<<"                        TOTAL SHOPS REPORT"<<endl;
+                              cout<<"**********************************************************"<<endl;
+
+                           }
+                           else if(eventChoice==2)
+                           {
+                              cout<<"\n*********************************************************"<<endl;
+                              cout<<"                         TOTAL TENANTS REPORT"<<endl;
+                              cout<<"**********************************************************"<<endl;
+
+                           }
+                           else if(eventChoice==3)
+                           {
+                              cout<<"\n*********************************************************"<<endl;
+                              cout<<"                         STAFF REPORT"<<endl;
+                              cout<<"**********************************************************"<<endl;
+
+                           }
+                           else if(eventChoice==4)
+                           {
+                              cout<<"\n*********************************************************"<<endl;
+                              cout<<"                         VISITOR REPORT"<<endl;
+                              cout<<"**********************************************************"<<endl;
+
+                           }
+                           else if(eventChoice==5)
+                           {
+                              cout<<"\n*********************************************************"<<endl;
+                              cout<<"                         EVENT REPORT"<<endl;
+                              cout<<"**********************************************************"<<endl;
+
+                           }
+                           else if(eventChoice==6)
+                           {
+                              cout<<"\n*********************************************************"<<endl;
+                              cout<<"                         GENERATE MALL SUMMARY"<<endl;
+                              cout<<"**********************************************************"<<endl;
+
+                           }
                }while(reportChoice!=7);
                            
           }
