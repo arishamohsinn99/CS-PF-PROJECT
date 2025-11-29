@@ -159,11 +159,11 @@ int main()
     {
        cout<<"\n\n"<<endl;
        cout<<"                                                                    WELCOME TO\n"<<endl;
-       cout<<"                     #####   #     #    #####    #####    #    #    ######    ######   ######    #######    ######"<<endl;
-       cout<<"                     #       #     #    #   #    #   #    #   #     #         #        #    #    #          #     # "<<endl;
-       cout<<"                      ##     #######    #   #    #####    # #       ######    ######   ######    #######    #######"<<endl;
-       cout<<"                        #    #     #    #   #    #        #  #      #         #        #         #          # # "<<endl;
-       cout<<"                     ####    #     #    #####    #        #    #    ######    ######   #         #######    #   # \n"<<endl;
+       cout<<"                     #####   ##     ##    #######    #######    ##    ##    #######    #######   #######    ########    #######"<<endl;
+       cout<<"                     #       ##     ##    ##   ##    ##   ##    ##   ##     ##         ##        ##    #    ##          ##     # "<<endl;
+       cout<<"                      ##     #########    ##   ##    #######    ## ##       #######    #######   #######    ########    ########"<<endl;
+       cout<<"                        #    ##     ##    ##   ##    ##         ##  ##      ##         ##        ##         ##          ## ## "<<endl;
+       cout<<"                     ####    ##     ##    #######    ##         ##    ##    #######    #######   ##         ########    ##   ## \n"<<endl;
        cout<<"                                                                        PANEL"<<endl;
 
           cout<<"                                             1. View Shop Details"<<endl;
@@ -185,7 +185,7 @@ int main()
           cout<<"                                             4. Report an Issue"<<endl;
           cout<<"                                             5. View Salary Details"<<endl;
           cout<<"                                             0. Logout"<<endl;
-          cout<<"                                               ENTER YOUR CHOIC=";
+          cout<<"                                               ENTER YOUR CHOICE=";
     }
    }
    else if(choice_1==0)
