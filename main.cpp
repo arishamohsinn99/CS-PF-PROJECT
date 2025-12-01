@@ -1,7 +1,12 @@
 #include<iostream>
+#include<windows.h>
+#include<iomanip>
 using namespace std;
+HANDLE console= GetStdHandle(STD_OUTPUT_HANDLE);
+  
 void title()
 {
+     SetConsoleTextAttribute(console,11);
      cout<<"**********************************************************************************************************************************\n\n"<<endl;
      cout<<"                                           ###      ###      ####       ##         ##"<<endl;
      cout<<"                                           ## ##   # ##     ##  ##      ##         ## "<<endl;
@@ -38,7 +43,9 @@ void panel()
      
 }
 void loginScreen(string &username, string &password)
-{    cout<<"\n\n";
+{   
+    
+    cout<<"\n\n";
      cout<<"                                              _________________________________________"<<endl;
      cout<<"                                             |                                         |"<<endl;
      cout<<"                                             |  ====================================   |"<<endl;
@@ -64,13 +71,18 @@ void loginScreen(string &username, string &password)
      cout<<"                                             |_________________________________________|"<<endl;
      cout<<"\n\n";
 }
+
+
+
+     
+
+
 void AdminPanel()
 {
      int choice_1,choice_shop, choice_admin,choice_shopkeeper, shopChoice , tenantChoice, staffChoice ,floorChoice, visitorChoice
     ,eventChoice , reportChoice;
      do{
           
-             
           cout<<"\n\n\n";
           cout<<"*************************************************************************************************************************************"<<endl;
           cout<<"                                                              WELCOME TO \n"<<endl;
@@ -103,16 +115,20 @@ void AdminPanel()
                            cout<<"1. Add Shops"<<endl;
                            cout<<"2. Update Shops"<<endl;
                            cout<<"3. Remove Shops"<<endl;
-                           cout<<"4. Back"<<endl;
+                           cout<<"4. View Shops"<<endl;
+                           cout<<"5. Back"<<endl;
                            cout<<"Enter Choice= ";
                            cin>>shopChoice;
                            cout<<"\n\n";
+                           string shopname[100], shopkeeperName[100];
+                           int ShopID[100], floorNumber[100];
+                           int count=1;
                            if(shopChoice==1)
                            {
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                        ADD SHOPS"<<endl;
                               cout<<"**********************************************************"<<endl;
-
+                            
                            }
                            else if(shopChoice==2)
                            {
@@ -128,7 +144,13 @@ void AdminPanel()
                               cout<<"**********************************************************"<<endl;
 
                            }
-               }while(shopChoice!=4);
+                           else if(shopChoice==4)
+                           {
+                              cout<<"\n*********************************************************"<<endl;
+                              cout<<"                        VIEW SHOPS"<<endl;
+                              cout<<"**********************************************************"<<endl;
+                           }
+               }while(shopChoice!=5);
           }
           else  if(choice_admin == 2)
           {
@@ -436,6 +458,7 @@ void AdminPanel()
           
  }while(choice_admin!=0);
 }
+
 void ShopkeeperPanel()
 {
      int choice_shopkeeper=1;
@@ -574,7 +597,6 @@ void StaffPanel()
 }
 
 
-  
 int main()
 {
     string username, password;
