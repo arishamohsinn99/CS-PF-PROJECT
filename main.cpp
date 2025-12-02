@@ -74,7 +74,11 @@ void loginScreen(string &username, string &password)
 
 
 
-     
+             string shopName[100], tenantPhone[100],tenantShop[100],  shopkeeperName[100], tenantName[100], staffName[100], staffRole[100];
+             int shopID[100], tenantID[100],tenantRent[100], shopFloor[100], staffID[100], staffSalary[100], totalFloors = 0, floorNumber[50], floorCapacity[50], floorOccupied[50];
+             int totalShops = 0;
+             int totalTenants = 0;
+             int totalStaff = 0;
 
 
 void AdminPanel()
@@ -119,36 +123,110 @@ void AdminPanel()
                            cout<<"5. Back"<<endl;
                            cout<<"Enter Choice= ";
                            cin>>shopChoice;
+                           cin.ignore();
                            cout<<"\n\n";
-                           string shopname[100], shopkeeperName[100];
-                           int ShopID[100], floorNumber[100];
-                           int count=1;
                            if(shopChoice==1)
                            {
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                        ADD SHOPS"<<endl;
                               cout<<"**********************************************************"<<endl;
-                            
+                              cout<<"Enter Shop ID: ";
+                              cin>>shopID[totalShops];
+                              cin.ignore();
+                              cout<<"Enter Shop Name: ";
+                              getline(cin, shopName[totalShops]);
+                              cout<<"Enter Shopkeeper Name: ";
+                              getline(cin, shopkeeperName[totalShops]);
+                              cout<<"Enter Floor Number: ";
+                              cin>>shopFloor[totalShops];
+                              totalShops++;
+                              cout<<"\nShop Added Successfully!\n";
                            }
                            else if(shopChoice==2)
                            {
+                              int id;
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                        UPDATE SHOPS"<<endl;
                               cout<<"**********************************************************"<<endl;
+                              cout<<"Enter Shop ID to Update: ";
+                              cin>>id;
+                              cin.ignore();
+                              bool found = false;
 
-                           }
+                              for(int i=0; i<totalShops; i++)
+                              {
+                                  if(shopID[i] == id)
+                                      {
+                                         found = true;
+                                         cout<<"Enter New Shop Name: ";
+                                         getline(cin, shopName[i]);
+                                         cout<<"Enter New Shopkeeper Name: ";
+                                         getline(cin, shopkeeperName[i]);
+                                         cout<<"Enter New Floor Number: ";
+                                         cin>>shopFloor[i];
+                                         cout<<"\nShop Updated Successfully!"<<endl;
+                                         break;
+
+                                       }
+                                       else if(found!=true)
+                                         cout<<"Shop Not Found!"<<endl;
+                                }
+                             }
                            else if(shopChoice==3)
                            {
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                        REMOVE SHOPS"<<endl;
                               cout<<"**********************************************************"<<endl;
+                              int id;
+                              cout<<"Enter Shop ID to Update: ";
+                              cin>>id;
+                              cin.ignore();
+                              bool found = false; 
 
-                           }
+                              for(int i=0; i<totalShops; i++)
+                               {
+                                    if(shopID[i] == id)
+                                     {
+                                       found = true;
+                                         for(int j=i; j<totalShops-1; j++)
+                                           {
+                                                shopID[j] = shopID[j+1];
+                                                shopName[j] = shopName[j+1];
+                                                shopkeeperName[j] = shopkeeperName[j+1];
+                                                shopFloor[j] = shopFloor[j+1];
+                                           }
+                                                    totalShops--;
+                                           cout<<"Shop Removed Successfully!\n";
+                                            break;
+                                     }
+                               }
+                                if(found!=true)
+                                {
+                                   cout<<"Shop Not Found!"<<endl;
+                                }
+                            }
                            else if(shopChoice==4)
                            {
-                              cout<<"\n*********************************************************"<<endl;
-                              cout<<"                        VIEW SHOPS"<<endl;
-                              cout<<"**********************************************************"<<endl;
+                              cout<<"\n          *********************************************************"<<endl;
+                              cout<<"                                     VIEW SHOPS"<<endl;
+                              cout<<"             **********************************************************"<<endl;
+                                if(totalShops == 0)
+                                    {
+                                      cout<<"No Shops Available.\n";
+                                    }
+                                    else
+                                    cout << setfill('-') << setw(80) << "-" << setfill(' ') << endl;
+                                    cout << left<< setw(10) << "ID"<< setw(25) << "SHOP NAME"<< setw(25) << "SHOPKEEPER"<< setw(15) << "FLOOR"<<endl;
+                                    cout << setfill('-') << setw(80) << "-" << setfill(' ') << endl;
+                                    {
+                                      for(int i=0; i<totalShops; i++)
+                                       {
+                                         cout << left<< setw(10) << shopID[i]<< setw(25) << shopName[i]<< setw(25) << shopkeeperName[i]<< setw(15) << shopFloor[i]<< endl;
+                                         cout<<"\n";
+                                       }
+                                       cout << setfill('-') << setw(80) << "-" << setfill(' ') << endl;
+                                    }
+                              
                            }
                }while(shopChoice!=5);
           }
@@ -166,12 +244,27 @@ void AdminPanel()
                            cout<<"5. Back"<<endl;
                            cout<<"Enter Choice= ";
                            cin>>tenantChoice;
+                           cin.ignore();
                            cout<<"\n\n";
                            if(tenantChoice==1)
                            {
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                        ADD SHOPKEEPER"<<endl;
                               cout<<"**********************************************************"<<endl;
+                              cout<<"Enter Tenant ID: ";
+                              cin>>tenantID[totalTenants];
+                              cin.ignore();
+                              cout<<"Enter Tenant Name: ";
+                              getline(cin, tenantName[totalTenants]);   
+                              cout<<"Enter Tenant Phone: ";
+                              getline(cin, tenantPhone[totalTenants]);
+                              cout<<"Enter Shop Name Allocated: ";
+                              getline(cin, tenantShop[totalTenants]);
+                              cout<<"Enter Monthly Rent: ";
+                              cin>>tenantRent[totalTenants];
+                              cin.ignore();
+                              totalTenants++;
+                              cout<<"\nTenant Added Successfully!"<<endl;
 
                            }
                            else if(tenantChoice==2)
@@ -179,20 +272,86 @@ void AdminPanel()
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                        VIEW SHOPKEEPER"<<endl;
                               cout<<"**********************************************************"<<endl;
+                              if(totalTenants == 0)
+                                {
+                                  cout<<"No Tenants Available.\n";
+                                }
+                              else
+                                 {
+                                     cout << setfill('-') << setw(100) << "-" << setfill(' ') << endl;
+                                     cout << left << setw(10) << "ID"<< setw(25) << "NAME"<< setw(20) << "PHONE"<< setw(25) << "SHOP"<< setw(15) << "RENT" << endl;
+                                     cout << setfill('-') << setw(100) << "-" << setfill(' ') << endl;
+                                  for(int i=0; i<totalTenants; i++)
+                                     {
+                                       cout << left << setw(10) << tenantID[i]<< setw(25) << tenantName[i]<< setw(20) << tenantPhone[i]<< setw(25) << tenantShop[i]<< setw(15) << tenantRent[i] << endl;
+                                     }
+                                       cout << setfill('-') << setw(100) << "-" << setfill(' ') << endl;
+                                 }
 
                            }
                            else if(tenantChoice==3)
                            {
+                              int id;
+                              bool found = false;
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                        UPDATE SHOPKEEPER"<<endl;
                               cout<<"**********************************************************"<<endl;
+                              cout<<"Enter Tenant ID to Update: ";
+                              cin>>id;
+                              cin.ignore();
+                              for(int i=0; i<totalTenants; i++)
+                                {
+                                  if(tenantID[i] == id)
+                                    {
+                                      found = true;
+                                      cout<<"Enter New Tenant Name: ";
+                                      getline(cin, tenantName[i]);
+                                      cout<<"Enter New Phone Number: ";
+                                      getline(cin, tenantPhone[i]);
+                                      cout<<"Enter New Shop Name: ";
+                                      getline(cin, tenantShop[i]); 
+                                      cout<<"Enter New Rent: ";
+                                      cin>>tenantRent[i];
+                                     cin.ignore();
+                                     cout<<"\nTenant Updated Successfully!"<<endl;
+                                     break;
+                                    }
+                                 }
+                            if(found == false)
+                               cout<<"Tenant Not Found!\n";
 
                            }
                            else if(tenantChoice==4)
                            {
+                              int id;
+                              bool found = false;
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                        REMOVE SHOPKEEPER"<<endl;
                               cout<<"**********************************************************"<<endl;
+                              cout<<"Enter Tenant ID to Remove: ";
+                              cin>>id;
+                              cin.ignore();
+                              for(int i=0; i<totalTenants; i++)
+                               {
+                                   if(tenantID[i] == id)
+                                    {
+                                      found = true;
+                                        for(int j=i; j<totalTenants-1; j++)
+                                          {
+                                                tenantID[j] = tenantID[j+1];
+                                                tenantName[j] = tenantName[j+1];
+                                                tenantPhone[j] = tenantPhone[j+1];
+                                                tenantShop[j] = tenantShop[j+1];
+                                                tenantRent[j] = tenantRent[j+1];
+                                          }
+                                                totalTenants--;
+                                              cout<<"Tenant Removed Successfully!\n";
+                                              break;
+                                     }
+                              }
+                             if(found == false)
+                                 cout<<"Tenant Not Found!\n";
+
 
                            }
                }while(tenantChoice!=5);
@@ -212,12 +371,24 @@ void AdminPanel()
                            cout<<"6.Back"<<endl;
                            cout<<"Enter Choice= ";
                            cin>>staffChoice;
+                           cin.ignore();
                            cout<<"\n\n";
                            if(staffChoice==1)
                            {
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                        ADD STAFF"<<endl;
                               cout<<"**********************************************************"<<endl;
+                              cout<<"Enter Staff ID: ";
+                              cin>>staffID[totalStaff];
+                              cin.ignore();
+                              cout<<"Enter Staff Name: ";
+                              getline(cin, staffName[totalStaff]);
+                              cout<<"Enter Staff Role: ";
+                              getline(cin, staffRole[totalStaff]);
+                              cout<<"Enter Salary: ";
+                              cin>>staffSalary[totalStaff];
+                              totalStaff++;
+                              cout<<"\nStaff Added Successfully!\n";
 
                            }
                            else if(staffChoice==2)
@@ -225,13 +396,51 @@ void AdminPanel()
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                        VIEW ALL STAFF"<<endl;
                               cout<<"**********************************************************"<<endl;
+                                  if(totalStaff == 0)
+                                    {
+                                     cout<<"No Staff Available.\n";
+                                    }
+                                     else
+                                     {
+                                        cout << setfill('-') << setw(90) << "-" << setfill(' ') << endl;
+                                        cout << left<< setw(10) << "ID"<< setw(25) << "NAME"<< setw(25) << "ROLE"<< setw(15) << "SALARY" << endl;
+                                        cout << setfill('-') << setw(90) << "-" << setfill(' ') << endl;
+                                     for(int i=0; i<totalStaff; i++)
+                                         {
+                                              cout << left<< setw(10) << staffID[i]<< setw(25) << staffName[i]<< setw(25) << staffRole[i]<< setw(15) << staffSalary[i] << endl;
+                                         }
+
+                                              cout << setfill('-') << setw(90) << "-" << setfill(' ') << endl;
+                                     }
 
                            }
                            if(staffChoice==3)
                            {
+                              int id;
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                        UPDATE STAFF"<<endl;
                               cout<<"**********************************************************"<<endl;
+                              cout<<"Enter Staff ID to Update: ";
+                              cin>>id;
+                              cin.ignore();
+                              bool found = false;
+                              for(int i=0; i<totalStaff; i++)
+                                {
+                                     if(staffID[i] == id)
+                                      {
+                                        found = true;
+                                        cout<<"Enter New Staff Name: ";
+                                        getline(cin, staffName[i]);
+                                        cout<<"Enter New Staff Role: ";
+                                        getline(cin, staffRole[i]);
+                                        cout<<"Enter New Salary: ";
+                                        cin>>staffSalary[i];
+                                        cout<<"\nStaff Updated Successfully!\n";
+                                        break;
+                                     }
+                                }
+                                if(!found)
+                                 cout<<"Staff Not Found!\n";
 
                            }
                            if(staffChoice==4)
@@ -239,6 +448,30 @@ void AdminPanel()
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                         REMOVE STAFF"<<endl;
                               cout<<"**********************************************************"<<endl;
+                              int id;
+                              cout<<"Enter Staff ID to Remove: ";
+                              cin>>id;
+                              cin.ignore();
+                              bool found = false;
+                              for(int i=0; i<totalStaff; i++)
+                               {
+                                  if(staffID[i] == id)
+                                    {
+                                     found = true;
+                                       for(int j=i; j<totalStaff-1; j++)
+                                         {
+                                            staffID[j] = staffID[j+1];
+                                            staffName[j] = staffName[j+1];
+                                            staffRole[j] = staffRole[j+1];
+                                            staffSalary[j] = staffSalary[j+1];
+                                         }
+                                            totalStaff--;
+                                            cout<<"Staff Removed Successfully!\n";
+                                            break;
+                                     }
+                               }
+                                if(!found)
+                                cout<<"Staff Not Found!\n";
 
                            }
                            if(staffChoice==5)
@@ -246,7 +479,26 @@ void AdminPanel()
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                        ASSIGNING DUTY TO STAFF"<<endl;
                               cout<<"**********************************************************"<<endl;
-
+                              int id;
+                              bool found;
+                              string duty;
+                              cout<<"Enter Staff ID: ";
+                              cin>>id;
+                              cin.ignore();
+                              found = false;
+                              for(int i=0; i<totalStaff; i++)
+                               {
+                                   if(staffID[i] == id)
+                                    {
+                                        found = true;
+                                        cout<<"Enter Duty to Assign: ";
+                                        getline(cin, duty);
+                                        cout<<"\nDuty Assigned Successfully to "<<staffName[i]<<"!\n";
+                                        break;
+                                    }
+                               }
+                                  if(!found)
+                                   cout<<"Staff Not Found!\n";
                            }
                }while(staffChoice!=6);
           }
@@ -265,12 +517,28 @@ void AdminPanel()
                            cout<<"6. Back"<<endl;
                            cout<<"Enter Choice= ";
                            cin>>floorChoice;
+                           cin.ignore();
                            cout<<"\n\n";
                            if(floorChoice==1)
                            {
                               cout<<"\n*********************************************************"<<endl;
-                              cout<<"                        ADD FLOOR"<<endl;
+                              cout<<"                        VIEW FLOOR"<<endl;
                               cout<<"**********************************************************"<<endl;
+                              if(totalFloors == 0)
+                               {
+                                 cout<<"No Floors Added Yet.\n";
+                               }
+                               else
+                                  {
+                                   cout << setfill('-') << setw(60) << "-" << setfill(' ') << endl;
+                                   cout << left << setw(15) << "FLOOR NO" << setw(20) << "CAPACITY"<< setw(20) << "OCCUPIED" << endl;
+                                   cout << setfill('-') << setw(60) << "-" << setfill(' ') << endl;
+                                     for(int i=0; i<totalFloors; i++)
+                                      {
+                                        cout << left << setw(15) << floorNumber[i]<< setw(20) << floorCapacity[i]<< setw(20) << floorOccupied[i] << endl;
+                                      }
+                                        cout << setfill('-') << setw(60) << "-" << setfill(' ') << endl;
+                                  }
 
                            }
                            else if(floorChoice==2)
@@ -278,6 +546,19 @@ void AdminPanel()
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                         VIEW AVAILABLE SPACES"<<endl;
                               cout<<"**********************************************************"<<endl;
+                              if(totalFloors == 0)
+                               {
+                                 cout<<"No Floors Added Yet.\n";
+                               }
+                               else
+                               {
+                               cout << left << setw(15) << "FLOOR NO"<< setw(25) << "AVAILABLE SPACES" << endl;
+                               cout << setfill('-') << setw(40) << "-" << setfill(' ') << endl;
+                                 for(int i=0; i<totalFloors; i++)
+                                   {
+                                      cout << left << setw(15) << floorNumber[i]<< setw(25) << (floorCapacity[i] - floorOccupied[i]) << endl;
+                                   }
+                               }
 
                            }
                            else if(floorChoice==3)
@@ -285,6 +566,37 @@ void AdminPanel()
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                         ALLOCATE SPACE TO NEW FLOOR"<<endl;
                               cout<<"**********************************************************"<<endl;
+                              int floorNo;
+                              bool found;
+                              cout<<"Enter Floor Number to Allocate Space: ";
+                              cin>>floorNo;
+                              cin.ignore();
+                              found = false;
+                               for(int i=0; i<totalFloors; i++)
+                                 {
+                                     if(floorNumber[i] == floorNo)
+                                     {
+                                     found = true;
+                                       if(floorOccupied[i] < floorCapacity[i])
+                                       {
+                                        floorOccupied[i]++;
+                                        cout<<"Space Allocated Successfully on Floor "<<floorNo<<"\n";
+                                       }
+                                     else
+                                       cout<<"No Available Space on this Floor!\n";
+                                       break;
+                                     }
+                                 }
+                             if(found!=true)
+                            {
+                                cout<<"Floor Not Found! Adding New Floor...\n";
+                                floorNumber[totalFloors] = floorNo;
+                                cout<<"Enter Floor Capacity: ";
+                                cin>>floorCapacity[totalFloors];
+                                floorOccupied[totalFloors] = 1; // Allocating first space
+                                totalFloors++;
+                                cout<<"New Floor Added and Space Allocated Successfully!\n";
+                             }
 
                            }
                            else if(floorChoice==4)
@@ -292,13 +604,58 @@ void AdminPanel()
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                         UPDATE STATUS OF THE FLOOR"<<endl;
                               cout<<"**********************************************************"<<endl;
-
+                              int floorNo;
+                              bool found;
+                              cout<<"Enter Floor Number to Update: ";
+                              cin>>floorNo; 
+                              cin.ignore();
+                              found = false;
+                               for(int i=0; i<totalFloors; i++)
+                               {
+                                  if(floorNumber[i] == floorNo)
+                                     {
+                                       found = true;
+                                       cout<<"Enter New Floor Capacity: ";
+                                       cin>>floorCapacity[i];
+                                       cin.ignore();
+                                       cout<<"Enter Number of Occupied Spaces: ";
+                                       cin>>floorOccupied[i];
+                                       cin.ignore();
+                                       cout<<"Floor Status Updated Successfully!\n";
+                                       break;
+                                    }
+                              }
+                               if(found!=true)
+                                  cout<<"Floor Not Found!\n";
                            }
                            else if(floorChoice==5)
                            {
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                         MARK AS VACANT SPACE"<<endl;
                               cout<<"**********************************************************"<<endl;
+                                                            int floorNo;
+                               bool found ;
+                              cout<<"Enter Floor Number: ";
+                              cin>>floorNo;
+                              cin.ignore();
+                              found = false;
+                                 for(int i=0; i<totalFloors; i++)
+                                   {
+                                     if(floorNumber[i] == floorNo)
+                                        {
+                                          found = true;
+                                          if(floorOccupied[i] > 0)
+                                            {
+                                               floorOccupied[i]--;
+                                               cout<<"Space Marked as Vacant on Floor "<<floorNo<<"\n";
+                                            }
+                                           else
+                                            cout<<"No Occupied Space to Vacate on this Floor!\n";
+                                            break;
+                                          }
+                                    }
+                                     if(!found)
+                                       cout<<"Floor Not Found!\n";
 
                            }
                          }while(floorChoice!=6);
