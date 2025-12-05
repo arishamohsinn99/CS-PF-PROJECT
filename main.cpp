@@ -17,7 +17,7 @@ void title()
      cout<<"         ###     ###      ##      ##     ##      ##      ####      #######    ##      ##    #######    ##      ##   ########"<<endl;
      cout<<"         ## ## ## ##     #  #     ## #   ##     #  #    #          ##         ## #  # ##    ##         ## #    ##      ##   "<<endl;
      cout<<"         ##   ##  ##    ######    ##   # ##    ######   #   ###    #######    ##  #   ##    #######    ##  #   ##      ##"<<endl;
-     cout<<"         ##       ##    #    #    ##     ##    #    #   #     #    ##         ##      ##    ##         ##    # ##      ##"<<endl;  
+     cout<<"         ##       ##    #    #    ##    ###    #    #   #     #    ##         ##      ##    ##         ##    # ##      ##"<<endl;  
      cout<<"         ##       ##    #    #    ##     ##    #    #    #####     #######    ##      ##    #######    ##      ##      ##"<<endl;
      cout<<"\n";
      cout<<"                               ######    ##      ##    #######    ########   ########    ###      ###"<<endl;
@@ -509,17 +509,59 @@ void AdminPanel()
                       cout<<"*******************************************************************************"<<endl;
                       cout<<"                      FLOOR AND SPACE MANAGEMENT"<<endl;
                       cout<<"*******************************************************************************"<<endl;
-                           cout<<"1. View Floors"<<endl;
-                           cout<<"2. View Available Spaces"<<endl;
-                           cout<<"3. Allocte Space to New Shop"<<endl;
-                           cout<<"4. Update Status of the Floor"<<endl;
-                           cout<<"5. Mark Space as Vacant"<<endl;
-                           cout<<"6. Back"<<endl;
+                           cout<<"1. Add Floors"<<endl;
+                           cout<<"2. View Floors"<<endl;
+                           cout<<"3. View Available Spaces"<<endl;
+                           cout<<"4. Allocte Space to New Shop"<<endl;
+                           cout<<"5. Update Status of the Floor"<<endl;
+                           cout<<"6. Mark Space as Vacant"<<endl;
+                           cout<<"7. Back"<<endl;
                            cout<<"Enter Choice= ";
                            cin>>floorChoice;
                            cin.ignore();
                            cout<<"\n\n";
                            if(floorChoice==1)
+                           {
+                              cout<<"\n*********************************************************"<<endl;
+                              cout<<"                        ADD FLOOR"<<endl;
+                              cout<<"**********************************************************"<<endl;
+                              int number, cap, occ;
+                              bool exists = false;
+                              cout << "Enter Floor Number: ";
+                              cin >> number;
+                               for(int i = 0; i < totalFloors; i++) 
+                               {
+                                 if(floorNumber[i] == number)
+                                   {
+                                      exists = true;
+                                       break;
+                                   }
+                               }
+
+                            if(exists)
+                             {
+                               cout << "Floor number already exists!\n";
+                            }
+                              cout << "Enter Capacity of Floor: ";
+                              cin >> cap;
+                               if(cap <= 0) 
+                               {
+                                  cout << "Capacity must be greater than 0!\n";
+                             }
+                                  cout << "Enter Currently Occupied Slots: ";
+                                  cin >> occ;
+                                  if(occ < 0 || occ > cap)
+                                   {
+                                     cout << "Occupied slots cannot be negative or greater than capacity!\n";
+
+                                   }
+                                     floorNumber[totalFloors] = number;
+                                     floorCapacity[totalFloors] = cap;
+                                     floorOccupied[totalFloors] = occ;
+                                     totalFloors++;
+                                    cout << "\n Floor Added Successfully!\n";
+                           }
+                           else if(floorChoice==2)
                            {
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                        VIEW FLOOR"<<endl;
@@ -541,7 +583,7 @@ void AdminPanel()
                                   }
 
                            }
-                           else if(floorChoice==2)
+                           else if(floorChoice==3)
                            {
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                         VIEW AVAILABLE SPACES"<<endl;
@@ -561,7 +603,7 @@ void AdminPanel()
                                }
 
                            }
-                           else if(floorChoice==3)
+                           else if(floorChoice==4)
                            {
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                         ALLOCATE SPACE TO NEW FLOOR"<<endl;
@@ -599,7 +641,7 @@ void AdminPanel()
                              }
 
                            }
-                           else if(floorChoice==4)
+                           else if(floorChoice==5)
                            {
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                         UPDATE STATUS OF THE FLOOR"<<endl;
@@ -628,7 +670,7 @@ void AdminPanel()
                                if(found!=true)
                                   cout<<"Floor Not Found!\n";
                            }
-                           else if(floorChoice==5)
+                           else if(floorChoice==6)
                            {
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                         MARK AS VACANT SPACE"<<endl;
@@ -658,7 +700,7 @@ void AdminPanel()
                                        cout<<"Floor Not Found!\n";
 
                            }
-                         }while(floorChoice!=6);
+                         }while(floorChoice!=7);
           }
            else  if(choice_admin == 5)
           {
@@ -816,6 +858,7 @@ void AdminPanel()
  }while(choice_admin!=0);
 }
 
+
 void ShopkeeperPanel()
 {
      int choice_shopkeeper=1;
@@ -958,12 +1001,24 @@ int main()
 {
     string username, password;
     int choice_1;
+             while(true)
+  {   // keeps showing main menu again and again
+        title();
+        panel();
 
+        cin >> choice_1;
+        cin.ignore();
+
+        if(choice_1 == 0) 
+        {
+            cout << "Exiting program...";
+            break;            
+        }
              title();  
              panel();
-             cin>>choice_1;
-             cin.ignore();
-   if(choice_1==1 || choice_1==2 || choice_1==3)
+
+
+     if(choice_1==1 || choice_1==2 || choice_1==3)
    { 
             loginScreen(username,password);
 
@@ -982,8 +1037,5 @@ int main()
        StaffPanel();
        }
  }
-   else if(choice_1==0)
- {
-     cout<<"EXIT"<<endl;
- }
+}
 }
