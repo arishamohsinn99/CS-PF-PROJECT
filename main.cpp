@@ -74,11 +74,16 @@ void loginScreen(string &username, string &password)
 
 
 
+             string eventName[100], eventDate[100], eventLocation[100], eventDescription[100];
+             string visitorName[100], visitorCNIC[100], visitorPurpose[100], visitorEntryTime[100], visitorExitTime[100];
              string shopName[100], tenantPhone[100],tenantShop[100],  shopkeeperName[100], tenantName[100], staffName[100], staffRole[100];
              int shopID[100], tenantID[100],tenantRent[100], shopFloor[100], staffID[100], staffSalary[100], totalFloors = 0, floorNumber[50], floorCapacity[50], floorOccupied[50];
              int totalShops = 0;
              int totalTenants = 0;
              int totalStaff = 0;
+             int eventID[100];
+             int totalEvents = 0;
+            int totalVisitors = 0;
 
 
 void AdminPanel()
@@ -152,7 +157,6 @@ void AdminPanel()
                               cin>>id;
                               cin.ignore();
                               bool found = false;
-
                               for(int i=0; i<totalShops; i++)
                               {
                                   if(shopID[i] == id)
@@ -168,9 +172,9 @@ void AdminPanel()
                                          break;
 
                                        }
-                                       else if(found!=true)
-                                         cout<<"Shop Not Found!"<<endl;
                                 }
+                                if(found!=true)
+                                 cout<<"Shop Not Found!"<<endl;
                              }
                            else if(shopChoice==3)
                            {
@@ -539,27 +543,26 @@ void AdminPanel()
                                }
 
                             if(exists)
-                             {
-                               cout << "Floor number already exists!\n";
-                            }
-                              cout << "Enter Capacity of Floor: ";
-                              cin >> cap;
-                               if(cap <= 0) 
                                {
-                                  cout << "Capacity must be greater than 0!\n";
-                             }
-                                  cout << "Enter Currently Occupied Slots: ";
-                                  cin >> occ;
-                                  if(occ < 0 || occ > cap)
-                                   {
-                                     cout << "Occupied slots cannot be negative or greater than capacity!\n";
-
-                                   }
-                                     floorNumber[totalFloors] = number;
-                                     floorCapacity[totalFloors] = cap;
-                                     floorOccupied[totalFloors] = occ;
-                                     totalFloors++;
-                                    cout << "\n Floor Added Successfully!\n";
+                                  cout << "Floor number already exists!\n";
+                               }
+                                      cout << "Enter Capacity of Floor: ";
+                                       cin >> cap;
+                                     if(cap <= 0) 
+                                      {
+                                         cout << "Capacity must be greater than 0!\n";
+                                      }
+                                         cout << "Enter Currently Occupied Slots: ";
+                                         cin >> occ;
+                                         if(occ < 0 || occ > cap)
+                                          {
+                                           cout << "Occupied slots cannot be negative or greater than capacity!\n";
+                                          }
+                                                floorNumber[totalFloors] = number;
+                                                floorCapacity[totalFloors] = cap;
+                                                floorOccupied[totalFloors] = occ;
+                                                totalFloors++;
+                                                cout << "\n Floor Added Successfully!\n";
                            }
                            else if(floorChoice==2)
                            {
@@ -635,10 +638,10 @@ void AdminPanel()
                                 floorNumber[totalFloors] = floorNo;
                                 cout<<"Enter Floor Capacity: ";
                                 cin>>floorCapacity[totalFloors];
-                                floorOccupied[totalFloors] = 1; // Allocating first space
+                                floorOccupied[totalFloors] = 1; 
                                 totalFloors++;
                                 cout<<"New Floor Added and Space Allocated Successfully!\n";
-                             }
+                            }
 
                            }
                            else if(floorChoice==5)
@@ -722,28 +725,73 @@ void AdminPanel()
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                      RECORD NEW VISITOR ENTRY"<<endl;
                               cout<<"**********************************************************"<<endl;
-
+                              cout<<"Enter Visitor Name: ";
+                              cin.ignore();
+                              getline(cin, visitorName[totalVisitors]);
+                              cout<<"Enter CNIC: ";
+                              getline(cin, visitorCNIC[totalVisitors]);
+                              cout<<"Enter Purpose of Visit: ";
+                              getline(cin, visitorPurpose[totalVisitors]);
+                              cout<<"Enter Entry Time (HH:MM): ";
+                              getline(cin, visitorEntryTime[totalVisitors]);
+                              visitorExitTime[totalVisitors] = "Not Exited Yet";
+                              totalVisitors++;
+                              cout<<"\nVisitor Entry Recorded Successfully!\n";
                            }
-                           else  if(eventChoice==2)
+                           else  if(visitorChoice==2)
                            {
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                        RECORD EXIT"<<endl;
                               cout<<"**********************************************************"<<endl;
-
+                              string cnic;
+                              bool found = false;
+                              cout<<"Enter Visitor CNIC to Record Exit: ";
+                              cin.ignore();
+                              getline(cin, cnic);
+                              for(int i = 0; i < totalVisitors; i++)
+                              {
+                                  if(visitorCNIC[i] == cnic)
+                                  {
+                                      found = true;
+                                      cout<<"Enter Exit Time (HH:MM): ";
+                                      getline(cin, visitorExitTime[i]);
+                                      cout<<"\nExit Time Recorded Successfully!"<<endl;
+                                      break;
+                                  }
+                              }
+                              if(found!=0)
+                              {
+                                  cout<<"Visitor Not Found!"<<endl;
+                              }
                            }
-                           else  if(eventChoice==3)
+                           else  if(visitorChoice==3)
                            {
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                        VIEW TOTAL VISITOR TODAY"<<endl;
                               cout<<"**********************************************************"<<endl;
+                              cout<<"Total Visitors Today: "<<totalVisitors<<endl;
 
                            }
-                           else  if(eventChoice==4)
+                           else  if(visitorChoice==4)
                            {
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                        VIEW VISITOR LOG"<<endl;
                               cout<<"**********************************************************"<<endl;
+                              if(totalVisitors == 0)
+                              {
+                                  cout<<"No Visitors Recorded Today!"<<endl;
+                              }
+                              else
+                              {
+                                  cout<<left;
+                                  cout<<setw(25)<<"NAME" <<setw(20)<<"CNIC"<<setw(30)<<"PURPOSE"<<setw(15)<<"ENTRY TIME"<<setw(15)<<"EXIT TIME"<<endl;
+                                  cout<<"---------------------------------------------------------------------------------------------"<<endl;
 
+                                  for(int i = 0; i < totalVisitors; i++)
+                                  {
+                                      cout<<setw(25)<<visitorName[i]<<setw(20)<<visitorCNIC[i]<<setw(30)<<visitorPurpose[i]<<setw(15)<<visitorEntryTime[i]<<setw(15)<<visitorExitTime[i]<<endl;
+                                  }
+                              }
                            }
                            
                   }while(visitorChoice!=5);
@@ -768,6 +816,19 @@ void AdminPanel()
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                        ADD NEW EVENT"<<endl;
                               cout<<"**********************************************************"<<endl;
+                              cout<<"Enter Event ID: ";
+                              cin>>eventID[totalEvents];
+                              cin.ignore();
+                              cout<<"Enter Event Name: ";
+                              getline(cin, eventName[totalEvents]);
+                              cout<<"Enter Event Date (DD-MM-YYYY): ";
+                              getline(cin, eventDate[totalEvents]);
+                              cout<<"Enter Event Location: ";
+                              getline(cin, eventLocation[totalEvents]);
+                              cout<<"Enter Event Description: ";
+                              getline(cin, eventDescription[totalEvents]);
+                              totalEvents++;
+                              cout<<"\nEvent Added Successfully!\n";
 
                            }
                            else if(eventChoice==2)
@@ -775,6 +836,32 @@ void AdminPanel()
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                        UPDATE EVENT"<<endl;
                               cout<<"**********************************************************"<<endl;
+                              int id;
+                              bool found = false;
+                              cout<<"Enter Event ID to Update: ";
+                              cin>>id;
+                              cin.ignore();
+                              for(int i = 0; i < totalEvents; i++)
+                              {
+                                  if(eventID[i] == id)
+                                  {
+                                      found = true;
+                                      cout<<"Enter New Event Name: ";
+                                      getline(cin, eventName[i]);
+                                      cout<<"Enter New Event Date (DD-MM-YYYY): ";
+                                      getline(cin, eventDate[i]);
+                                      cout<<"Enter New Event Location: ";
+                                      getline(cin, eventLocation[i]);
+                                      cout<<"Enter New Event Description: ";
+                                      getline(cin, eventDescription[i]);
+                                      cout<<"\nEvent Updated Successfully!"<<endl;
+                                      break;
+                                  }
+                              }
+                              if(!found)
+                              {
+                                  cout<<"Event Not Found!"<<endl;
+                              }
 
                            }
                            else if(eventChoice==3)
@@ -782,6 +869,33 @@ void AdminPanel()
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                        CANCEL EVENT"<<endl;
                               cout<<"**********************************************************"<<endl;
+                              int id;
+                              bool found = false;
+                              cout<<"Enter Event ID to Remove: ";
+                              cin>>id;
+                              cin.ignore();
+                              for(int i = 0; i < totalEvents; i++)
+                              {
+                                  if(eventID[i] == id)
+                                  {
+                                      found = true;
+                                      for(int j = i; j < totalEvents - 1; j++)
+                                      {
+                                          eventID[j] = eventID[j+1];
+                                          eventName[j] = eventName[j+1];
+                                          eventDate[j] = eventDate[j+1];
+                                          eventLocation[j] = eventLocation[j+1];
+                                          eventDescription[j] = eventDescription[j+1];
+                                      }
+                                      totalEvents--;
+                                      cout<<"\nEvent Removed Successfully!"<<endl;
+                                      break;
+                                  }
+                              }
+                              if(found!=true)
+                              {
+                                  cout<<"Event Not Found!"<<endl;
+                              }
 
                            }
                            else if(eventChoice==4)
@@ -789,6 +903,21 @@ void AdminPanel()
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                        VIEW ALL EVENT"<<endl;
                               cout<<"**********************************************************"<<endl;
+                              if(totalEvents == 0)
+                              {
+                                  cout<<"No Events Available!"<<endl;
+                              }
+                              else
+                              {
+                                  cout<<left;
+                                  cout<<setw(10)<<"ID" <<setw(25)<<"EVENT NAME"<<setw(15)<<"DATE"<<setw(20)<<"LOCATION"<<setw(35)<<"DESCRIPTION"<<endl;
+                                 cout<<"---------------------------------------------------------------------------------------------"<<endl;
+
+                                  for(int i = 0; i < totalEvents; i++)
+                                  {
+                                      cout<<setw(10)<<eventID[i]<<setw(25)<<eventName[i]<<setw(15)<<eventDate[i]<<setw(20)<<eventLocation[i]<<setw(35)<<eventDescription[i]<<endl;
+                                  }
+                              }
 
                            }
                  }while(eventChoice!=5);
@@ -814,42 +943,117 @@ void AdminPanel()
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                        TOTAL SHOPS REPORT"<<endl;
                               cout<<"**********************************************************"<<endl;
-
+                              if(totalShops!= 0)
+                               {
+                                   cout << left<< setw(10) << "ID"<< setw(25) << "NAME"<< setw(25) << "FLOOR NO"<< setw(20) << "TENANT NAME" << endl;
+                                   cout << setfill('-') << setw(80) << "-" << setfill(' ') << endl;
+                                     for(int i=0; i<totalShops; i++)
+                                         {
+                                              cout << left<< setw(10) << shopID[i]<< setw(25) << shopName[i]<< setw(25) << floorNumber[i]<< setw(20) << tenantName[i] << endl;
+                                         }
+                                              cout << setfill('-') << setw(80) << "-" << setfill(' ') << endl;
+                               }
+                               else
+                               {
+                                     cout<<"No Shops Available!\n";
+                               }
+                              cout<<"Total Shops: "<<totalShops<<endl;
                            }
-                           else if(eventChoice==2)
+                           else if(reportChoice==2)
                            {
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                         TOTAL TENANTS REPORT"<<endl;
                               cout<<"**********************************************************"<<endl;
+                              if(totalTenants!= 0)
+                               {
+                                   cout << left<< setw(10) << "ID"<< setw(25) << "NAME"<< setw(30) << "CONTACT"<< setw(30) << "RENT" << endl;
+                                   cout << setfill('-') << setw(95) << "-" << setfill(' ') << endl;
+                                     for(int i=0; i<totalTenants; i++)
+                                         {
+                                              cout << left<< setw(10) << tenantID[i]<< setw(25) << tenantName[i]<< setw(30) << tenantPhone[i]<< setw(30) << tenantRent[i] << endl;
+                                         }
+                                              cout << setfill('-') << setw(95) << "-" << setfill(' ') << endl;
+                               }
+                               else
+                               {
+                                     cout<<"No Tenants Available!\n";
+                               }
 
                            }
-                           else if(eventChoice==3)
+                           else if(reportChoice==3)
                            {
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                         STAFF REPORT"<<endl;
                               cout<<"**********************************************************"<<endl;
+                              if(totalStaff!= 0)
+                               {
+                                   cout << left<< setw(10) << "ID"<< setw(25) << "NAME"<< setw(25) << "ROLE"<< setw(20) << "SALARY" << endl;
+                                   cout << setfill('-') << setw(80) << "-" << setfill(' ') << endl;
+                                     for(int i=0; i<totalStaff; i++)
+                                         {
+                                              cout << left<< setw(10) << staffID[i]<< setw(25) << staffName[i]<< setw(25) << staffRole[i]<< setw(20) << staffSalary[i] << endl;
+                                         }
+                                              cout << setfill('-') << setw(80) << "-" << setfill(' ') << endl;
+                               }
+                               else
+                               {
+                                     cout<<"No Staff Available!\n";
+                               }
 
                            }
-                           else if(eventChoice==4)
+                           else if(reportChoice==4)
                            {
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                         VISITOR REPORT"<<endl;
                               cout<<"**********************************************************"<<endl;
+                              if(totalVisitors== 0)
+                               {
+                                   cout<<"No Visitors Recorded Today!"<<endl;
+                               }
+                               else
+                               {
+                                   cout<<left;
+                                   cout<<setw(25)<<"NAME" <<setw(20)<<"CNIC"<<setw(30)<<"PURPOSE"<<setw(15)<<"ENTRY TIME"<<setw(15)<<"EXIT TIME"<<endl;
+                                   cout<<"---------------------------------------------------------------------------------------------"<<endl;
+
+                                   for(int i = 0; i < totalVisitors; i++)
+                                   {
+                                       cout<<setw(25)<<visitorName[i]<<setw(20)<<visitorCNIC[i]<<setw(30)<<visitorPurpose[i]<<setw(15)<<visitorEntryTime[i]<<setw(15)<<visitorExitTime[i]<<endl;
+                                   }
+                               }
 
                            }
-                           else if(eventChoice==5)
+                           else if(reportChoice==5)
                            {
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                         EVENT REPORT"<<endl;
                               cout<<"**********************************************************"<<endl;
+                              if(totalEvents== 0)
+                               {
+                                   cout<<"No Events Available!"<<endl;
+                               }
+                               else
+                               {
+                                   cout<<left;
+                                   cout<<setw(10)<<"ID" <<setw(25)<<"EVENT NAME"<<setw(15)<<"DATE"<<setw(20)<<"LOCATION"<<setw(35)<<"DESCRIPTION"<<endl;
+                                  cout<<"---------------------------------------------------------------------------------------------"<<endl;
 
+                                   for(int i = 0; i < totalEvents; i++)
+                                   {
+                                       cout<<setw(10)<<eventID[i]<<setw(25)<<eventName[i]<<setw(15)<<eventDate[i]<<setw(20)<<eventLocation[i]<<setw(35)<<eventDescription[i]<<endl;
+                                   }
+                               }
                            }
-                           else if(eventChoice==6)
+                           else if(reportChoice==6)
                            {
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                         GENERATE MALL SUMMARY"<<endl;
                               cout<<"**********************************************************"<<endl;
-
+                              cout<<"Total Shops: "<<totalShops<<endl;
+                              cout<<"Total Tenants: "<<totalTenants<<endl;
+                              cout<<"Total Staff: "<<totalStaff<<endl;
+                              cout<<"Total Visitors Today: "<<totalVisitors<<endl;
+                              cout<<"Total Events Scheduled: "<<totalEvents<<endl;
                            }
                }while(reportChoice!=7);
                            
@@ -1001,8 +1205,8 @@ int main()
 {
     string username, password;
     int choice_1;
-             while(true)
-  {   // keeps showing main menu again and again
+    while(true)
+     {   
         title();
         panel();
 
