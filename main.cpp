@@ -759,10 +759,10 @@ void AdminPanel()
                                       break;
                                   }
                               }
-                              if(found!=0)
-                              {
-                                  cout<<"Visitor Not Found!"<<endl;
-                              }
+                                if(!found)
+                                {
+                                   cout<<"Visitor Not Found!"<<endl;
+                                }
                            }
                            else  if(visitorChoice==3)
                            {
@@ -1062,7 +1062,8 @@ void AdminPanel()
  }while(choice_admin!=0);
 }
 
-
+string productName[100],maintenanceRequest[100];
+int productQty[100], productPrice[100], totalProducts = 0, totalBills = 0, totalRevenue = 0, requestShopID[100], totalRequests = 0;
 void ShopkeeperPanel()
 {
      int choice_shopkeeper=1;
@@ -1078,7 +1079,9 @@ void ShopkeeperPanel()
        cout<<"                ####    ##     ##    #######    ##         ##    ##    #######    #######   ##         ########    ##   ## \n"<<endl;
        cout<<"                                                                   PANEL"<<endl;
        cout<<"*************************************************************************************************************************************"<<endl;
-
+       int loggedShop;
+       cout << "Enter your Shop ID: ";
+       cin >> loggedShop;
           cout<<"\n"<<endl;
           cout<<"                                                        1. View Shop Details"<<endl;
           cout<<"                                                        2. Update Shop Information"<<endl;
@@ -1096,43 +1099,186 @@ void ShopkeeperPanel()
                cout<<"******************************************************************************"<<endl;
                cout<<"                         VIEW SHOP DETAILS"<<endl;
                cout<<"*******************************************************************************"<<endl;
+               cout<<"Shop ID: "<<shopID[loggedShop]<<endl;
+               cout<<"Shop Name: "<<shopName[loggedShop]<<endl;
+               cout<<"Floor Number: "<<floorNumber[loggedShop]<<endl;
+               cout<<"Tenant Name: "<<tenantName[loggedShop]<<endl;
+               cout<<"Monthly Rent: "<<tenantRent[loggedShop]<<endl;
           }
           else if(choice_shopkeeper==2)
           {
+                int prodChoice;
                cout<<"******************************************************************************"<<endl;
                cout<<"                         UPDATE SHOP INFORMATION"<<endl;
                cout<<"*******************************************************************************"<<endl;
+                              
           }
           else if(choice_shopkeeper==3)
           {
+               int prodChoice;
                cout<<"******************************************************************************"<<endl;
                cout<<"                         MANAGE PRODUCTS"<<endl;
                cout<<"*******************************************************************************"<<endl;
+                do {
+                     cout<<"1. Add Product"<<endl;
+                     cout<<"2. View Products"<<endl;
+                     cout<<"3. Update Product"<<endl;
+                     cout<<"4. Delete Product"<<endl;
+                     cout<<"5. Back"<<endl;
+                     cout<<"Enter Choice: ";
+                     cin>>prodChoice;
+                     cin.ignore();
+
+                      if(prodChoice == 1)
+                       {
+                          cout<<"******************************************************************************"<<endl;
+                          cout<<"                               ADD PRODUCT"<<endl;
+                          cout<<"******************************************************************************"<<endl;
+                          cout<<"Enter Product Name: ";
+                          cin.ignore();
+                          getline(cin, productName[totalProducts]);
+                          cout<<"Enter Price: ";
+                          cin>>productPrice[totalProducts];
+                          cout<<"Enter Quantity: ";
+                          cin>>productQty[totalProducts];
+                          totalProducts++;
+                          cout<<"\nProduct Added Successfully!"<<endl;
+                       }
+                        else if(prodChoice == 2)
+                        {
+                          cout<<"******************************************************************************"<<endl;
+                          cout<<"                               PRODUCT LIST"<<endl;
+                          cout<<"******************************************************************************"<<endl;
+                         if(totalProducts == 0)
+                         {
+                            cout<<"No Products Available!"<<endl;
+                         }
+                         else
+                            {
+                               cout<<left<<setw(20)<<"Name"<<setw(10)<<"Price"<<setw(10)<<"Qty"<<endl;
+                               cout<<"--------------------------------------------------"<<endl;
+                               for(int i = 0; i < totalProducts; i++)
+                               {
+                                 cout<<setw(20)<<productName[i]<<setw(10)<<productPrice[i]<<setw(10)<<productQty[i]<<endl;
+                               }
+                          }
+                       }
+                      else if(prodChoice == 3)
+                       {
+                          cout<<"******************************************************************************"<<endl;
+                          cout<<"                              UPDATE PRODUCT"<<endl;
+                          cout<<"******************************************************************************"<<endl;
+                          int id;
+                          cout<<"Enter Product Number to Update (0 to "<<totalProducts-1<<"): ";
+                          cin>>id;
+                          if(id >= 0 && id < totalProducts)
+                          {
+                              cout<<"Enter New Name: ";
+                              cin.ignore();
+                              getline(cin, productName[id]);
+                              cout<<"Enter New Price: ";
+                              cin>>productPrice[id];
+                              cout<<"Enter New Quantity: ";
+                              cin>>productQty[id];
+                              cout<<"\nUpdated Successfully!"<<endl;
+                         }
+                          else
+                           {
+                              cout<<"Invalid Product ID!"<<endl;
+                           }
+                       }
+                     else if(prodChoice == 4)
+                     {
+                           cout<<"******************************************************************************"<<endl;
+                           cout<<"                              DELETE PRODUCT"<<endl;
+                           cout<<"******************************************************************************"<<endl;
+                           int id;
+                           cout<<"Enter Product Number to Delete: ";
+                           cin>>id; 
+                            if(id >= 0 && id < totalProducts)
+                            {
+                             for(int i = id; i < totalProducts - 1; i++)
+                              {
+                                   productName[i] = productName[i + 1];
+                                   productPrice[i] = productPrice[i + 1];
+                                   productQty[i] = productQty[i + 1];
+                             } 
+                                 totalProducts--;
+                                 cout<<"Deleted Successfully!"<<endl;
+                             }
+                           else
+                               {
+                                   cout<<"Invalid ID!"<<endl;
+                               }
+                     }
+                      if(prodChoice != 5)
+                      {
+                         cout<<"\nPress Enter to return...";
+                         cin.ignore();
+                         cin.get();
+                      }
+                       } while(prodChoice != 5); 
           }
           else if(choice_shopkeeper==4)
           {
                cout<<"******************************************************************************"<<endl;
                cout<<"                         VIEW SALES SUMMARY"<<endl;
                cout<<"*******************************************************************************"<<endl;
+               cout<<"Total Bills Generated: "<<totalBills<<endl;
+               cout<<"Total Revenue: "<<totalRevenue<<endl;
           }
           else if(choice_shopkeeper==5)
           {
                cout<<"******************************************************************************"<<endl;
                cout<<"                         CUSTOMER BILING"<<endl;
                cout<<"*******************************************************************************"<<endl;
+                       int pid, quantity;
+                       char more='y';
+                       float bill=0;
+                       while(more=='y' || more=='Y')
+                     {
+                      cout<<"Enter Product Number (0 to "<<totalProducts-1<<"): ";
+                      cin>>pid;
+                       if(pid>=0 && pid<totalProducts)
+                        {
+                         cout<<"Enter Quantity: ";
+                         cin>>quantity;
+                          if(quantity <= productQty[pid])
+                           {
+                            bill += quantity * productPrice[pid];
+                            productQty[pid] -= quantity;
+                            cout<<"Added!"<<endl;
+                           }
+                            else
+                             cout<<"Stock Not Available!"<<endl;
+                       }
+                        else
+                        cout<<"Invalid ID!"<<endl;
+                        cout<<"Add More? (y/n): ";
+                        cin>>more;
+                    }
+                       totalRevenue += bill;
+                       totalBills++;
+                       cout<<"Total Bill: "<<bill<<endl;
           }
           else if(choice_shopkeeper==6)
           {
                cout<<"******************************************************************************"<<endl;
                cout<<"                         REQUEST MAINTENANCE"<<endl;
                cout<<"*******************************************************************************"<<endl;
+               cout<<"Enter Your Maintenance Issue: ";
+               cin.ignore();
+               getline(cin, maintenanceRequest[totalRequests]);
+               requestShopID[totalRequests] = shopID[loggedShop];
+               totalRequests++;
+               cout<<"Maintenance Request Submitted!"<<endl;
           }
           if(choice_shopkeeper != 0)
-    {
+         {
              cout << "\nPress Enter to return to the menu";
              cin.ignore(); 
              cin.get(); 
-    }
+         }
      }while(choice_shopkeeper!=0);
 }
 void StaffPanel()
