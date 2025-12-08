@@ -1079,9 +1079,9 @@ void ShopkeeperPanel()
        cout<<"                ####    ##     ##    #######    ##         ##    ##    #######    #######   ##         ########    ##   ## \n"<<endl;
        cout<<"                                                                   PANEL"<<endl;
        cout<<"*************************************************************************************************************************************"<<endl;
-       int loggedShop;
-       cout << "Enter your Shop ID: ";
-       cin >> loggedShop;
+          int loggedShop, index=-1;
+          cout << "Enter your Shop ID: ";
+          cin >> loggedShop;
           cout<<"\n"<<endl;
           cout<<"                                                        1. View Shop Details"<<endl;
           cout<<"                                                        2. Update Shop Information"<<endl;
@@ -1092,18 +1092,25 @@ void ShopkeeperPanel()
           cout<<"                                                        0. Logout"<<endl;
           cout<<"                                                           ENTER YOUR CHOICE=";
           cin>>choice_shopkeeper;
-
           
           if(choice_shopkeeper==1)
           {
+            for(int i=0; i<totalShops; i++)
+            {
+                  if(shopID[i]==loggedShop)
+                  {
+                     index=i;
+                     break;
+                  }
+            }
                cout<<"******************************************************************************"<<endl;
                cout<<"                         VIEW SHOP DETAILS"<<endl;
                cout<<"*******************************************************************************"<<endl;
-               cout<<"Shop ID: "<<shopID[loggedShop]<<endl;
-               cout<<"Shop Name: "<<shopName[loggedShop]<<endl;
-               cout<<"Floor Number: "<<floorNumber[loggedShop]<<endl;
-               cout<<"Tenant Name: "<<tenantName[loggedShop]<<endl;
-               cout<<"Monthly Rent: "<<tenantRent[loggedShop]<<endl;
+               cout<<"Shop ID: "<<shopID[index]<<endl;
+               cout<<"Shop Name: "<<shopName[index]<<endl;
+               cout<<"Floor Number: "<<shopFloor[index]<<endl;
+               cout<<"Tenant Name: "<<tenantName[index]<<endl;
+               cout<<"Monthly Rent: "<<tenantRent[index]<<endl;
           }
           else if(choice_shopkeeper==2)
           {
@@ -1111,6 +1118,22 @@ void ShopkeeperPanel()
                cout<<"******************************************************************************"<<endl;
                cout<<"                         UPDATE SHOP INFORMATION"<<endl;
                cout<<"*******************************************************************************"<<endl;
+               for(int i=0; i<totalShops; i++)
+               {
+                  if(shopID[i]==loggedShop)
+                  {
+                     loggedShop=i;
+                     break;
+                  }
+               }
+               cout<<"Enter New Shop Name: ";
+               cin.ignore();
+               getline(cin, shopName[loggedShop]);
+               cout<<"Enter New Tenant Name: ";
+               getline(cin, tenantName[loggedShop]);
+               cout<<"Enter New Monthly Rent: ";
+               cin>>tenantRent[loggedShop];
+               cout<<"\nShop Information Updated Successfully!"<<endl;
                               
           }
           else if(choice_shopkeeper==3)
@@ -1281,6 +1304,13 @@ void ShopkeeperPanel()
          }
      }while(choice_shopkeeper!=0);
 }
+string staffName[50], staffDuties[50];;
+int staffAttendance[50], staffSalary[50], totalStaff = 0;
+string duties[5] = {"Clean Floor", "Check Inventory", "Assist Customers", "Organize Shelves", "Maintain Records"};
+bool attendanceMarked = false;
+string workStatus = "Pending", reportedIssue = "None";
+int basicSalary = 25000;
+int daysPresent = 0;
 void StaffPanel()
 {
        
@@ -1311,30 +1341,60 @@ void StaffPanel()
                     cout<<"****************************************************************"<<endl;
                     cout<<"           VIEW ASSIGNED DUTIES"<<endl;
                     cout<<"****************************************************************"<<endl;
+                     cout<<"Your Assigned Duties for Today are:"<<endl;
+                     for(int i = 0; i < 3; i++)
+                     {
+                         cout << "- " << duties[i] << endl;
+                     }
+
                 }
                 else if(staffChoice==2)
                 {
                     cout<<"****************************************************************"<<endl;
                     cout<<"              MARK ATTENDANCE"<<endl;
                     cout<<"****************************************************************"<<endl;
+                     if(!attendanceMarked)
+                      {
+                            attendanceMarked = true;
+                            daysPresent++;
+                            cout<<"Attendance Marked for Today!"<<endl;
+                      }
+                        else
+                        {
+                           cout<<"Attendance Already Marked!"<<endl;
+                        }
                 }
                  else if(staffChoice==3)
                 {
                     cout<<"****************************************************************"<<endl;
                     cout<<"                UPDATE WORK STATUS "<<endl;
                     cout<<"****************************************************************"<<endl;
+                     cout<<"Current Work Status: "<<workStatus<<endl;
+                     cout<<"Enter New Work Status (Pending/Completed): ";
+                     cin>>workStatus;
+                     cout<<"Work Status Updated to "<<workStatus<<"!"<<endl;
+
                 }
                  else if(staffChoice==4)
                 {
                     cout<<"****************************************************************"<<endl;
                     cout<<"              REPORT AN ISSUE"<<endl;
                     cout<<"****************************************************************"<<endl;
+                     cout<<"Current Reported Issue: "<<reportedIssue<<endl;
+                     cout<<"Enter New Issue to Report: ";
+                     cin.ignore();
+                     getline(cin, reportedIssue);
+                     cout<<"Issue Reported: "<<reportedIssue<<endl;
                 }
                  else if(staffChoice==5)
                 {
                     cout<<"****************************************************************"<<endl;
                     cout<<"              VIEW SALARY DETAILS"<<endl;
                     cout<<"****************************************************************"<<endl;
+                    int salary = basicSalary + (daysPresent * 1000);
+                    cout << "Basic Salary: " << basicSalary << endl;
+                    cout << "Days Present: " << daysPresent << endl;
+                    cout << "Total Salary: " << salary << endl;
                 }
                 if(staffChoice != 0)
                  {
