@@ -1304,8 +1304,7 @@ void ShopkeeperPanel()
          }
      }while(choice_shopkeeper!=0);
 }
-string staffName[50], staffDuties[50];;
-int staffAttendance[50], staffSalary[50], totalStaff = 0;
+
 string duties[5] = {"Clean Floor", "Check Inventory", "Assist Customers", "Organize Shelves", "Maintain Records"};
 bool attendanceMarked = false;
 string workStatus = "Pending", reportedIssue = "None";
