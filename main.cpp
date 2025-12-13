@@ -258,6 +258,11 @@ void AdminPanel()
                               cout<<"Enter Tenant ID: ";
                               cin>>tenantID[totalTenants];
                               cin.ignore();
+                              if(tenantID[totalTenants] == shopID[totalTenants])
+                              {
+                                  cout<<"Tenant ID already exists! Please use a different ID.\n";
+                                  continue;
+                              }
                               cout<<"Enter Tenant Name: ";
                               getline(cin, tenantName[totalTenants]);   
                               cout<<"Enter Tenant Phone: ";
@@ -1109,7 +1114,7 @@ void ShopkeeperPanel()
                cout<<"Shop ID: "<<shopID[index]<<endl;
                cout<<"Shop Name: "<<shopName[index]<<endl;
                cout<<"Floor Number: "<<shopFloor[index]<<endl;
-               cout<<"Tenant Name: "<<tenantName[index]<<endl;
+               cout<<"Tenant Name: "<<shopkeeperName[index]<<endl;
                cout<<"Monthly Rent: "<<tenantRent[index]<<endl;
           }
           else if(choice_shopkeeper==2)
