@@ -1115,6 +1115,11 @@ void ShopkeeperPanel()
                cout<<"Shop Name: "<<shopName[index]<<endl;
                cout<<"Floor Number: "<<shopFloor[index]<<endl;
                cout<<"Tenant Name: "<<shopkeeperName[index]<<endl;
+               if(tenantRent[index]==0)
+               {
+                  cout<<"Not Added/Updated yet"<<endl;
+               }
+               else
                cout<<"Monthly Rent: "<<tenantRent[index]<<endl;
           }
           else if(choice_shopkeeper==2)
