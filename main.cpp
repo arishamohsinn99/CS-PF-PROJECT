@@ -88,8 +88,9 @@ void loginScreen(string &username, string &password)
 
 void AdminPanel()
 {
-     int choice_1,choice_shop, choice_admin,choice_shopkeeper, shopChoice , tenantChoice, staffChoice ,floorChoice, visitorChoice
+     int choice_1,choice_shop,choice_shopkeeper, shopChoice , tenantChoice, staffChoice ,floorChoice, visitorChoice
     ,eventChoice , reportChoice;
+    string choice_admin="2";
      do{
           
           cout<<"\n\n\n";
@@ -114,9 +115,11 @@ void AdminPanel()
           cout<<"                                                            ENTER YOUR CHOICE=";
           cin>>choice_admin;
           cin.ignore();
-          if(choice_admin == 1)
+         if(choice_admin=="0" || choice_admin=="1" || choice_admin=="2" || choice_admin=="3" || choice_admin=="4" || choice_admin=="5" || choice_admin=="6" || choice_admin=="7")
           {
-               do{
+              if(choice_admin == "1")
+              {
+                   do{
                       cout<<"\n\n";
                       cout<<"*******************************************************************************"<<endl;
                       cout<<"                           SHOP MANAGEMENT"<<endl;
@@ -126,7 +129,7 @@ void AdminPanel()
                            cout<<"3. Remove Shops"<<endl;
                            cout<<"4. View Shops"<<endl;
                            cout<<"5. Back"<<endl;
-                           cout<<"Enter Choice= ";
+                           cout<<"Enter Choice=";
                            cin>>shopChoice;
                            cin.ignore();
                            cout<<"\n\n";
@@ -234,7 +237,7 @@ void AdminPanel()
                            }
                }while(shopChoice!=5);
           }
-          else  if(choice_admin == 2)
+          else  if(choice_admin == "2")
           {
                do{
                       cout<<"\n\n";
@@ -365,7 +368,7 @@ void AdminPanel()
                            }
                }while(tenantChoice!=5);
           }
-           else  if(choice_admin == 3)
+           else  if(choice_admin == "3")
           {
                do{
                       cout<<"\n\n";
@@ -511,7 +514,7 @@ void AdminPanel()
                            }
                }while(staffChoice!=6);
           }
-           else  if(choice_admin == 4)
+           else  if(choice_admin == "4")
           {
                do{
                       cout<<"\n\n";
@@ -710,7 +713,7 @@ void AdminPanel()
                            }
                          }while(floorChoice!=7);
           }
-           else  if(choice_admin == 5)
+           else  if(choice_admin == "5")
           {
                   do{
                       cout<<"\n\n";
@@ -801,7 +804,7 @@ void AdminPanel()
                            
                   }while(visitorChoice!=5);
           }
-           else  if(choice_admin == 6)
+           else  if(choice_admin == "6")
           {
                do{
                       cout<<"\n\n";
@@ -927,7 +930,7 @@ void AdminPanel()
                            }
                  }while(eventChoice!=5);
           }
-           else  if(choice_admin == 7)
+           else  if(choice_admin == "7")
           {
                do{    cout<<"\n\n";
                       cout<<"*******************************************************************************"<<endl;
@@ -1061,10 +1064,14 @@ void AdminPanel()
                               cout<<"Total Events Scheduled: "<<totalEvents<<endl;
                            }
                }while(reportChoice!=7);
-                           
-          }
+                 } 
+                 }
+                 else
+                      cout<<"                     Invalid Choice! Please select a valid option.\n";           
           
- }while(choice_admin!=0);
+          
+ }while(choice_admin!="0");
+
 }
 
 string productName[100],maintenanceRequest[100];
