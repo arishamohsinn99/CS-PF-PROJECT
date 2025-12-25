@@ -1,6 +1,8 @@
 #include<iostream>
 #include<windows.h>
 #include<iomanip>
+#include<string>
+#include<fstream>
 using namespace std;
 HANDLE console= GetStdHandle(STD_OUTPUT_HANDLE);
   
@@ -76,7 +78,7 @@ void loginScreen(string &username, string &password)
 
              string eventName[100], eventDate[100], eventLocation[100], eventDescription[100];
              string visitorName[100], visitorCNIC[100], visitorPurpose[100], visitorEntryTime[100], visitorExitTime[100];
-             string shopName[100], tenantPhone[100],tenantShop[100],  shopkeeperName[100], tenantName[100], staffName[100], staffRole[100];
+             string shopName[100], tenantPhone[100],tenantShop[100],  shopkeeperName[100], tenantName[100] , staffName[100], staffRole[100];
              int shopID[100], tenantID[100],tenantRent[100], shopFloor[100], staffID[100], staffSalary[100], totalFloors = 0, floorNumber[50], floorCapacity[50], floorOccupied[50];
              int totalShops = 0;
              int totalTenants = 0;
@@ -88,7 +90,7 @@ void loginScreen(string &username, string &password)
 
 void AdminPanel()
 {
-     int choice_1,choice_shop,choice_shopkeeper, shopChoice , tenantChoice, staffChoice ,floorChoice, visitorChoice
+     string choice_1,choice_shop,choice_shopkeeper, shopChoice , tenantChoice, staffChoice ,floorChoice, visitorChoice
     ,eventChoice , reportChoice;
     string choice_admin="2";
      do{
@@ -104,13 +106,12 @@ void AdminPanel()
           cout<<"                                                                 PANEL"<<endl;
           cout<<"*************************************************************************************************************************************"<<endl;
           cout<<"\n";
-          cout<<"                                                         1. Shop Management"<<endl;
-          cout<<"                                                         2. Tenant Management"<<endl;
-          cout<<"                                                         3. Staff Management"<<endl;
-          cout<<"                                                         4. Floor and Space Management"<<endl;
-          cout<<"                                                         5. Visitor Management"<<endl;
-          cout<<"                                                         6. Event and Promotion Management "<<endl;
-          cout<<"                                                         7. Reports and Analytic"<<endl;
+          cout<<"                                                         1. Shop/Tenant Management"<<endl;
+          cout<<"                                                         2. Staff Management"<<endl;
+          cout<<"                                                         3. Floor and Space Management"<<endl;
+          cout<<"                                                         4. Visitor Management"<<endl;
+          cout<<"                                                         5. Event and Promotion Management "<<endl;
+          cout<<"                                                         6. Reports and Analytic"<<endl;
           cout<<"                                                         0. logout"<<endl;
           cout<<"                                                            ENTER YOUR CHOICE=";
           cin>>choice_admin;
@@ -124,37 +125,46 @@ void AdminPanel()
                       cout<<"*******************************************************************************"<<endl;
                       cout<<"                           SHOP MANAGEMENT"<<endl;
                       cout<<"*******************************************************************************"<<endl;
-                           cout<<"1. Add Shops"<<endl;
-                           cout<<"2. Update Shops"<<endl;
-                           cout<<"3. Remove Shops"<<endl;
-                           cout<<"4. View Shops"<<endl;
+                           cout<<"1. Add Shop/Tenant"<<endl;
+                           cout<<"2. Update Shop/Tenant"<<endl;
+                           cout<<"3. Remove Shop/Tenant"<<endl;
+                           cout<<"4. View Shop/Tenant"<<endl;
                            cout<<"5. Back"<<endl;
                            cout<<"Enter Choice=";
                            cin>>shopChoice;
                            cin.ignore();
                            cout<<"\n\n";
-                           if(shopChoice==1)
+                           if(shopChoice=="1")
                            {
+                              fstream outfile;
+                              outfile.open("shops.txt", ios::app);
                               cout<<"\n*********************************************************"<<endl;
-                              cout<<"                        ADD SHOPS"<<endl;
+                              cout<<"                        ADD SHOP/TENANT"<<endl;
                               cout<<"**********************************************************"<<endl;
-                              cout<<"Enter Shop ID: ";
+                              cout<<"Enter Shop ID (in digits): ";
                               cin>>shopID[totalShops];
                               cin.ignore();
                               cout<<"Enter Shop Name: ";
                               getline(cin, shopName[totalShops]);
                               cout<<"Enter Shopkeeper Name: ";
                               getline(cin, shopkeeperName[totalShops]);
-                              cout<<"Enter Floor Number: ";
+                              cout<<"Enter Floor Number (in digits): ";
                               cin>>shopFloor[totalShops];
+                              cin.ignore();
+                              cout<<"Enter Shopkeeper Phone Number: ";
+                              getline(cin, tenantPhone[totalShops]);
+                              cout<<"Enter Shopkeeper rent: ";
+                              cin>>tenantRent[totalShops];
+                              outfile<<"SHOP ID: "<<shopID[totalShops]<<"\nSHOP NAME: "<<shopName[totalShops]<<"\nSHOPKEEPER NAME: "<<shopkeeperName[totalShops]<<"\nFLOOR NUMBER: "<<shopFloor[totalShops]<<"\nSHOPKEEPER PHONE: "<<tenantPhone[totalShops]<<"\nSHOPKEEPER RENT: "<<tenantRent[totalShops]<<"\n\n";
+                              outfile.close();
+                              cout<<"\nShop Added/stored Successfully!\n";
                               totalShops++;
-                              cout<<"\nShop Added Successfully!\n";
                            }
-                           else if(shopChoice==2)
+                           else if(shopChoice=="2")
                            {
                               int id;
                               cout<<"\n*********************************************************"<<endl;
-                              cout<<"                        UPDATE SHOPS"<<endl;
+                              cout<<"                        UPDATE SHOP/TENANT"<<endl;
                               cout<<"**********************************************************"<<endl;
                               cout<<"Enter Shop ID to Update: ";
                               cin>>id;
@@ -164,32 +174,42 @@ void AdminPanel()
                               {
                                   if(shopID[i] == id)
                                       {
+                                         fstream outfile;
+                                         outfile.open("shops.txt", ios::app);
                                          found = true;
                                          cout<<"Enter New Shop Name: ";
                                          getline(cin, shopName[i]);
                                          cout<<"Enter New Shopkeeper Name: ";
                                          getline(cin, shopkeeperName[i]);
-                                         cout<<"Enter New Floor Number: ";
+                                         cout<<"Enter New Floor Number (in digits): ";
                                          cin>>shopFloor[i];
-                                         cout<<"\nShop Updated Successfully!"<<endl;
-                                         break;
+                                         cin.ignore();
+                                         cout<<"Enter New Shopkeeper Phone Number: ";
+                                             getline(cin, tenantPhone[i]);
+                                             cout<<"Enter New Shopkeeper Rent: ";
+                                             cin>>tenantRent[i];
+                                             outfile<<"UPDATED SHOP DETAILS:\n";
+                                             outfile<<"SHOP ID: "<<shopID[i]<<"\nSHOP NAME: "<<shopName[i]<<"\nSHOPKEEPER NAME: "<<shopkeeperName[i]<<"\nFLOOR NUMBER: "<<shopFloor[i]<<"\nSHOPKEEPER PHONE: "<<tenantPhone[i]<<"\nSHOPKEEPER RENT: "<<tenantRent[i]<<"\n\n";
+                                             cout<<"\nShop Updated/Sored Successfully!"<<endl;
+                                             break;
 
                                        }
                                 }
                                 if(found!=true)
                                  cout<<"Shop Not Found!"<<endl;
                              }
-                           else if(shopChoice==3)
+                           else if(shopChoice=="3")
                            {
                               cout<<"\n*********************************************************"<<endl;
-                              cout<<"                        REMOVE SHOPS"<<endl;
+                              cout<<"                        REMOVE SHOP/TENANT"<<endl;
                               cout<<"**********************************************************"<<endl;
                               int id;
                               cout<<"Enter Shop ID to Update: ";
                               cin>>id;
                               cin.ignore();
                               bool found = false; 
-
+                               fstream outfile;
+                               outfile.open("shops.txt", ios::app);
                               for(int i=0; i<totalShops; i++)
                                {
                                     if(shopID[i] == id)
@@ -201,6 +221,11 @@ void AdminPanel()
                                                 shopName[j] = shopName[j+1];
                                                 shopkeeperName[j] = shopkeeperName[j+1];
                                                 shopFloor[j] = shopFloor[j+1];
+                                                tenantRent[j] = tenantRent[j+1];
+                                                tenantPhone[j] = tenantPhone[j+1];
+                                                outfile<<"REMOVED SHOP DETAILS:\n";
+                                                outfile<<"SHOP ID: "<<shopID[j]<<"\nSHOP NAME: "<<shopName[j]<<"\nSHOPKEEPER NAME: "<<shopkeeperName[j]<<"\nFLOOR NUMBER: "<<shopFloor[j]<<"\nSHOPKEEPER PHONE: "<<tenantPhone[j]<<"\nSHOPKEEPER RENT: "<<tenantRent[j]<<"\n\n";
+
                                            }
                                                     totalShops--;
                                            cout<<"Shop Removed Successfully!\n";
@@ -212,163 +237,35 @@ void AdminPanel()
                                    cout<<"Shop Not Found!"<<endl;
                                 }
                             }
-                           else if(shopChoice==4)
+                           else if(shopChoice=="4")
                            {
                               cout<<"\n          *********************************************************"<<endl;
-                              cout<<"                                     VIEW SHOPS"<<endl;
+                              cout<<"                                     VIEW SHOP/TENANT"<<endl;
                               cout<<"             **********************************************************"<<endl;
                                 if(totalShops == 0)
                                     {
                                       cout<<"No Shops Available.\n";
                                     }
                                     else
-                                    cout << setfill('-') << setw(80) << "-" << setfill(' ') << endl;
+                                    cout << setfill('-') << setw(100) << "-" << setfill(' ') << endl;
                                     cout << left<< setw(10) << "ID"<< setw(25) << "SHOP NAME"<< setw(25) << "SHOPKEEPER"<< setw(15) << "FLOOR"<<endl;
-                                    cout << setfill('-') << setw(80) << "-" << setfill(' ') << endl;
+                                    cout << setfill('-') << setw(100) << "-" << setfill(' ') << endl;
                                     {
                                       for(int i=0; i<totalShops; i++)
                                        {
                                          cout << left<< setw(10) << shopID[i]<< setw(25) << shopName[i]<< setw(25) << shopkeeperName[i]<< setw(15) << shopFloor[i]<< endl;
                                          cout<<"\n";
                                        }
-                                       cout << setfill('-') << setw(80) << "-" << setfill(' ') << endl;
+                                       cout << setfill('-') << setw(100) << "-" << setfill(' ') << endl;
                                     }
                               
                            }
-               }while(shopChoice!=5);
+                           else 
+                                cout<<"inavlid choice! please try again."<<endl;
+               }while(shopChoice!="5");
           }
-          else  if(choice_admin == "2")
-          {
-               do{
-                      cout<<"\n\n";
-                      cout<<"*******************************************************************************"<<endl;
-                      cout<<"                            TENANT/SHOPKEEPER MANAGEMENT"<<endl;
-                      cout<<"*******************************************************************************"<<endl;
-                           cout<<"1. Add Shopkeeper"<<endl;
-                           cout<<"2. View Shopkeeper"<<endl;
-                           cout<<"3. Update Shopkeeper"<<endl;
-                           cout<<"4. Remove Shopkeeper"<<endl;
-                           cout<<"5. Back"<<endl;
-                           cout<<"Enter Choice= ";
-                           cin>>tenantChoice;
-                           cin.ignore();
-                           cout<<"\n\n";
-                           if(tenantChoice==1)
-                           {
-                              cout<<"\n*********************************************************"<<endl;
-                              cout<<"                        ADD SHOPKEEPER"<<endl;
-                              cout<<"**********************************************************"<<endl;
-                              cout<<"Enter Tenant ID: ";
-                              cin>>tenantID[totalTenants];
-                              cin.ignore();
-                              if(tenantID[totalTenants] == shopID[totalTenants])
-                              {
-                                  cout<<"Tenant ID already exists! Please use a different ID.\n";
-                                  continue;
-                              }
-                              cout<<"Enter Tenant Name: ";
-                              getline(cin, tenantName[totalTenants]);   
-                              cout<<"Enter Tenant Phone: ";
-                              getline(cin, tenantPhone[totalTenants]);
-                              cout<<"Enter Shop Name Allocated: ";
-                              getline(cin, tenantShop[totalTenants]);
-                              cout<<"Enter Monthly Rent: ";
-                              cin>>tenantRent[totalTenants];
-                              cin.ignore();
-                              totalTenants++;
-                              cout<<"\nTenant Added Successfully!"<<endl;
-
-                           }
-                           else if(tenantChoice==2)
-                           {
-                              cout<<"\n*********************************************************"<<endl;
-                              cout<<"                        VIEW SHOPKEEPER"<<endl;
-                              cout<<"**********************************************************"<<endl;
-                              if(totalTenants == 0)
-                                {
-                                  cout<<"No Tenants Available.\n";
-                                }
-                              else
-                                 {
-                                     cout << setfill('-') << setw(100) << "-" << setfill(' ') << endl;
-                                     cout << left << setw(10) << "ID"<< setw(25) << "NAME"<< setw(20) << "PHONE"<< setw(25) << "SHOP"<< setw(15) << "RENT" << endl;
-                                     cout << setfill('-') << setw(100) << "-" << setfill(' ') << endl;
-                                  for(int i=0; i<totalTenants; i++)
-                                     {
-                                       cout << left << setw(10) << tenantID[i]<< setw(25) << tenantName[i]<< setw(20) << tenantPhone[i]<< setw(25) << tenantShop[i]<< setw(15) << tenantRent[i] << endl;
-                                     }
-                                       cout << setfill('-') << setw(100) << "-" << setfill(' ') << endl;
-                                 }
-
-                           }
-                           else if(tenantChoice==3)
-                           {
-                              int id;
-                              bool found = false;
-                              cout<<"\n*********************************************************"<<endl;
-                              cout<<"                        UPDATE SHOPKEEPER"<<endl;
-                              cout<<"**********************************************************"<<endl;
-                              cout<<"Enter Tenant ID to Update: ";
-                              cin>>id;
-                              cin.ignore();
-                              for(int i=0; i<totalTenants; i++)
-                                {
-                                  if(tenantID[i] == id)
-                                    {
-                                      found = true;
-                                      cout<<"Enter New Tenant Name: ";
-                                      getline(cin, tenantName[i]);
-                                      cout<<"Enter New Phone Number: ";
-                                      getline(cin, tenantPhone[i]);
-                                      cout<<"Enter New Shop Name: ";
-                                      getline(cin, tenantShop[i]); 
-                                      cout<<"Enter New Rent: ";
-                                      cin>>tenantRent[i];
-                                     cin.ignore();
-                                     cout<<"\nTenant Updated Successfully!"<<endl;
-                                     break;
-                                    }
-                                 }
-                            if(found == false)
-                               cout<<"Tenant Not Found!\n";
-
-                           }
-                           else if(tenantChoice==4)
-                           {
-                              int id;
-                              bool found = false;
-                              cout<<"\n*********************************************************"<<endl;
-                              cout<<"                        REMOVE SHOPKEEPER"<<endl;
-                              cout<<"**********************************************************"<<endl;
-                              cout<<"Enter Tenant ID to Remove: ";
-                              cin>>id;
-                              cin.ignore();
-                              for(int i=0; i<totalTenants; i++)
-                               {
-                                   if(tenantID[i] == id)
-                                    {
-                                      found = true;
-                                        for(int j=i; j<totalTenants-1; j++)
-                                          {
-                                                tenantID[j] = tenantID[j+1];
-                                                tenantName[j] = tenantName[j+1];
-                                                tenantPhone[j] = tenantPhone[j+1];
-                                                tenantShop[j] = tenantShop[j+1];
-                                                tenantRent[j] = tenantRent[j+1];
-                                          }
-                                                totalTenants--;
-                                              cout<<"Tenant Removed Successfully!\n";
-                                              break;
-                                     }
-                              }
-                             if(found == false)
-                                 cout<<"Tenant Not Found!\n";
-
-
-                           }
-               }while(tenantChoice!=5);
-          }
-           else  if(choice_admin == "3")
+ 
+           else  if(choice_admin == "2")
           {
                do{
                       cout<<"\n\n";
@@ -385,25 +282,30 @@ void AdminPanel()
                            cin>>staffChoice;
                            cin.ignore();
                            cout<<"\n\n";
-                           if(staffChoice==1)
+                           if(staffChoice=="1")
                            {
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                        ADD STAFF"<<endl;
                               cout<<"**********************************************************"<<endl;
-                              cout<<"Enter Staff ID: ";
+                              fstream outfile;
+                              outfile.open("staff.txt", ios::app);
+                              cout<<"Enter Staff ID (digits only): ";
                               cin>>staffID[totalStaff];
                               cin.ignore();
                               cout<<"Enter Staff Name: ";
                               getline(cin, staffName[totalStaff]);
                               cout<<"Enter Staff Role: ";
                               getline(cin, staffRole[totalStaff]);
-                              cout<<"Enter Salary: ";
+                              cout<<"Enter Salary (in digits): ";
                               cin>>staffSalary[totalStaff];
+                              cin.ignore();
+                              outfile<<"STAFF ID: "<<staffID[totalStaff]<<"\nSTAFF NAME: "<<staffName[totalStaff]<<"\nSTAFF ROLE: "<<staffRole[totalStaff]<<"\nSTAFF SALARY: "<<staffSalary[totalStaff]<<"\n\n";
+                              outfile.close();
                               totalStaff++;
                               cout<<"\nStaff Added Successfully!\n";
 
                            }
-                           else if(staffChoice==2)
+                           else if(staffChoice=="2")
                            {
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                        VIEW ALL STAFF"<<endl;
@@ -426,16 +328,18 @@ void AdminPanel()
                                      }
 
                            }
-                           if(staffChoice==3)
+                           if(staffChoice=="3")
                            {
                               int id;
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                        UPDATE STAFF"<<endl;
                               cout<<"**********************************************************"<<endl;
-                              cout<<"Enter Staff ID to Update: ";
+                              cout<<"Enter Staff ID to Update (digits only): ";
                               cin>>id;
                               cin.ignore();
                               bool found = false;
+                              fstream outfile;
+                              outfile.open("staff.txt", ios::app);
                               for(int i=0; i<totalStaff; i++)
                                 {
                                      if(staffID[i] == id)
@@ -447,6 +351,9 @@ void AdminPanel()
                                         getline(cin, staffRole[i]);
                                         cout<<"Enter New Salary: ";
                                         cin>>staffSalary[i];
+                                          cin.ignore();
+                                          outfile<<"UPDATED STAFF DETAILS:\n";
+                                          outfile<<"STAFF ID: "<<staffID[i]<<"\nSTAFF NAME: "<<staffName[i]<<"\nSTAFF ROLE: "<<staffRole[i]<<"\nSTAFF SALARY: "<<staffSalary[i]<<"\n\n";
                                         cout<<"\nStaff Updated Successfully!\n";
                                         break;
                                      }
@@ -455,7 +362,7 @@ void AdminPanel()
                                  cout<<"Staff Not Found!\n";
 
                            }
-                           if(staffChoice==4)
+                           if(staffChoice=="4")
                            {
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                         REMOVE STAFF"<<endl;
@@ -465,6 +372,8 @@ void AdminPanel()
                               cin>>id;
                               cin.ignore();
                               bool found = false;
+                              fstream outfile;
+                              outfile.open("staff.txt", ios::app);
                               for(int i=0; i<totalStaff; i++)
                                {
                                   if(staffID[i] == id)
@@ -476,6 +385,8 @@ void AdminPanel()
                                             staffName[j] = staffName[j+1];
                                             staffRole[j] = staffRole[j+1];
                                             staffSalary[j] = staffSalary[j+1];
+                                             outfile<<"REMOVED STAFF DETAILS:\n";
+                                             outfile<<"STAFF ID: "<<staffID[j]<<"\nSTAFF NAME: "<<staffName[j]<<"\nSTAFF ROLE: "<<staffRole[j]<<"\nSTAFF SALARY: "<<staffSalary[j]<<"\n\n";
                                          }
                                             totalStaff--;
                                             cout<<"Staff Removed Successfully!\n";
@@ -486,7 +397,7 @@ void AdminPanel()
                                 cout<<"Staff Not Found!\n";
 
                            }
-                           if(staffChoice==5)
+                           if(staffChoice=="5")
                            {
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                        ASSIGNING DUTY TO STAFF"<<endl;
@@ -494,10 +405,12 @@ void AdminPanel()
                               int id;
                               bool found;
                               string duty;
-                              cout<<"Enter Staff ID: ";
+                              cout<<"Enter Staff ID(in digits): ";
                               cin>>id;
                               cin.ignore();
                               found = false;
+                              fstream outfile;
+                              outfile.open("staff.txt", ios::app);
                               for(int i=0; i<totalStaff; i++)
                                {
                                    if(staffID[i] == id)
@@ -506,15 +419,17 @@ void AdminPanel()
                                         cout<<"Enter Duty to Assign: ";
                                         getline(cin, duty);
                                         cout<<"\nDuty Assigned Successfully to "<<staffName[i]<<"!\n";
+                                        outfile<<"DUTY ASSIGNED TO STAFF:\n";
+                                          outfile<<"STAFF ID: "<<staffID[i]<<"\nSTAFF NAME: "<<staffName[i]<<"\nASSIGNED DUTY: "<<duty<<"\n\n";
                                         break;
                                     }
                                }
                                   if(!found)
                                    cout<<"Staff Not Found!\n";
                            }
-               }while(staffChoice!=6);
+               }while(staffChoice!="6");
           }
-           else  if(choice_admin == "4")
+           else  if(choice_admin == "3")
           {
                do{
                       cout<<"\n\n";
@@ -532,14 +447,16 @@ void AdminPanel()
                            cin>>floorChoice;
                            cin.ignore();
                            cout<<"\n\n";
-                           if(floorChoice==1)
+                           fstream outfile;
+                           outfile.open("floors.txt", ios::app);
+                           if(floorChoice=="1")
                            {
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                        ADD FLOOR"<<endl;
                               cout<<"**********************************************************"<<endl;
                               int number, cap, occ;
                               bool exists = false;
-                              cout << "Enter Floor Number: ";
+                              cout << "Enter Floor Number(in digits): ";
                               cin >> number;
                                for(int i = 0; i < totalFloors; i++) 
                                {
@@ -554,13 +471,13 @@ void AdminPanel()
                                {
                                   cout << "Floor number already exists!\n";
                                }
-                                      cout << "Enter Capacity of Floor: ";
+                                      cout << "Enter Capacity of Floor (0-100): ";
                                        cin >> cap;
                                      if(cap <= 0) 
                                       {
                                          cout << "Capacity must be greater than 0!\n";
                                       }
-                                         cout << "Enter Currently Occupied Slots: ";
+                                         cout << "Enter Currently Occupied Slots(0-100): ";
                                          cin >> occ;
                                          if(occ < 0 || occ > cap)
                                           {
@@ -569,10 +486,12 @@ void AdminPanel()
                                                 floorNumber[totalFloors] = number;
                                                 floorCapacity[totalFloors] = cap;
                                                 floorOccupied[totalFloors] = occ;
+                                                outfile << "ADDED FLOOR DETAILS:\n";
+                                                outfile << "FLOOR NUMBER: " << floorNumber[totalFloors] << "\nFLOOR CAPACITY: " << floorCapacity[totalFloors] << "\nFLOOR OCCUPIED: " << floorOccupied[totalFloors] << "\n\n";
                                                 totalFloors++;
                                                 cout << "\n Floor Added Successfully!\n";
                            }
-                           else if(floorChoice==2)
+                           else if(floorChoice=="2")
                            {
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                        VIEW FLOOR"<<endl;
@@ -594,7 +513,7 @@ void AdminPanel()
                                   }
 
                            }
-                           else if(floorChoice==3)
+                           else if(floorChoice=="3")
                            {
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                         VIEW AVAILABLE SPACES"<<endl;
@@ -614,17 +533,19 @@ void AdminPanel()
                                }
 
                            }
-                           else if(floorChoice==4)
+                           else if(floorChoice=="4")
                            {
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                         ALLOCATE SPACE TO NEW FLOOR"<<endl;
                               cout<<"**********************************************************"<<endl;
                               int floorNo;
                               bool found;
-                              cout<<"Enter Floor Number to Allocate Space: ";
+                              cout<<"Enter Floor Number to Allocate Space (0-100): ";
                               cin>>floorNo;
                               cin.ignore();
                               found = false;
+                              fstream outfile;
+                              outfile.open("floors.txt", ios::app);
                                for(int i=0; i<totalFloors; i++)
                                  {
                                      if(floorNumber[i] == floorNo)
@@ -634,6 +555,8 @@ void AdminPanel()
                                        {
                                         floorOccupied[i]++;
                                         cout<<"Space Allocated Successfully on Floor "<<floorNo<<"\n";
+                                        outfile << "UPDATED FLOOR DETAILS:\n";
+                                          outfile << "FLOOR NUMBER: " << floorNumber[i] << "\nFLOOR CAPACITY: " << floorCapacity[i] << "\nFLOOR OCCUPIED: " << floorOccupied[i] << "\n\n";
                                        }
                                      else
                                        cout<<"No Available Space on this Floor!\n";
@@ -652,43 +575,47 @@ void AdminPanel()
                             }
 
                            }
-                           else if(floorChoice==5)
+                           else if(floorChoice=="5")
                            {
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                         UPDATE STATUS OF THE FLOOR"<<endl;
                               cout<<"**********************************************************"<<endl;
                               int floorNo;
                               bool found;
-                              cout<<"Enter Floor Number to Update: ";
+                              cout<<"Enter Floor Number to Update(0-100): ";
                               cin>>floorNo; 
                               cin.ignore();
+                              fstream outfile;
+                              outfile.open("floors.txt", ios::app);
                               found = false;
                                for(int i=0; i<totalFloors; i++)
                                {
                                   if(floorNumber[i] == floorNo)
                                      {
                                        found = true;
-                                       cout<<"Enter New Floor Capacity: ";
+                                       cout<<"Enter New Floor Capacity (0-100): ";
                                        cin>>floorCapacity[i];
                                        cin.ignore();
-                                       cout<<"Enter Number of Occupied Spaces: ";
+                                       cout<<"Enter Number of Occupied Spaces (0-100): ";
                                        cin>>floorOccupied[i];
                                        cin.ignore();
                                        cout<<"Floor Status Updated Successfully!\n";
+                                       outfile << "UPDATED FLOOR DETAILS:\n";
+                                       outfile << "FLOOR NUMBER: " << floorNumber[i] << "\nFLOOR CAPACITY: " << floorCapacity[i] << "\nFLOOR OCCUPIED: " << floorOccupied[i] << "\n\n";
                                        break;
                                     }
                               }
                                if(found!=true)
                                   cout<<"Floor Not Found!\n";
                            }
-                           else if(floorChoice==6)
+                           else if(floorChoice=="6")
                            {
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                         MARK AS VACANT SPACE"<<endl;
                               cout<<"**********************************************************"<<endl;
                                                             int floorNo;
                                bool found ;
-                              cout<<"Enter Floor Number: ";
+                              cout<<"Enter Floor Number (0-100): ";
                               cin>>floorNo;
                               cin.ignore();
                               found = false;
@@ -711,9 +638,9 @@ void AdminPanel()
                                        cout<<"Floor Not Found!\n";
 
                            }
-                         }while(floorChoice!=7);
+                         }while(floorChoice!="7");
           }
-           else  if(choice_admin == "5")
+           else  if(choice_admin == "4")
           {
                   do{
                       cout<<"\n\n";
@@ -728,7 +655,9 @@ void AdminPanel()
                            cout<<"Enter= ";
                            cin>>visitorChoice;
                            cout<<"\n\n";
-                            if(visitorChoice==1)
+                           fstream outfile;
+                           outfile.open("visitors.txt", ios::app);
+                            if(visitorChoice=="1")
                            {
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                      RECORD NEW VISITOR ENTRY"<<endl;
@@ -738,15 +667,24 @@ void AdminPanel()
                               getline(cin, visitorName[totalVisitors]);
                               cout<<"Enter CNIC: ";
                               getline(cin, visitorCNIC[totalVisitors]);
+                              if(visitorCNIC[totalVisitors].length() != 15)
+                              {
+                                  cout<<"Invalid CNIC! It should be 15 digits long.\n";
+                                  break;
+                              }
+                              else if(visitorCNIC[totalVisitors].substr(5,1) == "-" && visitorCNIC[totalVisitors].substr(13,1) == "-")
+                              {
                               cout<<"Enter Purpose of Visit: ";
                               getline(cin, visitorPurpose[totalVisitors]);
                               cout<<"Enter Entry Time (HH:MM): ";
                               getline(cin, visitorEntryTime[totalVisitors]);
                               visitorExitTime[totalVisitors] = "Not Exited Yet";
+                              outfile<<"VISITOR NAME: "<<visitorName[totalVisitors]<<"\nCNIC: "<<visitorCNIC[totalVisitors]<<"\nPURPOSE: "<<visitorPurpose[totalVisitors]<<"\nENTRY TIME: "<<visitorEntryTime[totalVisitors]<<"\nEXIT TIME: "<<visitorExitTime[totalVisitors]<<"\n\n";
                               totalVisitors++;
                               cout<<"\nVisitor Entry Recorded Successfully!\n";
+                             
                            }
-                           else  if(visitorChoice==2)
+                           else  if(visitorChoice=="2")
                            {
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                        RECORD EXIT"<<endl;
@@ -764,6 +702,8 @@ void AdminPanel()
                                       cout<<"Enter Exit Time (HH:MM): ";
                                       getline(cin, visitorExitTime[i]);
                                       cout<<"\nExit Time Recorded Successfully!"<<endl;
+                                      outfile<<"UPDATED VISITOR DETAILS:\n";
+                                      outfile<<"VISITOR NAME: "<<visitorName[i]<<"\nCNIC: "<<visitorCNIC[i]<<"\nPURPOSE: "<<visitorPurpose[i]<<"\nENTRY TIME: "<<visitorEntryTime[i]<<"\nEXIT TIME: "<<visitorExitTime[i]<<"\n\n";
                                       break;
                                   }
                               }
@@ -772,7 +712,7 @@ void AdminPanel()
                                    cout<<"Visitor Not Found!"<<endl;
                                 }
                            }
-                           else  if(visitorChoice==3)
+                           else  if(visitorChoice=="3")
                            {
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                        VIEW TOTAL VISITOR TODAY"<<endl;
@@ -780,7 +720,7 @@ void AdminPanel()
                               cout<<"Total Visitors Today: "<<totalVisitors<<endl;
 
                            }
-                           else  if(visitorChoice==4)
+                           else  if(visitorChoice=="4")
                            {
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                        VIEW VISITOR LOG"<<endl;
@@ -800,11 +740,14 @@ void AdminPanel()
                                       cout<<setw(25)<<visitorName[i]<<setw(20)<<visitorCNIC[i]<<setw(30)<<visitorPurpose[i]<<setw(15)<<visitorEntryTime[i]<<setw(15)<<visitorExitTime[i]<<endl;
                                   }
                               }
-                           }
                            
-                  }while(visitorChoice!=5);
+                           }
+                        }
+                           outfile.close();
+                  }while(visitorChoice!="5");
+               
           }
-           else  if(choice_admin == "6")
+           else  if(choice_admin == "5")
           {
                do{
                       cout<<"\n\n";
@@ -819,12 +762,15 @@ void AdminPanel()
                            cout<<"Enter Choice= ";
                            cin>>eventChoice;
                            cout<<"\n\n";
-                           if(eventChoice==1)
+                           fstream outfile;
+                           outfile.open("events.txt", ios::app);
+
+                           if(eventChoice=="1")
                            {
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                        ADD NEW EVENT"<<endl;
                               cout<<"**********************************************************"<<endl;
-                              cout<<"Enter Event ID: ";
+                              cout<<"Enter Event ID (digits only): ";
                               cin>>eventID[totalEvents];
                               cin.ignore();
                               cout<<"Enter Event Name: ";
@@ -835,18 +781,19 @@ void AdminPanel()
                               getline(cin, eventLocation[totalEvents]);
                               cout<<"Enter Event Description: ";
                               getline(cin, eventDescription[totalEvents]);
+                              outfile<<"EVENT ID: "<<eventID[totalEvents]<<"\nEVENT NAME: "<<eventName[totalEvents]<<"\nEVENT DATE: "<<eventDate[totalEvents]<<"\nEVENT LOCATION: "<<eventLocation[totalEvents]<<"\nEVENT DESCRIPTION: "<<eventDescription[totalEvents]<<"\n\n";
                               totalEvents++;
                               cout<<"\nEvent Added Successfully!\n";
 
                            }
-                           else if(eventChoice==2)
+                           else if(eventChoice=="2")
                            {
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                        UPDATE EVENT"<<endl;
                               cout<<"**********************************************************"<<endl;
                               int id;
                               bool found = false;
-                              cout<<"Enter Event ID to Update: ";
+                              cout<<"Enter Event ID to Update (digits only): ";
                               cin>>id;
                               cin.ignore();
                               for(int i = 0; i < totalEvents; i++)
@@ -863,6 +810,8 @@ void AdminPanel()
                                       cout<<"Enter New Event Description: ";
                                       getline(cin, eventDescription[i]);
                                       cout<<"\nEvent Updated Successfully!"<<endl;
+                                      outfile<<"UPDATED EVENT DETAILS:\n";
+                                       outfile<<"EVENT ID: "<<eventID[i]<<"\nEVENT NAME: "<<eventName[i]<<"\nEVENT DATE: "<<eventDate[i]<<"\nEVENT LOCATION: "<<eventLocation[i]<<"\nEVENT DESCRIPTION: "<<eventDescription[i]<<"\n\n";
                                       break;
                                   }
                               }
@@ -872,14 +821,14 @@ void AdminPanel()
                               }
 
                            }
-                           else if(eventChoice==3)
+                           else if(eventChoice=="3")
                            {
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                        CANCEL EVENT"<<endl;
                               cout<<"**********************************************************"<<endl;
                               int id;
                               bool found = false;
-                              cout<<"Enter Event ID to Remove: ";
+                              cout<<"Enter Event ID to Remove (digits only): ";
                               cin>>id;
                               cin.ignore();
                               for(int i = 0; i < totalEvents; i++)
@@ -894,6 +843,8 @@ void AdminPanel()
                                           eventDate[j] = eventDate[j+1];
                                           eventLocation[j] = eventLocation[j+1];
                                           eventDescription[j] = eventDescription[j+1];
+                                          outfile<<"REMOVED EVENT DETAILS:\n";
+                                          outfile<<"EVENT ID: "<<eventID[j]<<"\nEVENT NAME: "<<eventName[j]<<"\nEVENT DATE: "<<eventDate[j]<<"\nEVENT LOCATION: "<<eventLocation[j]<<"\nEVENT DESCRIPTION: "<<eventDescription[j]<<"\n\n";
                                       }
                                       totalEvents--;
                                       cout<<"\nEvent Removed Successfully!"<<endl;
@@ -906,7 +857,7 @@ void AdminPanel()
                               }
 
                            }
-                           else if(eventChoice==4)
+                           else if(eventChoice=="4")
                            {
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                        VIEW ALL EVENT"<<endl;
@@ -928,38 +879,37 @@ void AdminPanel()
                               }
 
                            }
-                 }while(eventChoice!=5);
+                 }while(eventChoice!="5");
           }
-           else  if(choice_admin == "7")
+           else  if(choice_admin == "6")
           {
                do{    cout<<"\n\n";
                       cout<<"*******************************************************************************"<<endl;
                       cout<<"                      REPORTS AND ANALYTIC"<<endl;
                       cout<<"*******************************************************************************"<<endl;
                            cout<<"1. Total Shops Report"<<endl;
-                           cout<<"2. Total Tenants Report"<<endl;
-                           cout<<"3. Staff Report"<<endl;
-                           cout<<"4. Visitor Report"<<endl;
-                           cout<<"5. Events Report"<<endl;
-                           cout<<"6. Generate Mall Summary"<<endl;
-                           cout<<"7. Back"<<endl;
+                           cout<<"2. Staff Report"<<endl;
+                           cout<<"3. Visitor Report"<<endl;
+                           cout<<"4. Events Report"<<endl;
+                           cout<<"5. Generate Mall Summary"<<endl;
+                           cout<<"6. Back"<<endl;
                            cout<<"Enter Choice= ";
                            cin>>reportChoice;
                            cout<<"\n\n";
-                           if(reportChoice==1)
+                           if(reportChoice=="1")
                            {
                               cout<<"\n*********************************************************"<<endl;
-                              cout<<"                        TOTAL SHOPS REPORT"<<endl;
+                              cout<<"                        TOTAL SHOPS/TENANT REPORT"<<endl;
                               cout<<"**********************************************************"<<endl;
                               if(totalShops!= 0)
                                {
-                                   cout << left<< setw(10) << "ID"<< setw(25) << "NAME"<< setw(25) << "FLOOR NO"<< setw(20) << "TENANT NAME" << endl;
-                                   cout << setfill('-') << setw(80) << "-" << setfill(' ') << endl;
+                                   cout << left<< setw(10) << "ID"<< setw(25) << "NAME"<< setw(25) << "FLOOR NO"<< setw(20) << "TENANT NAME" <<setw(20)<<"RENT"<<setw(20)<<"CONTACT"<<endl;
+                                   cout << setfill('-') << setw(100) << "-" << setfill(' ') << endl;
                                      for(int i=0; i<totalShops; i++)
                                          {
-                                              cout << left<< setw(10) << shopID[i]<< setw(25) << shopName[i]<< setw(25) << floorNumber[i]<< setw(20) << tenantName[i] << endl;
+                                              cout << left<< setw(10) << shopID[i]<< setw(25) << shopName[i]<< setw(25) << shopFloor[i]<< setw(20) << shopkeeperName[i] <<setw(20)<< tenantRent[i]<<setw(20)<< tenantPhone[i]<< endl;
                                          }
-                                              cout << setfill('-') << setw(80) << "-" << setfill(' ') << endl;
+                                              cout << setfill('-') << setw(100) << "-" << setfill(' ') << endl;
                                }
                                else
                                {
@@ -967,28 +917,8 @@ void AdminPanel()
                                }
                               cout<<"Total Shops: "<<totalShops<<endl;
                            }
-                           else if(reportChoice==2)
-                           {
-                              cout<<"\n*********************************************************"<<endl;
-                              cout<<"                         TOTAL TENANTS REPORT"<<endl;
-                              cout<<"**********************************************************"<<endl;
-                              if(totalTenants!= 0)
-                               {
-                                   cout << left<< setw(10) << "ID"<< setw(25) << "NAME"<< setw(30) << "CONTACT"<< setw(30) << "RENT" << endl;
-                                   cout << setfill('-') << setw(95) << "-" << setfill(' ') << endl;
-                                     for(int i=0; i<totalTenants; i++)
-                                         {
-                                              cout << left<< setw(10) << tenantID[i]<< setw(25) << tenantName[i]<< setw(30) << tenantPhone[i]<< setw(30) << tenantRent[i] << endl;
-                                         }
-                                              cout << setfill('-') << setw(95) << "-" << setfill(' ') << endl;
-                               }
-                               else
-                               {
-                                     cout<<"No Tenants Available!\n";
-                               }
-
-                           }
-                           else if(reportChoice==3)
+                          
+                           else if(reportChoice=="2")
                            {
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                         STAFF REPORT"<<endl;
@@ -1009,7 +939,7 @@ void AdminPanel()
                                }
 
                            }
-                           else if(reportChoice==4)
+                           else if(reportChoice=="3")
                            {
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                         VISITOR REPORT"<<endl;
@@ -1031,7 +961,7 @@ void AdminPanel()
                                }
 
                            }
-                           else if(reportChoice==5)
+                           else if(reportChoice=="4")
                            {
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                         EVENT REPORT"<<endl;
@@ -1052,7 +982,7 @@ void AdminPanel()
                                    }
                                }
                            }
-                           else if(reportChoice==6)
+                           else if(reportChoice=="5")
                            {
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                         GENERATE MALL SUMMARY"<<endl;
@@ -1063,11 +993,11 @@ void AdminPanel()
                               cout<<"Total Visitors Today: "<<totalVisitors<<endl;
                               cout<<"Total Events Scheduled: "<<totalEvents<<endl;
                            }
-               }while(reportChoice!=7);
+               }while(reportChoice!="6");
                  } 
                  }
                  else
-                      cout<<"                     Invalid Choice! Please select a valid option.\n";           
+                      cout<<"\n                           Invalid Choice! Please select a valid option.\n";           
           
           
  }while(choice_admin!="0");
@@ -1078,7 +1008,7 @@ string productName[100],maintenanceRequest[100];
 int productQty[100], productPrice[100], totalProducts = 0, totalBills = 0, totalRevenue = 0, requestShopID[100], totalRequests = 0;
 void ShopkeeperPanel()
 {
-     int choice_shopkeeper=1;
+     string choice_shopkeeper="1";
       do{
 
      cout<<"\n\n"<<endl;
@@ -1105,7 +1035,7 @@ void ShopkeeperPanel()
           cout<<"                                                           ENTER YOUR CHOICE=";
           cin>>choice_shopkeeper;
           
-          if(choice_shopkeeper==1)
+          if(choice_shopkeeper=="1")
           {
             for(int i=0; i<totalShops; i++)
             {
@@ -1129,8 +1059,9 @@ void ShopkeeperPanel()
                else
                cout<<"Monthly Rent: "<<tenantRent[index]<<endl;
           }
-          else if(choice_shopkeeper==2)
-          {
+          else if(choice_shopkeeper=="2")
+          {     fstream outfile;
+                outfile.open("shops.txt", ios::app);
                 int prodChoice;
                cout<<"******************************************************************************"<<endl;
                cout<<"                         UPDATE SHOP INFORMATION"<<endl;
@@ -1150,12 +1081,17 @@ void ShopkeeperPanel()
                getline(cin, tenantName[loggedShop]);
                cout<<"Enter New Monthly Rent: ";
                cin>>tenantRent[loggedShop];
+               outfile<<"UPDATED SHOP DETAILS:\n";
+               outfile<<"SHOP ID: "<<shopID[loggedShop]<<"\nSHOP NAME: "<<shopName[loggedShop]<<"\nFLOOR NUMBER: "<<shopFloor[loggedShop]<<"\nTENANT NAME: "<<tenantName[loggedShop]<<"\nMONTHLY RENT: "<<tenantRent[loggedShop]<<"\n\n";
                cout<<"\nShop Information Updated Successfully!"<<endl;
+               outfile.close();
                               
           }
-          else if(choice_shopkeeper==3)
+          else if(choice_shopkeeper=="3")
           {
-               int prodChoice;
+               string prodChoice;
+               fstream outfile;
+               outfile.open("products.txt", ios::app);
                cout<<"******************************************************************************"<<endl;
                cout<<"                         MANAGE PRODUCTS"<<endl;
                cout<<"*******************************************************************************"<<endl;
@@ -1169,7 +1105,7 @@ void ShopkeeperPanel()
                      cin>>prodChoice;
                      cin.ignore();
 
-                      if(prodChoice == 1)
+                      if(prodChoice == "1")
                        {
                           cout<<"******************************************************************************"<<endl;
                           cout<<"                               ADD PRODUCT"<<endl;
@@ -1181,10 +1117,11 @@ void ShopkeeperPanel()
                           cin>>productPrice[totalProducts];
                           cout<<"Enter Quantity: ";
                           cin>>productQty[totalProducts];
+                           outfile<<"PRODUCT NAME: "<<productName[totalProducts]<<"\nPRICE: "<<productPrice[totalProducts]<<"\nQUANTITY: "<<productQty[totalProducts]<<"\n\n";
                           totalProducts++;
                           cout<<"\nProduct Added Successfully!"<<endl;
                        }
-                        else if(prodChoice == 2)
+                        else if(prodChoice == "2")
                         {
                           cout<<"******************************************************************************"<<endl;
                           cout<<"                               PRODUCT LIST"<<endl;
@@ -1197,13 +1134,16 @@ void ShopkeeperPanel()
                             {
                                cout<<left<<setw(20)<<"Name"<<setw(10)<<"Price"<<setw(10)<<"Qty"<<endl;
                                cout<<"--------------------------------------------------"<<endl;
+                               outfile<<"PRODUCT LIST:\n";
                                for(int i = 0; i < totalProducts; i++)
                                {
                                  cout<<setw(20)<<productName[i]<<setw(10)<<productPrice[i]<<setw(10)<<productQty[i]<<endl;
+                                 outfile<<"PRODUCT NAME: "<<productName[i]<<"\nPRICE: "<<productPrice[i]<<"\nQUANTITY: "<<productQty[i]<<"\n\n";
                                }
+
                           }
                        }
-                      else if(prodChoice == 3)
+                      else if(prodChoice == "3")
                        {
                           cout<<"******************************************************************************"<<endl;
                           cout<<"                              UPDATE PRODUCT"<<endl;
@@ -1220,6 +1160,8 @@ void ShopkeeperPanel()
                               cin>>productPrice[id];
                               cout<<"Enter New Quantity: ";
                               cin>>productQty[id];
+                              outfile<<"UPDATED PRODUCT DETAILS:\n";
+                              outfile<<"PRODUCT NAME: "<<productName[id]<<"\nPRICE: "<<productPrice[id]<<"\nQUANTITY: "<<productQty[id]<<"\n\n";
                               cout<<"\nUpdated Successfully!"<<endl;
                          }
                           else
@@ -1227,7 +1169,7 @@ void ShopkeeperPanel()
                               cout<<"Invalid Product ID!"<<endl;
                            }
                        }
-                     else if(prodChoice == 4)
+                     else if(prodChoice == "4")
                      {
                            cout<<"******************************************************************************"<<endl;
                            cout<<"                              DELETE PRODUCT"<<endl;
@@ -1242,6 +1184,8 @@ void ShopkeeperPanel()
                                    productName[i] = productName[i + 1];
                                    productPrice[i] = productPrice[i + 1];
                                    productQty[i] = productQty[i + 1];
+                                   outfile<<"DELETED PRODUCT DETAILS:\n";
+                                   outfile<<"PRODUCT NAME: "<<productName[i]<<"\nPRICE: "<<productPrice[i]<<"\nQUANTITY: "<<productQty[i]<<"\n\n";
                              } 
                                  totalProducts--;
                                  cout<<"Deleted Successfully!"<<endl;
@@ -1251,15 +1195,16 @@ void ShopkeeperPanel()
                                    cout<<"Invalid ID!"<<endl;
                                }
                      }
-                      if(prodChoice != 5)
+                      if(prodChoice != "5")
                       {
                          cout<<"\nPress Enter to return...";
                          cin.ignore();
                          cin.get();
                       }
-                       } while(prodChoice != 5); 
+                      outfile.close();
+                       } while(prodChoice != "5"); 
           }
-          else if(choice_shopkeeper==4)
+          else if(choice_shopkeeper=="4")
           {
                cout<<"******************************************************************************"<<endl;
                cout<<"                         VIEW SALES SUMMARY"<<endl;
@@ -1267,7 +1212,7 @@ void ShopkeeperPanel()
                cout<<"Total Bills Generated: "<<totalBills<<endl;
                cout<<"Total Revenue: "<<totalRevenue<<endl;
           }
-          else if(choice_shopkeeper==5)
+          else if(choice_shopkeeper=="5")
           {
                cout<<"******************************************************************************"<<endl;
                cout<<"                         CUSTOMER BILING"<<endl;
@@ -1301,7 +1246,7 @@ void ShopkeeperPanel()
                        totalBills++;
                        cout<<"Total Bill: "<<bill<<endl;
           }
-          else if(choice_shopkeeper==6)
+          else if(choice_shopkeeper=="6")
           {
                cout<<"******************************************************************************"<<endl;
                cout<<"                         REQUEST MAINTENANCE"<<endl;
@@ -1313,13 +1258,13 @@ void ShopkeeperPanel()
                totalRequests++;
                cout<<"Maintenance Request Submitted!"<<endl;
           }
-          if(choice_shopkeeper != 0)
+          if(choice_shopkeeper != "0")
          {
              cout << "\nPress Enter to return to the menu";
              cin.ignore(); 
              cin.get(); 
          }
-     }while(choice_shopkeeper!=0);
+     }while(choice_shopkeeper!="0");
 }
 
 string duties[5] = {"Clean Floor", "Check Inventory", "Assist Customers", "Organize Shelves", "Maintain Records"};
@@ -1330,8 +1275,8 @@ int daysPresent = 0;
 void StaffPanel()
 {
        
-             int staffChoice=1;
-        while(staffChoice!=0)
+             string staffChoice="1";
+        while(staffChoice!="0")
              {  
           cout<<"*************************************************************************************************************************************"<<endl;
           cout<<"                                                               WELCOME TO\n"<<endl;
@@ -1343,6 +1288,15 @@ void StaffPanel()
           cout<<"                                                                  PANEL"<<endl;
           cout<<"*************************************************************************************************************************************"<<endl;
           cout<<"\n"<<endl;
+          cout<<"Enter staff ID to Login: ";
+          int staffIDD;
+          cin>>staffIDD;
+          fstream outfile;
+            outfile.open("staff.txt", ios::app);
+          for(int i=0; i<totalStaff; i++)
+          {
+          if(staffIDD==staffID[i])
+
 
           cout<<"                                                         1. View Assigned Duties"<<endl;
           cout<<"                                                         2. Mark Attendance"<<endl;
@@ -1352,19 +1306,18 @@ void StaffPanel()
           cout<<"                                                         0. Logout"<<endl;
           cout<<"                                                          ENTER YOUR CHOICE=";
           cin>>staffChoice;
-          if(staffChoice==1)
+          if(staffChoice=="1")
                 {
                     cout<<"****************************************************************"<<endl;
                     cout<<"           VIEW ASSIGNED DUTIES"<<endl;
                     cout<<"****************************************************************"<<endl;
                      cout<<"Your Assigned Duties for Today are:"<<endl;
-                     for(int i = 0; i < 3; i++)
-                     {
-                         cout << "- " << duties[i] << endl;
-                     }
+                     outfile<<"STAFF ID: "<<staffID[i]<<"\nASSIGNED DUTIES FOR TODAY:\n";
+                         cout << "- " << staffRole[i] << endl;
+                           outfile<<"- "<<staffRole[i]<<"\n";
 
                 }
-                else if(staffChoice==2)
+                else if(staffChoice=="2")
                 {
                     cout<<"****************************************************************"<<endl;
                     cout<<"              MARK ATTENDANCE"<<endl;
@@ -1374,13 +1327,14 @@ void StaffPanel()
                             attendanceMarked = true;
                             daysPresent++;
                             cout<<"Attendance Marked for Today!"<<endl;
+                            outfile<<"STAFF ID: "<<staffID[i]<<"\nATTENDANCE MARKED FOR TODAY\n\n";
                       }
                         else
                         {
                            cout<<"Attendance Already Marked!"<<endl;
                         }
                 }
-                 else if(staffChoice==3)
+                 else if(staffChoice=="3")
                 {
                     cout<<"****************************************************************"<<endl;
                     cout<<"                UPDATE WORK STATUS "<<endl;
@@ -1389,9 +1343,10 @@ void StaffPanel()
                      cout<<"Enter New Work Status (Pending/Completed): ";
                      cin>>workStatus;
                      cout<<"Work Status Updated to "<<workStatus<<"!"<<endl;
+                     outfile<<"STAFF ID: "<<staffID[i]<<"\nUPDATED WORK STATUS TO: "<<workStatus<<"\n\n";
 
                 }
-                 else if(staffChoice==4)
+                 else if(staffChoice=="4")
                 {
                     cout<<"****************************************************************"<<endl;
                     cout<<"              REPORT AN ISSUE"<<endl;
@@ -1401,8 +1356,9 @@ void StaffPanel()
                      cin.ignore();
                      getline(cin, reportedIssue);
                      cout<<"Issue Reported: "<<reportedIssue<<endl;
+                     outfile<<"STAFF ID: "<<staffID[i]<<"\nREPORTED ISSUE: "<<reportedIssue<<"\n\n";
                 }
-                 else if(staffChoice==5)
+                 else if(staffChoice=="5")
                 {
                     cout<<"****************************************************************"<<endl;
                     cout<<"              VIEW SALARY DETAILS"<<endl;
@@ -1411,14 +1367,15 @@ void StaffPanel()
                     cout << "Basic Salary: " << basicSalary << endl;
                     cout << "Days Present: " << daysPresent << endl;
                     cout << "Total Salary: " << salary << endl;
+                    outfile<<"STAFF ID: "<<staffID[i]<<"\nBASIC SALARY: "<<basicSalary<<"\nDAYS PRESENT: "<<daysPresent<<"\nTOTAL SALARY: "<<salary<<"\n\n";
                 }
-                if(staffChoice != 0)
+                if(staffChoice != "0")
                  {
                     cout << "Press Enter to continue";
                     cin.ignore();
                     cin.get();
                  }
-               
+          }
 }
 }
 
