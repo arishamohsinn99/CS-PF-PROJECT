@@ -1023,8 +1023,37 @@ void AdminPanel()
                            } else if(eventChoice=="5")
                            {
                               cout<<"\n*********************************************************"<<endl;
-                              cout<<"                        ADD NEW EVENT"<<endl;
+                              cout<<"                        LOAD NEW EVENT"<<endl;
                               cout<<"**********************************************************"<<endl;
+                              ifstream infile("events.txt");  
+                               if(!infile)
+                                 {
+                                   cout << "No event data file found!\n";
+                                 }
+                                 else
+                                      {
+                                       totalEvents = 0;  
+                                       string line;
+                                       while(getline(infile, line))
+                                       {
+                                         if(line.substr(0, 9) == "EVENT ID:")
+                                         {
+                                           eventID[totalEvents] = stoi(line.substr(9)); // convert string to int
+                                           getline(infile, line);
+                                           eventName[totalEvents] = line.substr(12); // skip "EVENT NAME: "
+                                           getline(infile, line);
+                                           eventDate[totalEvents] = line.substr(11); // skip "EVENT DATE: "
+                                           getline(infile, line);
+                                           eventLocation[totalEvents] = line.substr(16); // skip "EVENT LOCATION: "
+                                           getline(infile, line);
+                                           eventDescription[totalEvents] = line.substr(18); // skip "EVENT DESCRIPTION: "
+                                           getline(infile, line); // skip blank line
+                                           totalEvents++; // increment counter
+                                         }
+                                      }
+                                             infile.close();
+                                             cout << "\nEvents Loaded Successfully! Total Events: " << totalEvents << "\n";
+                                  }
                            }
                  }while(eventChoice!="6");
           }
