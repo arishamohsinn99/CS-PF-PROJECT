@@ -118,6 +118,7 @@ void AdminPanel()
           cin.ignore();
          if(choice_admin=="0" || choice_admin=="1" || choice_admin=="2" || choice_admin=="3" || choice_admin=="4" || choice_admin=="5" || choice_admin=="6" || choice_admin=="7")
           {
+
               if(choice_admin == "1")
               {
                    do{
@@ -429,6 +430,7 @@ void AdminPanel()
                            }
                }while(staffChoice!="6");
           }
+
            else  if(choice_admin == "3")
           {
                do{
@@ -640,6 +642,7 @@ void AdminPanel()
                            }
                          }while(floorChoice!="7");
           }
+
            else  if(choice_admin == "4")
           {
                   do{
@@ -881,6 +884,7 @@ void AdminPanel()
                            }
                  }while(eventChoice!="5");
           }
+
            else  if(choice_admin == "6")
           {
                do{    cout<<"\n\n";
@@ -996,6 +1000,7 @@ void AdminPanel()
                }while(reportChoice!="6");
                  } 
                  }
+                 
                  else
                       cout<<"\n                           Invalid Choice! Please select a valid option.\n";           
           
