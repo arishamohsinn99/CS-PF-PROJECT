@@ -130,13 +130,15 @@ void AdminPanel()
                            cout<<"2. Update Shop/Tenant"<<endl;
                            cout<<"3. Remove Shop/Tenant"<<endl;
                            cout<<"4. View Shop/Tenant"<<endl;
-                           cout<<"5. Back"<<endl;
+                           cout<<"5. Load Shops"<<endl;
+                           cout<<"6. Back"<<endl;
                            cout<<"Enter Choice=";
                            cin>>shopChoice;
                            cin.ignore();
                            cout<<"\n\n";
                            if(shopChoice=="1")
                            {
+                              
                               fstream outfile;
                               outfile.open("shops.txt", ios::app);
                               cout<<"\n*********************************************************"<<endl;
@@ -175,8 +177,6 @@ void AdminPanel()
                               {
                                   if(shopID[i] == id)
                                       {
-                                         fstream outfile;
-                                         outfile.open("shops.txt", ios::app);
                                          found = true;
                                          cout<<"Enter New Shop Name: ";
                                          getline(cin, shopName[i]);
@@ -186,16 +186,20 @@ void AdminPanel()
                                          cin>>shopFloor[i];
                                          cin.ignore();
                                          cout<<"Enter New Shopkeeper Phone Number: ";
-                                             getline(cin, tenantPhone[i]);
-                                             cout<<"Enter New Shopkeeper Rent: ";
-                                             cin>>tenantRent[i];
-                                             outfile<<"UPDATED SHOP DETAILS:\n";
+                                         getline(cin, tenantPhone[i]);
+                                         cout<<"Enter New Shopkeeper Rent: ";
+                                         cin>>tenantRent[i];
+                                            break;
+                                       }
+                                    }
+                                        ofstream outfile("shops.txt");
+                                        for(int i=0; i<totalShops; i++)
+                                         {
                                              outfile<<"SHOP ID: "<<shopID[i]<<"\nSHOP NAME: "<<shopName[i]<<"\nSHOPKEEPER NAME: "<<shopkeeperName[i]<<"\nFLOOR NUMBER: "<<shopFloor[i]<<"\nSHOPKEEPER PHONE: "<<tenantPhone[i]<<"\nSHOPKEEPER RENT: "<<tenantRent[i]<<"\n\n";
                                              cout<<"\nShop Updated/Sored Successfully!"<<endl;
-                                             break;
-
-                                       }
-                                }
+                                         }
+                                         outfile.close();
+                                
                                 if(found!=true)
                                  cout<<"Shop Not Found!"<<endl;
                              }
@@ -209,8 +213,6 @@ void AdminPanel()
                               cin>>id;
                               cin.ignore();
                               bool found = false; 
-                               fstream outfile;
-                               outfile.open("shops.txt", ios::app);
                               for(int i=0; i<totalShops; i++)
                                {
                                     if(shopID[i] == id)
@@ -224,15 +226,19 @@ void AdminPanel()
                                                 shopFloor[j] = shopFloor[j+1];
                                                 tenantRent[j] = tenantRent[j+1];
                                                 tenantPhone[j] = tenantPhone[j+1];
-                                                outfile<<"REMOVED SHOP DETAILS:\n";
-                                                outfile<<"SHOP ID: "<<shopID[j]<<"\nSHOP NAME: "<<shopName[j]<<"\nSHOPKEEPER NAME: "<<shopkeeperName[j]<<"\nFLOOR NUMBER: "<<shopFloor[j]<<"\nSHOPKEEPER PHONE: "<<tenantPhone[j]<<"\nSHOPKEEPER RENT: "<<tenantRent[j]<<"\n\n";
-
                                            }
                                                     totalShops--;
                                            cout<<"Shop Removed Successfully!\n";
                                             break;
                                      }
                                }
+                                         ofstream outfile("shops.txt");
+                                        for(int i=0; i<totalShops; i++)
+                                         {
+                                             outfile<<"SHOP ID: "<<shopID[i]<<"\nSHOP NAME: "<<shopName[i]<<"\nSHOPKEEPER NAME: "<<shopkeeperName[i]<<"\nFLOOR NUMBER: "<<shopFloor[i]<<"\nSHOPKEEPER PHONE: "<<tenantPhone[i]<<"\nSHOPKEEPER RENT: "<<tenantRent[i]<<"\n\n";
+                                             cout<<"\nShop Deleted/Sored Successfully!"<<endl;
+                                         }
+                                         outfile.close();
                                 if(found!=true)
                                 {
                                    cout<<"Shop Not Found!"<<endl;
@@ -260,10 +266,47 @@ void AdminPanel()
                                        cout << setfill('-') << setw(100) << "-" << setfill(' ') << endl;
                                     }
                               
+                                                     }else if(shopChoice=="5")
+                           {
+                              cout<<"\n          *********************************************************"<<endl;
+                              cout<<"                                     Load SHOP/TENANT"<<endl;
+                              cout<<"             **********************************************************"<<endl;
+                              ifstream infile("shops.txt");
+
+                                  if (!infile)
+                                   {
+                                      cout << "No shop data file found!\n";
+                                      return;
+                                   }
+                                      totalShops = 0;  
+                                      string line;
+                                      while (getline(infile, line))
+                                      {
+                                         if (line.substr(0, 8) == "SHOP ID:")
+                                         {
+                                            shopID[totalShops] = atoi(line.substr(8).c_str());
+                                            getline(infile, line);
+                                            shopName[totalShops] = line.substr(11);
+                                            getline(infile, line);
+                                            shopkeeperName[totalShops] = line.substr(17);
+                                            getline(infile, line);
+                                            shopFloor[totalShops] = atoi(line.substr(14).c_str());
+                                            getline(infile, line);
+                                            tenantPhone[totalShops] = line.substr(17);
+                                            getline(infile, line);
+                                            tenantRent[totalShops] = atoi(line.substr(17).c_str());
+                                            getline(infile, line);
+                                            totalShops++;
+                                          }
+                                      }
+                                        infile.close();
+                                        cout << "\nShops Loaded Successfully!\n";
+                           
+                              
                            }
                            else 
                                 cout<<"inavlid choice! please try again."<<endl;
-               }while(shopChoice!="5");
+               }while(shopChoice!="6");
           }
  
            else  if(choice_admin == "2")
@@ -278,7 +321,8 @@ void AdminPanel()
                            cout<<"3. Update Staff"<<endl;
                            cout<<"4. Remove Staff"<<endl;
                            cout<<"5. Assign duty to the staff"<<endl;
-                           cout<<"6.Back"<<endl;
+                           cout<<"6. Load Staff"<<endl;
+                           cout<<"7.Back"<<endl;
                            cout<<"Enter Choice= ";
                            cin>>staffChoice;
                            cin.ignore();
@@ -339,8 +383,6 @@ void AdminPanel()
                               cin>>id;
                               cin.ignore();
                               bool found = false;
-                              fstream outfile;
-                              outfile.open("staff.txt", ios::app);
                               for(int i=0; i<totalStaff; i++)
                                 {
                                      if(staffID[i] == id)
@@ -352,13 +394,20 @@ void AdminPanel()
                                         getline(cin, staffRole[i]);
                                         cout<<"Enter New Salary: ";
                                         cin>>staffSalary[i];
-                                          cin.ignore();
-                                          outfile<<"UPDATED STAFF DETAILS:\n";
-                                          outfile<<"STAFF ID: "<<staffID[i]<<"\nSTAFF NAME: "<<staffName[i]<<"\nSTAFF ROLE: "<<staffRole[i]<<"\nSTAFF SALARY: "<<staffSalary[i]<<"\n\n";
+                                        cin.ignore();
                                         cout<<"\nStaff Updated Successfully!\n";
                                         break;
                                      }
                                 }
+                                if(found)
+                                 {
+                                   ofstream outfile("staff.txt");  
+                                    for(int i=0; i<totalStaff; i++)
+                                      {
+                                        outfile<<"STAFF ID: "<<staffID[i]<<"\nSTAFF NAME: "<<staffName[i]<<"\nSTAFF ROLE: "<<staffRole[i]<<"\nSTAFF SALARY: "<<staffSalary[i]<<"\n\n";
+                                      }
+                                          outfile.close();
+                                 }
                                 if(!found)
                                  cout<<"Staff Not Found!\n";
 
@@ -373,8 +422,6 @@ void AdminPanel()
                               cin>>id;
                               cin.ignore();
                               bool found = false;
-                              fstream outfile;
-                              outfile.open("staff.txt", ios::app);
                               for(int i=0; i<totalStaff; i++)
                                {
                                   if(staffID[i] == id)
@@ -386,14 +433,21 @@ void AdminPanel()
                                             staffName[j] = staffName[j+1];
                                             staffRole[j] = staffRole[j+1];
                                             staffSalary[j] = staffSalary[j+1];
-                                             outfile<<"REMOVED STAFF DETAILS:\n";
-                                             outfile<<"STAFF ID: "<<staffID[j]<<"\nSTAFF NAME: "<<staffName[j]<<"\nSTAFF ROLE: "<<staffRole[j]<<"\nSTAFF SALARY: "<<staffSalary[j]<<"\n\n";
                                          }
                                             totalStaff--;
                                             cout<<"Staff Removed Successfully!\n";
                                             break;
                                      }
                                }
+                                if(found)
+                                 {
+                                   ofstream outfile("staff.txt");  
+                                    for(int i=0; i<totalStaff; i++)
+                                      {
+                                        outfile<<"STAFF ID: "<<staffID[i]<<"\nSTAFF NAME: "<<staffName[i]<<"\nSTAFF ROLE: "<<staffRole[i]<<"\nSTAFF SALARY: "<<staffSalary[i]<<"\n\n";
+                                      }
+                                          outfile.close();
+                                 }
                                 if(!found)
                                 cout<<"Staff Not Found!\n";
 
@@ -427,8 +481,39 @@ void AdminPanel()
                                }
                                   if(!found)
                                    cout<<"Staff Not Found!\n";
+                           } if(staffChoice=="6")
+                           {
+                              cout<<"\n*********************************************************"<<endl;
+                              cout<<"                         LOAD STAFF"<<endl;
+                              cout<<"**********************************************************"<<endl;
+                              ifstream infile("staff.txt");
+                              if (!infile)
+                              {
+                                 cout << "No staff data file found!\n";
+                                 return;
+                              }
+                                totalStaff = 0;  
+                                string line;
+                                while (getline(infile, line))
+                                {
+                                 if (line.substr(0, 9) == "STAFF ID:")
+                                   {
+                                      staffID[totalStaff] = atoi(line.substr(9).c_str());   
+                                      getline(infile, line);
+                                      staffName[totalStaff] = line.substr(12);  // skip "STAFF NAME: "
+                                      getline(infile, line);
+                                      staffRole[totalStaff] = line.substr(12);  // skip "STAFF ROLE: "
+                                      getline(infile, line);
+                                      staffSalary[totalStaff] = atoi(line.substr(13).c_str()); // skip "STAFF SALARY: "
+                                      getline(infile, line); // skip the blank line
+                                      totalStaff++;
+                                   }
+                                }
+                                            infile.close();
+                                            cout << "\nStaff Loaded Successfully!\n";
+
                            }
-               }while(staffChoice!="6");
+               }while(staffChoice!="7");
           }
 
            else  if(choice_admin == "3")
@@ -654,12 +739,12 @@ void AdminPanel()
                            cout<<"2. Record Exit"<<endl;
                            cout<<"3. View Total Visitors Today"<<endl;
                            cout<<"4. View Visitor Log"<<endl;
-                           cout<<"5. Back"<<endl;
+                           cout<<"5. Load Visitor"<<endl;
+                           cout<<"6. Back"<<endl;
                            cout<<"Enter= ";
+                           fstream outfile;
                            cin>>visitorChoice;
                            cout<<"\n\n";
-                           fstream outfile;
-                           outfile.open("visitors.txt", ios::app);
                             if(visitorChoice=="1")
                            {
                               cout<<"\n*********************************************************"<<endl;
@@ -676,17 +761,19 @@ void AdminPanel()
                                   break;
                               }
                               else if(visitorCNIC[totalVisitors].substr(5,1) == "-" && visitorCNIC[totalVisitors].substr(13,1) == "-")
-                              {
+                               {
                               cout<<"Enter Purpose of Visit: ";
                               getline(cin, visitorPurpose[totalVisitors]);
                               cout<<"Enter Entry Time (HH:MM): ";
                               getline(cin, visitorEntryTime[totalVisitors]);
                               visitorExitTime[totalVisitors] = "Not Exited Yet";
+                              ofstream outfile("visitors.txt", ios::app);
                               outfile<<"VISITOR NAME: "<<visitorName[totalVisitors]<<"\nCNIC: "<<visitorCNIC[totalVisitors]<<"\nPURPOSE: "<<visitorPurpose[totalVisitors]<<"\nENTRY TIME: "<<visitorEntryTime[totalVisitors]<<"\nEXIT TIME: "<<visitorExitTime[totalVisitors]<<"\n\n";
+                              outfile.close();
                               totalVisitors++;
                               cout<<"\nVisitor Entry Recorded Successfully!\n";
-                             
-                           }
+                               }  
+                           } 
                            else  if(visitorChoice=="2")
                            {
                               cout<<"\n*********************************************************"<<endl;
@@ -705,16 +792,24 @@ void AdminPanel()
                                       cout<<"Enter Exit Time (HH:MM): ";
                                       getline(cin, visitorExitTime[i]);
                                       cout<<"\nExit Time Recorded Successfully!"<<endl;
-                                      outfile<<"UPDATED VISITOR DETAILS:\n";
-                                      outfile<<"VISITOR NAME: "<<visitorName[i]<<"\nCNIC: "<<visitorCNIC[i]<<"\nPURPOSE: "<<visitorPurpose[i]<<"\nENTRY TIME: "<<visitorEntryTime[i]<<"\nEXIT TIME: "<<visitorExitTime[i]<<"\n\n";
                                       break;
                                   }
                               }
-                                if(!found)
-                                {
-                                   cout<<"Visitor Not Found!"<<endl;
+                               if(!found) 
+                               {
+                                 cout << "Visitor Not Found!" << endl;
+                               } 
+                               else 
+                               {
+                                   
+                                  ofstream outfile("visitors.txt"); 
+                                  for(int i = 0; i < totalVisitors; i++) 
+                                   {
+                                   outfile<<"VISITOR NAME: "<<visitorName[i]<<"\nCNIC: "<<visitorCNIC[i]<<"\nPURPOSE: "<<visitorPurpose[i]<<"\nENTRY TIME: "<<visitorEntryTime[i]<<"\nEXIT TIME: "<<visitorExitTime[i]<<"\n\n";
+                                   }
+                                     outfile.close();
                                 }
-                           }
+                         }
                            else  if(visitorChoice=="3")
                            {
                               cout<<"\n*********************************************************"<<endl;
@@ -727,7 +822,7 @@ void AdminPanel()
                            {
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                        VIEW VISITOR LOG"<<endl;
-                              cout<<"**********************************************************"<<endl;
+                              cout<<"**********************************************************\n"<<endl;
                               if(totalVisitors == 0)
                               {
                                   cout<<"No Visitors Recorded Today!"<<endl;
@@ -745,9 +840,43 @@ void AdminPanel()
                               }
                            
                            }
-                        }
-                           outfile.close();
-                  }while(visitorChoice!="5");
+                        
+                      else if(visitorChoice=="5")
+                           {
+                              cout<<"\n*********************************************************"<<endl;
+                              cout<<"                      LOAD VISITOR ENTRY"<<endl;
+                              cout<<"**********************************************************"<<endl;
+                               ifstream infile("visitors.txt");
+                               if(!infile)
+                                {
+                                  cout << "No visitor data file found!\n";
+                                }
+                                 else {
+                                       totalVisitors = 0;
+                                       string line;
+                                       while(getline(infile, line)) 
+                                       {
+                                         if(line.substr(0, 13) == "VISITOR NAME:") 
+                                         {
+                                         visitorName[totalVisitors] = line.substr(12);
+                                         getline(infile, line);
+                                         visitorCNIC[totalVisitors] = line.substr(6);
+                                         getline(infile, line);
+                                         visitorPurpose[totalVisitors] = line.substr(9);
+                                         getline(infile, line);
+                                         visitorEntryTime[totalVisitors] = line.substr(12);
+                                         getline(infile, line);
+                                         visitorExitTime[totalVisitors] = line.substr(10);
+                                         getline(infile, line);
+                                           totalVisitors++;
+                                          }
+                                       }
+                                              infile.close();
+                                              cout << "\nVisitors Loaded Successfully! Total Visitors: " << totalVisitors << "\n";
+                                     }
+                                   
+                           }
+                  }while(visitorChoice!="6");
                
           }
            else  if(choice_admin == "5")
@@ -761,7 +890,8 @@ void AdminPanel()
                            cout<<"2. Upate Event"<<endl;
                            cout<<"3. Cancel Event"<<endl;
                            cout<<"4. View All Event"<<endl;
-                           cout<<"5. Back"<<endl;
+                           cout<<"5. Load All Event"<<endl;
+                           cout<<"6. Back"<<endl;
                            cout<<"Enter Choice= ";
                            cin>>eventChoice;
                            cout<<"\n\n";
@@ -813,15 +943,20 @@ void AdminPanel()
                                       cout<<"Enter New Event Description: ";
                                       getline(cin, eventDescription[i]);
                                       cout<<"\nEvent Updated Successfully!"<<endl;
-                                      outfile<<"UPDATED EVENT DETAILS:\n";
-                                       outfile<<"EVENT ID: "<<eventID[i]<<"\nEVENT NAME: "<<eventName[i]<<"\nEVENT DATE: "<<eventDate[i]<<"\nEVENT LOCATION: "<<eventLocation[i]<<"\nEVENT DESCRIPTION: "<<eventDescription[i]<<"\n\n";
-                                      break;
+               
                                   }
                               }
-                              if(!found)
-                              {
-                                  cout<<"Event Not Found!"<<endl;
-                              }
+                              if(found)
+                                 {
+                                   ofstream outfile("event.txt");  
+                                    for(int j=0; j<totalEvents; j++)
+                                      {
+                                          outfile<<"EVENT ID: "<<eventID[j]<<"\nEVENT NAME: "<<eventName[j]<<"\nEVENT DATE: "<<eventDate[j]<<"\nEVENT LOCATION: "<<eventLocation[j]<<"\nEVENT DESCRIPTION: "<<eventDescription[j]<<"\n\n";
+                                      }
+                                          outfile.close();
+                                 }
+                                if(!found)
+                                cout<<"Event Not Found!\n";
 
                            }
                            else if(eventChoice=="3")
@@ -846,18 +981,23 @@ void AdminPanel()
                                           eventDate[j] = eventDate[j+1];
                                           eventLocation[j] = eventLocation[j+1];
                                           eventDescription[j] = eventDescription[j+1];
-                                          outfile<<"REMOVED EVENT DETAILS:\n";
-                                          outfile<<"EVENT ID: "<<eventID[j]<<"\nEVENT NAME: "<<eventName[j]<<"\nEVENT DATE: "<<eventDate[j]<<"\nEVENT LOCATION: "<<eventLocation[j]<<"\nEVENT DESCRIPTION: "<<eventDescription[j]<<"\n\n";
-                                      }
+                                        }
                                       totalEvents--;
                                       cout<<"\nEvent Removed Successfully!"<<endl;
                                       break;
                                   }
                               }
-                              if(found!=true)
-                              {
-                                  cout<<"Event Not Found!"<<endl;
-                              }
+                                   if(found)
+                                    {
+                                     ofstream outfile("event.txt");  
+                                    for(int j=0; j<totalEvents; j++)
+                                      {
+                                          outfile<<"EVENT ID: "<<eventID[j]<<"\nEVENT NAME: "<<eventName[j]<<"\nEVENT DATE: "<<eventDate[j]<<"\nEVENT LOCATION: "<<eventLocation[j]<<"\nEVENT DESCRIPTION: "<<eventDescription[j]<<"\n\n";
+                                      }
+                                          outfile.close();
+                                    }
+                                     if(!found)
+                                    cout<<"Event Not Found!\n";
 
                            }
                            else if(eventChoice=="4")
@@ -880,9 +1020,13 @@ void AdminPanel()
                                       cout<<setw(10)<<eventID[i]<<setw(25)<<eventName[i]<<setw(15)<<eventDate[i]<<setw(20)<<eventLocation[i]<<setw(35)<<eventDescription[i]<<endl;
                                   }
                               }
-
+                           } else if(eventChoice=="5")
+                           {
+                              cout<<"\n*********************************************************"<<endl;
+                              cout<<"                        ADD NEW EVENT"<<endl;
+                              cout<<"**********************************************************"<<endl;
                            }
-                 }while(eventChoice!="5");
+                 }while(eventChoice!="6");
           }
 
            else  if(choice_admin == "6")
