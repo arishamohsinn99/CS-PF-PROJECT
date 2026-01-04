@@ -8,48 +8,106 @@ HANDLE console= GetStdHandle(STD_OUTPUT_HANDLE);
   
 void title()
 {
-     SetConsoleTextAttribute(console,11);
-     cout<<"**********************************************************************************************************************************\n\n"<<endl;
-     cout<<"                                           ###      ###      ####       ##         ##"<<endl;
-     cout<<"                                           ## ##   # ##     ##  ##      ##         ## "<<endl;
-     cout<<"                                           ##   ##   ##    ########     ##         ##"<<endl;
-     cout<<"                                           ##        ##    ##     ##    ##         ##"<<endl;
-     cout<<"                                           ##        ##    ##     ##    ########   ########"<<endl;
+     SetConsoleTextAttribute(console,9);
+     cout<<"                                       *******************************************************"<<endl;   
+     cout<<"                                       *******************************************************\n"<<endl;   
+     cout<<"                                             ###      ###      ####       ##         ##"<<endl;
+     cout<<"                                             ## ##   # ##     ##  ##      ##         ## "<<endl;
+     cout<<"                                             ##   ##   ##    ########     ##         ##"<<endl;
+     cout<<"                                             ##        ##    ##     ##    ##         ##"<<endl;
+     cout<<"                                             ##        ##    ##     ##    ########   ########"<<endl;
      cout<<"\n";
-     cout<<"         ###     ###      ##      ##     ##      ##      ####      #######    ##      ##    #######    ##      ##   ########"<<endl;
-     cout<<"         ## ## ## ##     #  #     ## #   ##     #  #    #          ##         ## #  # ##    ##         ## #    ##      ##   "<<endl;
-     cout<<"         ##   ##  ##    ######    ##   # ##    ######   #   ###    #######    ##  #   ##    #######    ##  #   ##      ##"<<endl;
-     cout<<"         ##       ##    #    #    ##    ###    #    #   #     #    ##         ##      ##    ##         ##    # ##      ##"<<endl;  
-     cout<<"         ##       ##    #    #    ##     ##    #    #    #####     #######    ##      ##    #######    ##      ##      ##"<<endl;
+     cout<<"           ###     ###      ##      ##     ##      ##      ####      #######    ##      ##    #######    ##      ##   ########"<<endl;
+     cout<<"           ## ## ## ##     #  #     ## #   ##     #  #    #          ##         ## #  # ##    ##         ## #    ##      ##   "<<endl;
+     cout<<"           ##   ##  ##    ######    ##   # ##    ######   #   ###    #######    ##  #   ##    #######    ##  #   ##      ##"<<endl;
+     cout<<"           ##       ##    #    #    ##    ###    #    #   #     #    ##         ##      ##    ##         ##    # ##      ##"<<endl;  
+     cout<<"           ##       ##    #    #    ##     ##    #    #    #####     #######    ##      ##    #######    ##      ##      ##"<<endl;
      cout<<"\n";
-     cout<<"                               ######    ##      ##    #######    ########   ########    ###      ###"<<endl;
-     cout<<"                               #           ##  ##      #             ##      ##          ## ##   # ## "<<endl;
-     cout<<"                                ####         ##         ####         ##      ########    ##    #   ##"<<endl;
-     cout<<"                                    #        ##              #       ##      ##          ##        ## "<<endl;
-     cout<<"                               ######        ##       #######        ##      ########    ##        ##"<<endl;
+     cout<<"                                 ######   ##      ##    #######    ########   ########    ###      ###"<<endl;
+     cout<<"                                 #          ##  ##      #             ##      ##          ## ##   # ## "<<endl;
+     cout<<"                                  ####        ##         ####         ##      ########    ##    #   ##"<<endl;
+     cout<<"                                      #       ##              #       ##      ##          ##        ## "<<endl;
+     cout<<"                                 ######       ##       #######        ##      ########    ##        ##"<<endl;
      cout<<"\n";
-     cout<<"*********************************************************************************************************************************\n\n"<<endl;
+     cout<<"                                       *******************************************************"<<endl;   
+     cout<<"                                       *******************************************************\n\n\n"<<endl; 
+     cout<<"                                             ==========================================="<<endl;
+     cout<<"                                            ||";
+     SetConsoleTextAttribute(console, 11);
+     cout<<"   ##     ##    ####   ######  ##   ##   ";
+     SetConsoleTextAttribute(console, 9);
+     cout<<"||"<<endl;
+     cout<<"                                            || ";
+     SetConsoleTextAttribute(console, 11);
+     cout<<"  ##    #  #  ##        ##    ##   ##  ";
+     SetConsoleTextAttribute(console, 9); 
+     cout<<" ||"<<endl;
+     cout<<"                                            || ";
+     SetConsoleTextAttribute(console, 11); 
+     cout<<"  ##    #  #  #  ###    ##    #  # ##   ";
+     SetConsoleTextAttribute(console, 9);
+     cout<<"||"<<endl;
+     cout<<"                                            ||  ";
+     SetConsoleTextAttribute(console, 11);
+     cout<<" #####  ##    ####   ######  ##   ##  ";
+     SetConsoleTextAttribute(console, 9); 
+     cout<<" ||"<<endl;
+     cout<<"                                             ==========================================="<<endl;
+     cout<<"                                            ||                                         ||              "<<endl;
+     cout<<"                                            ||   ";
+     SetConsoleTextAttribute(console, 11);
+     cout<<" -WELCOME TO MALL MANAGEMENT SYSTEM-  ";
+     SetConsoleTextAttribute(console, 9);
+     cout<<"||               "<<endl;
+     cout<<"                                            ||     ";
+     SetConsoleTextAttribute(console, 11);
+     cout<<"  select who is logging in?        ";
+     SetConsoleTextAttribute(console, 9);
 
+     cout<<" ||             "<<endl;
+     cout<<"                                            ||                                         ||             "<<endl;
+
+     
 }
 
 void panel()
 {
      
-     cout<<"                        ====================================================================================="<<endl;      
-     cout<<"                                                        1. ADMIN PANEL"<<endl;
-     cout<<"                                                        2. SHOPKEEPER PANEL"<<endl;
-     cout<<"                                                        3. STAFF PANEL"<<endl;
-     cout<<"                                                        0. EXIT"<<endl;
-     cout<<"                        ====================================================================================="<<endl;
-     cout<<"                                                    Select Who Is Logging In=";
+     cout<<"                                             ==========================================="<<endl;   
+     cout<<"                                            ||    ";
+      SetConsoleTextAttribute(console, 11);
+      cout<<"        1. ADMIN PANEL              ";
+      SetConsoleTextAttribute(console, 9);
+      cout<<" ||"<<endl;
+      cout<<"                                            ||        ";
+      SetConsoleTextAttribute(console, 11);
+      cout<<"    2. SHOPKEEPER PANEL         ";
+      SetConsoleTextAttribute(console, 9);
+      cout<<" ||"<<endl;
+      cout<<"                                            ||       ";
+      SetConsoleTextAttribute(console, 11);
+      cout<<"     3. STAFF PANEL             ";
+      SetConsoleTextAttribute(console, 9); 
+      cout<<"  ||"<<endl;
+      cout<<"                                            ||         ";
+      SetConsoleTextAttribute(console, 11);
+      cout<<"   0. EXIT                     ";
+      SetConsoleTextAttribute(console, 9);
+      cout<<" ||"<<endl;
+      cout<<"                                            ============================================"<<endl;
+      SetConsoleTextAttribute(console, 11);
+      cout<<"                                                               ENTER=";
      
 }
 void loginScreen(string &username, string &password)
 {   
     
     cout<<"\n\n";
+         SetConsoleTextAttribute(console, 10);
      cout<<"                                              _________________________________________"<<endl;
-     cout<<"                                             |                                         |"<<endl;
+     cout<<"                                             |";
+
+     cout<<"                                         |"<<endl;
      cout<<"                                             |  ====================================   |"<<endl;
      cout<<"                                             |  |                                   |  |"<<endl;
      cout<<"                                             |  |             * LOGIN *             |  |"<<endl;
@@ -72,6 +130,7 @@ void loginScreen(string &username, string &password)
      cout<<"                                             |                                         |"<<endl;
      cout<<"                                             |_________________________________________|"<<endl;
      cout<<"\n\n";
+     SetConsoleTextAttribute(console, 11);
 }
 
 
@@ -96,15 +155,48 @@ void AdminPanel()
      do{
           
           cout<<"\n\n\n";
-          cout<<"*************************************************************************************************************************************"<<endl;
-          cout<<"                                                              WELCOME TO \n"<<endl;
-          cout<<"                                             ##    #####    ##     ##   ########   ##   ##"<<endl;
-          cout<<"                                            #  #   ##   #   ## # # ##      ##      ## # ##"<<endl;
-          cout<<"                                            ####   ##    #  ##  #  ##      ##      ##  ###"<<endl;
-          cout<<"                                            #  #   ##   #   ##     ##      ##      ##   ##"<<endl;
-          cout<<"                                            #  #   #####    ##     ##   ########   ##   ##\n"<<endl;
-          cout<<"                                                                 PANEL"<<endl;
-          cout<<"*************************************************************************************************************************************"<<endl;
+          SetConsoleTextAttribute(console, 11);
+          cout<<"                                     *************************************************************"<<endl;
+          cout<<"                                     *************************************************************"<<endl;
+          cout<<"                                     **        ";
+          SetConsoleTextAttribute(console, 13);
+          cout<<"                 WELCOME TO                     ";
+          SetConsoleTextAttribute(console, 11);
+          cout<<"  ** "<<endl;
+          cout<<"                                     **                                                          **"<<endl;
+          cout<<"                                     **      ";
+          SetConsoleTextAttribute(console, 13);
+          cout<<"  ##    #####    ##     ##   ########   ##   ##   ";
+          SetConsoleTextAttribute(console, 11);
+          cout<<"  **"<<endl;
+          cout<<"                                     **      ";
+          SetConsoleTextAttribute(console, 13);
+          cout<<" #  #   ##   #   ## # # ##      ##      ## # ##     ";
+          SetConsoleTextAttribute(console, 11);
+          cout<<"**"<<endl;
+          cout<<"                                     **      ";
+          SetConsoleTextAttribute(console, 13);
+          cout<<" ####   ##    #  ##  #  ##      ##      ##  ###   ";
+          SetConsoleTextAttribute(console, 11);
+          cout<<"  **"<<endl;
+          cout<<"                                     **     ";
+          SetConsoleTextAttribute(console, 13);
+          cout<<"  #  #   ##   #   ##     ##      ##      ##   ##   ";
+          SetConsoleTextAttribute(console, 11);
+          cout<<"  **"<<endl;
+          cout<<"                                     **     ";
+          SetConsoleTextAttribute(console, 13);
+          cout<<"  #  #   #####    ##     ##   ########   ##   ##    ";
+          SetConsoleTextAttribute(console, 11);
+          cout<<" **   "<<endl;
+          cout<<"                                     **                                                          **"<<endl;
+          cout<<"                                     **                        ";
+          SetConsoleTextAttribute(console, 13);
+          cout<<"    PANEL                        ";
+          SetConsoleTextAttribute(console, 11);
+          cout<<" **"<<endl;
+          cout<<"                                     *************************************************************"<<endl;
+          cout<<"                                     *************************************************************"<<endl;
           cout<<"\n";
           cout<<"                                                         1. Shop/Tenant Management"<<endl;
           cout<<"                                                         2. Staff Management"<<endl;
@@ -126,6 +218,7 @@ void AdminPanel()
                       cout<<"*******************************************************************************"<<endl;
                       cout<<"                           SHOP MANAGEMENT"<<endl;
                       cout<<"*******************************************************************************"<<endl;
+                           //displaying shops main menu
                            cout<<"1. Add Shop/Tenant"<<endl;
                            cout<<"2. Update Shop/Tenant"<<endl;
                            cout<<"3. Remove Shop/Tenant"<<endl;
@@ -140,7 +233,7 @@ void AdminPanel()
                            {
                               
                               fstream outfile;
-                              outfile.open("shops.txt", ios::app);
+                              outfile.open("shops.txt", ios::app); //shops is a text file
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                        ADD SHOP/TENANT"<<endl;
                               cout<<"**********************************************************"<<endl;
@@ -158,10 +251,11 @@ void AdminPanel()
                               getline(cin, tenantPhone[totalShops]);
                               cout<<"Enter Shopkeeper rent: ";
                               cin>>tenantRent[totalShops];
+                              //storing data in files
                               outfile<<"SHOP ID: "<<shopID[totalShops]<<"\nSHOP NAME: "<<shopName[totalShops]<<"\nSHOPKEEPER NAME: "<<shopkeeperName[totalShops]<<"\nFLOOR NUMBER: "<<shopFloor[totalShops]<<"\nSHOPKEEPER PHONE: "<<tenantPhone[totalShops]<<"\nSHOPKEEPER RENT: "<<tenantRent[totalShops]<<"\n\n";
                               outfile.close();
                               cout<<"\nShop Added/stored Successfully!\n";
-                              totalShops++;
+                              totalShops++; 
                            }
                            else if(shopChoice=="2")
                            {
@@ -176,6 +270,7 @@ void AdminPanel()
                               for(int i=0; i<totalShops; i++)
                               {
                                   if(shopID[i] == id)
+                                   //if shop already exists then we can update its data
                                       {
                                          found = true;
                                          cout<<"Enter New Shop Name: ";
@@ -192,6 +287,7 @@ void AdminPanel()
                                             break;
                                        }
                                     }
+                                        //opening text file to update or overwrite data
                                         ofstream outfile("shops.txt");
                                         for(int i=0; i<totalShops; i++)
                                          {
@@ -227,6 +323,7 @@ void AdminPanel()
                                                 tenantRent[j] = tenantRent[j+1];
                                                 tenantPhone[j] = tenantPhone[j+1];
                                            }
+                                                    //after removing one shop decreament of 1 in total shops
                                                     totalShops--;
                                            cout<<"Shop Removed Successfully!\n";
                                             break;
@@ -246,14 +343,15 @@ void AdminPanel()
                             }
                            else if(shopChoice=="4")
                            {
-                              cout<<"\n          *********************************************************"<<endl;
+                              cout<<"\n            *********************************************************"<<endl;
                               cout<<"                                     VIEW SHOP/TENANT"<<endl;
                               cout<<"             **********************************************************"<<endl;
                                 if(totalShops == 0)
                                     {
                                       cout<<"No Shops Available.\n";
                                     }
-                                    else
+                                    else 
+                                    //using setw to print in aligned form
                                     cout << setfill('-') << setw(100) << "-" << setfill(' ') << endl;
                                     cout << left<< setw(10) << "ID"<< setw(25) << "SHOP NAME"<< setw(25) << "SHOPKEEPER"<< setw(15) << "FLOOR"<<endl;
                                     cout << setfill('-') << setw(100) << "-" << setfill(' ') << endl;
@@ -265,8 +363,8 @@ void AdminPanel()
                                        }
                                        cout << setfill('-') << setw(100) << "-" << setfill(' ') << endl;
                                     }
-                              
-                                                     }else if(shopChoice=="5")
+                           }
+                           else if(shopChoice=="5")
                            {
                               cout<<"\n          *********************************************************"<<endl;
                               cout<<"                                     Load SHOP/TENANT"<<endl;
@@ -281,7 +379,8 @@ void AdminPanel()
                                       totalShops = 0;  
                                       string line;
                                       while (getline(infile, line))
-                                      {
+                                      { 
+                                         //it will start taking input from file if it is starting from SHOPID
                                          if (line.substr(0, 8) == "SHOP ID:")
                                          {
                                             shopID[totalShops] = atoi(line.substr(8).c_str());
@@ -322,10 +421,10 @@ void AdminPanel()
                            cout<<"4. Remove Staff"<<endl;
                            cout<<"5. Assign duty to the staff"<<endl;
                            cout<<"6. Load Staff"<<endl;
-                           cout<<"7.Back"<<endl;
+                           cout<<"7. Back"<<endl;
                            cout<<"Enter Choice= ";
                            cin>>staffChoice;
-                           cin.ignore();
+                           cin.ignore(); //to clear the buffer
                            cout<<"\n\n";
                            if(staffChoice=="1")
                            {
@@ -361,13 +460,14 @@ void AdminPanel()
                                     }
                                      else
                                      {
+                                        //to print it in table form
                                         cout << setfill('-') << setw(90) << "-" << setfill(' ') << endl;
                                         cout << left<< setw(10) << "ID"<< setw(25) << "NAME"<< setw(25) << "ROLE"<< setw(15) << "SALARY" << endl;
                                         cout << setfill('-') << setw(90) << "-" << setfill(' ') << endl;
-                                     for(int i=0; i<totalStaff; i++)
-                                         {
+                                            for(int i=0; i<totalStaff; i++)
+                                             {
                                               cout << left<< setw(10) << staffID[i]<< setw(25) << staffName[i]<< setw(25) << staffRole[i]<< setw(15) << staffSalary[i] << endl;
-                                         }
+                                             }
 
                                               cout << setfill('-') << setw(90) << "-" << setfill(' ') << endl;
                                      }
@@ -385,6 +485,7 @@ void AdminPanel()
                               bool found = false;
                               for(int i=0; i<totalStaff; i++)
                                 {
+                                      //if staff already exist then we will update its content
                                      if(staffID[i] == id)
                                       {
                                         found = true;
@@ -424,6 +525,7 @@ void AdminPanel()
                               bool found = false;
                               for(int i=0; i<totalStaff; i++)
                                {
+                                   //if staff already exist then we will delete the staff
                                   if(staffID[i] == id)
                                     {
                                      found = true;
@@ -470,6 +572,7 @@ void AdminPanel()
                                {
                                    if(staffID[i] == id)
                                     {
+                                        //if staff already exist then admin can assign duties to staff
                                         found = true;
                                         cout<<"Enter Duty to Assign: ";
                                         getline(cin, duty);
@@ -481,8 +584,10 @@ void AdminPanel()
                                }
                                   if(!found)
                                    cout<<"Staff Not Found!\n";
-                           } if(staffChoice=="6")
+                           }
+                             if(staffChoice=="6")
                            {
+
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                         LOAD STAFF"<<endl;
                               cout<<"**********************************************************"<<endl;
@@ -538,6 +643,9 @@ void AdminPanel()
                            outfile.open("floors.txt", ios::app);
                            if(floorChoice=="1")
                            {
+                               /* it will first take floor number from user if floor already exists then it will
+                               disply message that it already exist, if it doesnt exits then the floor will be added
+                               and admin can set its capacity, floor number and other stuff*/
                               cout<<"\n*********************************************************"<<endl;
                               cout<<"                        ADD FLOOR"<<endl;
                               cout<<"**********************************************************"<<endl;
@@ -1188,19 +1296,51 @@ void ShopkeeperPanel()
 {
      string choice_shopkeeper="1";
       do{
-
-     cout<<"\n\n"<<endl;
-       cout<<"*************************************************************************************************************************************"<<endl;
-       cout<<"                                                                WELCOME TO\n"<<endl;
-       cout<<"                #####   ##     ##    #######    #######    ##    ##    #######    #######   #######    ########    #######"<<endl;
-       cout<<"                #       ##     ##    ##   ##    ##   ##    ##   ##     ##         ##        ##    #    ##          ##     # "<<endl;
-       cout<<"                 ##     #########    ##   ##    #######    ## ##       #######    #######   #######    ########    ########"<<endl;
-       cout<<"                   #    ##     ##    ##   ##    ##         ##  ##      ##         ##        ##         ##          ## ## "<<endl;
-       cout<<"                ####    ##     ##    #######    ##         ##    ##    #######    #######   ##         ########    ##   ## \n"<<endl;
-       cout<<"                                                                   PANEL"<<endl;
-       cout<<"*************************************************************************************************************************************"<<endl;
+       SetConsoleTextAttribute(console,11);
+       cout<<"\n\n"<<endl;
+       cout<<"           *******************************************************************************************************************"<<endl;
+       cout<<"           *******************************************************************************************************************"<<endl;
+       cout<<"           **              ";
+       SetConsoleTextAttribute(console,13);
+       cout<<"                                     WELCOME TO                                      ";
+       SetConsoleTextAttribute(console,11);
+       cout<<"            **"<<endl;
+       cout<<"           **                                                                                                               ** "<<endl;
+       cout<<"           **  ";
+       SetConsoleTextAttribute(console,13);
+       cout<<" #####   ##     ##    #######    #######    ##    ##    #######    #######   #######   ########    ####### ";
+       SetConsoleTextAttribute(console,11);
+       cout<<"  **"<<endl;
+       cout<<"           **  ";
+       SetConsoleTextAttribute(console,13);
+       cout<<" #       ##     ##    ##   ##    ##   ##    ##   ##     ##         ##        ##    #   ##          ##     #  ";
+       SetConsoleTextAttribute(console,11);
+       cout<<"** "<<endl;
+       cout<<"           **   ";
+       SetConsoleTextAttribute(console,13);
+       cout<<" ##     #########    ##   ##    #######    ## ##       #######    #######   #######   ########    ########  ";
+       SetConsoleTextAttribute(console,11);
+       cout<<"**"<<endl;
+       cout<<"           **   ";
+       SetConsoleTextAttribute(console,13);
+       cout<<"   #    ##     ##    ##   ##    ##         ##  ##      ##         ##        ##        ##          ## ##   ";
+       SetConsoleTextAttribute(console,11);
+       cout<<"  **"<<endl;
+       cout<<"           ** ";
+       SetConsoleTextAttribute(console,13);
+       cout<<"  ####    ##     ##    #######    ##         ##    ##    #######    #######   ##        ########    ##   ##  ";
+       SetConsoleTextAttribute(console,11);
+       cout<<" **"<<endl;
+       cout<<"           **                                                                                                               ** "<<endl;
+       cout<<"           **                                           ";
+       SetConsoleTextAttribute(console,13);
+       cout<<"           PANEL                                                ";
+       SetConsoleTextAttribute(console,11);
+       cout<<"    **"<<endl;
+       cout<<"           *******************************************************************************************************************"<<endl;
+       cout<<"           *******************************************************************************************************************\n"<<endl;
           int loggedShop, index=-1;
-          cout << "Enter your Shop ID: ";
+          cout << "                                                         Enter your Shop ID: ";
           cin >> loggedShop;
           cout<<"\n"<<endl;
           cout<<"                                                        1. View Shop Details"<<endl;
@@ -1452,21 +1592,53 @@ int basicSalary = 25000;
 int daysPresent = 0;
 void StaffPanel()
 {
-       
+             SetConsoleTextAttribute(console,11);
              string staffChoice="1";
         while(staffChoice!="0")
              {  
-          cout<<"*************************************************************************************************************************************"<<endl;
-          cout<<"                                                               WELCOME TO\n"<<endl;
-          cout<<"                                             ####    ######      ####      #######    ######"<<endl;
-          cout<<"                                             #         ##       ##  ##     ##         ##     "<<endl;
-          cout<<"                                              ###      ##      ########    #######    ######"<<endl;
-          cout<<"                                                #      ##     ##      ##   ##         ##"<<endl;
-          cout<<"                                             ####      ##     ##      ##   ##         ## "<<endl;
-          cout<<"                                                                  PANEL"<<endl;
-          cout<<"*************************************************************************************************************************************"<<endl;
+          cout<<"                                         **********************************************************"<<endl;
+          cout<<"                                         **********************************************************"<<endl;
+          cout<<"                                         **      ";
+          SetConsoleTextAttribute(console,13);
+          cout<<"                WELCOME TO                   ";
+          SetConsoleTextAttribute(console,11);
+          cout<<"   **"<<endl;
+          cout<<"                                         **                                                      **"<<endl;
+          cout<<"                                         **   ";
+          SetConsoleTextAttribute(console,13);
+          cout<<" ####    ######      ####      #######    ######  ";
+          SetConsoleTextAttribute(console,11);
+          cout<<" **"<<endl;
+          cout<<"                                         **   ";
+          SetConsoleTextAttribute(console,13);
+          cout<<" #         ##       ##  ##     ##         ##      ";
+          SetConsoleTextAttribute(console,11);
+          cout<<" **"<<endl;
+          cout<<"                                         **    ";
+          SetConsoleTextAttribute(console,13);
+          cout<<" ###      ##      ########    #######    ######   ";
+          SetConsoleTextAttribute(console,11);
+          cout<<"**"<<endl;
+          cout<<"                                         **    ";
+          SetConsoleTextAttribute(console,13);
+          cout<<"   #      ##     ##      ##   ##         ##    ";
+          SetConsoleTextAttribute(console,11);
+          cout<<"   **"<<endl;
+          cout<<"                                         **   ";
+          SetConsoleTextAttribute(console,13);
+          cout<<" ####      ##     ##      ##   ##         ##     ";
+          SetConsoleTextAttribute(console,11);
+          cout<<"  **"<<endl;
+          cout<<"                                         **                                                      **"<<endl;
+          cout<<"                                         **                     ";
+          SetConsoleTextAttribute(console,13);
+          cout<<"    PANEL                       ";
+          SetConsoleTextAttribute(console,11);
+          cout<<" **"<<endl;
+          cout<<"                                         **********************************************************"<<endl;
+          cout<<"                                         **********************************************************"<<endl; 
           cout<<"\n"<<endl;
-          cout<<"Enter staff ID to Login: ";
+          cout<<"                                                        Enter staff ID to Login: ";
           int staffIDD;
           cin>>staffIDD;
           fstream outfile;
@@ -1476,7 +1648,7 @@ void StaffPanel()
           if(staffIDD==staffID[i])
 
 
-          cout<<"                                                         1. View Assigned Duties"<<endl;
+          cout<<"\n                                                         1. View Assigned Duties"<<endl;
           cout<<"                                                         2. Mark Attendance"<<endl;
           cout<<"                                                         3. Update Work Status"<<endl;
           cout<<"                                                         4. Report an Issue"<<endl;
@@ -1556,6 +1728,22 @@ void StaffPanel()
           }
 }
 }
+void exitprogram()
+{
+   SetConsoleTextAttribute(console, 12); 
+   cout<<"\n                                       *******************************************************"<<endl;
+   cout<<"                                       *******************************************************\n"<<endl;
+   cout<<"                                             ########   ##     ##     ########    ########"<<endl;
+   cout<<"                                             ##           ## ##          ##          ##"<<endl;
+   cout<<"                                             ########       #            ##          ##"<<endl;
+   cout<<"                                             ##           ## ##          ##          ##"<<endl;
+   cout<<"                                             ########    ##   ##      #######        ##\n"<<endl;
+   cout<<"                                       *******************************************************"<<endl;
+   cout<<"                                       *             THANKS FOR USING THE SYSTEM             *"<<endl;
+   cout<<"                                       *                  have a great day!                  *"<<endl;
+   cout<<"                                       *******************************************************"<<endl;
+   SetConsoleTextAttribute(console,11);
+}
 
 
 int main()
@@ -1572,13 +1760,13 @@ int main()
 
         if(choice_1 == 0) 
         {
-            cout << "Exiting program...";
+           exitprogram();
             break;            
         }
              title();  
              panel();
 
-
+            
      if(choice_1==1 || choice_1==2 || choice_1==3)
    { 
             loginScreen(username,password);
@@ -1599,4 +1787,5 @@ int main()
        }
  }
 }
+SetConsoleTextAttribute(console,15);
 }
