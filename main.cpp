@@ -1,4 +1,3 @@
-
 #include<iostream>
 #include<windows.h>
 #include<iomanip>
@@ -1789,9 +1788,4 @@ int main()
  }
 }
 SetConsoleTextAttribute(console,15);
-return 0;
-}
-
-
-
 }
